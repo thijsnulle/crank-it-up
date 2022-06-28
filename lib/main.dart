@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'app_object.dart' as app_object;
 
 void main() {
   runApp(const CrankItUp());
