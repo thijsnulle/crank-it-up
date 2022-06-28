@@ -8,7 +8,7 @@ class GameObject {
   List players = [Player("A"), Player("B")];
   int currentRound = 0;
   int totalRounds = 0;
-  Pack pack = Pack("");
+  Pack pack = Pack("", []);
 }
 
 class Player {
@@ -22,5 +22,5 @@ class Pack {
   String packName;
   List scenarios = [];
 
-  Pack(this.packName);
+  Pack(this.packName, this.scenarios);
 }
