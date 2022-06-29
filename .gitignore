@@ -51,5 +51,6 @@ ios/
 android/
 macos/
 linux/
+web/
 
 .metadata
