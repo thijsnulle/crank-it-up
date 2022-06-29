@@ -19,8 +19,8 @@ class Player {
 }
 
 class Pack {
-  final String? packName;
+  final String? name;
   final List? scenarios;
 
-  const Pack({this.packName, this.scenarios});
+  const Pack({this.name, this.scenarios});
 }
