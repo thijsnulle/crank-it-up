@@ -5,22 +5,22 @@ List packs = [];
 String selectedPack = "";
 
 class GameObject {
-  List players = [Player("A"), Player("B")];
+  List<Player> players = [];
   int currentRound = 0;
   int totalRounds = 0;
   Pack pack = Pack("", []);
 }
 
 class Player {
-  String name;
+  final String name;
   int score = 0;
 
   Player(this.name);
 }
 
 class Pack {
-  String packName;
-  List scenarios = [];
+  final String packName;
+  final List scenarios;
 
   Pack(this.packName, this.scenarios);
 }
