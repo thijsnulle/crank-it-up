@@ -1,6 +1,6 @@
-library crank_it_up.lib.app_object;
+library crank_it_up.lib.app;
 
-GameObject obj = GameObject();
+GameObject game = GameObject();
 List packs = [];
 String selectedPack = "";
 
@@ -8,7 +8,7 @@ class GameObject {
   List<Player> players = [];
   int currentRound = 0;
   int totalRounds = 0;
-  Pack pack = Pack("", []);
+  Pack pack = const Pack();
 }
 
 class Player {
@@ -19,8 +19,8 @@ class Player {
 }
 
 class Pack {
-  final String packName;
-  final List scenarios;
+  final String? packName;
+  final List? scenarios;
 
-  Pack(this.packName, this.scenarios);
+  const Pack({this.packName, this.scenarios});
 }
