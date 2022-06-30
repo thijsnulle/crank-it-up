@@ -1,8 +1,7 @@
 library crank_it_up.lib.app;
 
-GameObject game = GameObject([], const Pack(name: "", scenarios: []));
-List packs = [];
-Pack selectedPack = const Pack(name: "", scenarios: []);
+GameObject game = GameObject(players: [], pack: const Pack(name: "", scenarios: []));
+List<Pack> selectedPacks = [];
 
 class GameObject {
   final List<Player> players;
@@ -10,7 +9,7 @@ class GameObject {
   int totalRounds = 0;
   final Pack pack;
 
-  GameObject(this.players, this.pack);
+  GameObject({required this.players, required this.pack});
 }
 
 class Player {
