@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'app.dart' as app;
 
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/color_scheme.dart';
@@ -19,40 +18,24 @@ class CrankItUp extends StatelessWidget {
             scaffoldBackgroundColor: colorScheme.background,
             fontFamily: 'Montserrat',
             textTheme: TextTheme(
-              headline1: TextStyle(
-                  fontWeight: FontWeight.w700,
-                  fontSize: 48.0,
-                  color: colorScheme.primary),
-              headline2: TextStyle(
-                  fontWeight: FontWeight.w300,
-                  fontSize: 48.0,
-                  color: colorScheme.secondary),
+              headline1: TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: colorScheme.primary),
+              headline2: TextStyle(fontWeight: FontWeight.w300, fontSize: 48.0, color: colorScheme.secondary),
               button: TextStyle(
-                  fontWeight: FontWeight.w500,
-                  fontSize: 14.0,
-                  color: colorScheme.secondary,
-                  letterSpacing: 2),
+                  fontWeight: FontWeight.w500, fontSize: 14.0, color: colorScheme.secondary, letterSpacing: 2),
             ),
             textButtonTheme: TextButtonThemeData(
                 style: ButtonStyle(
-                    backgroundColor:
-                        MaterialStateProperty.all<Color>(colorScheme.primary),
-                    padding: MaterialStateProperty.all<EdgeInsets>(
-                        const EdgeInsets.all(18.0)),
+                    backgroundColor: MaterialStateProperty.all<Color>(colorScheme.primary),
+                    padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(18.0)),
                     shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                        RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(48.0))))),
+                        RoundedRectangleBorder(borderRadius: BorderRadius.circular(48.0))))),
             elevatedButtonTheme: ElevatedButtonThemeData(
               style: ButtonStyle(
-                  backgroundColor:
-                      MaterialStateProperty.all<Color>(Colors.transparent),
-                  padding: MaterialStateProperty.all<EdgeInsets>(
-                      const EdgeInsets.all(18.0)),
-                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                      RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(48.0),
-                          side: BorderSide(
-                              color: colorScheme.primary, width: 2)))),
+                  backgroundColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                  padding: MaterialStateProperty.all<EdgeInsets>(const EdgeInsets.all(18.0)),
+                  shape: MaterialStateProperty.all<RoundedRectangleBorder>(RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(48.0),
+                      side: BorderSide(color: colorScheme.primary, width: 2)))),
             )));
   }
 }
