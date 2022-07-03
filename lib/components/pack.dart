@@ -1,54 +1,11 @@
+import 'dart:developer';
+
 import 'package:crank_it_up/app.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-class Overlay extends StatefulWidget {
-  bool isSelected;
+class Pack extends StatefulWidget {
   int id;
-
-  Overlay({super.key, required this.isSelected, required this.id});
-
-  @override
-  _Overlay createState() => _Overlay();
-}
-
-class _Overlay extends State<Overlay> with AutomaticKeepAliveClientMixin<Overlay> {
-  @override
-  bool get wantKeepAlive => true;
-
-  @override
-  Widget build(
-    BuildContext context,
-  ) {
-    return GestureDetector(
-        onTap: () {
-          setState(() {
-            app.packs[widget.id].isSelected = !widget.isSelected;
-            widget.isSelected = !widget.isSelected;
-          });
-        },
-        child: Stack(
-          children: [
-            Container(
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: widget.isSelected ? Colors.black.withOpacity(0.5) : Colors.transparent),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 5, top: 5),
-              child: Icon(
-                Icons.check_rounded,
-                color: widget.isSelected ? const Color.fromARGB(255, 26, 200, 35) : Colors.transparent,
-                size: 40,
-              ),
-            )
-          ],
-        ));
-  }
-}
-
-class Pack extends StatelessWidget {
-  final int id;
   final String name;
   final String img;
   final List scenarios;
@@ -65,6 +22,14 @@ class Pack extends StatelessWidget {
       this.isSelected = false});
 
   @override
+  _Pack createState() => _Pack();
+}
+
+class _Pack extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Stack(
@@ -72,7 +37,7 @@ class Pack extends StatelessWidget {
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: HSLColor.fromColor(color).withLightness(0.6).toColor(),
+            color: HSLColor.fromColor(widget.color).withLightness(0.6).toColor(),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x66000000),
@@ -87,13 +52,33 @@ class Pack extends StatelessWidget {
           padding: const EdgeInsets.all(30),
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(image: Svg('assets/' + img + '.svg', color: color)),
+                  image: DecorationImage(image: Svg('assets/' + widget.img + '.svg', color: widget.color)),
                   borderRadius: BorderRadius.circular(20))),
         ),
-        Overlay(
-          isSelected: isSelected,
-          id: id,
-        )
+        GestureDetector(
+            onTap: () {
+              setState(() {
+                app.packs[widget.id].isSelected = !app.packs[widget.id].isSelected;
+              });
+            },
+            child: Stack(
+              children: [
+                Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(20),
+                      color: app.packs[widget.id].isSelected ? Colors.black.withOpacity(0.5) : Colors.transparent),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 5, top: 5),
+                  child: Icon(
+                    Icons.check_rounded,
+                    color:
+                        app.packs[widget.id].isSelected ? const Color.fromARGB(255, 26, 200, 35) : Colors.transparent,
+                    size: 40,
+                  ),
+                )
+              ],
+            ))
       ],
     ));
   }
