@@ -1,11 +1,12 @@
-import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/app.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class Overlay extends StatefulWidget {
   bool isSelected;
+  int id;
 
-  Overlay({super.key, required this.isSelected});
+  Overlay({super.key, required this.isSelected, required this.id});
 
   @override
   _Overlay createState() => _Overlay();
@@ -22,6 +23,7 @@ class _Overlay extends State<Overlay> with AutomaticKeepAliveClientMixin<Overlay
     return GestureDetector(
         onTap: () {
           setState(() {
+            app.packs[widget.id].isSelected = !widget.isSelected;
             widget.isSelected = !widget.isSelected;
           });
         },
@@ -46,6 +48,7 @@ class _Overlay extends State<Overlay> with AutomaticKeepAliveClientMixin<Overlay
 }
 
 class Pack extends StatelessWidget {
+  final int id;
   final String name;
   final String img;
   final List scenarios;
@@ -54,6 +57,7 @@ class Pack extends StatelessWidget {
 
   Pack(
       {super.key,
+      required this.id,
       required this.name,
       required this.img,
       required this.scenarios,
@@ -88,6 +92,7 @@ class Pack extends StatelessWidget {
         ),
         Overlay(
           isSelected: isSelected,
+          id: id,
         )
       ],
     ));
