@@ -20,8 +20,16 @@ class PackSelectionScreen extends StatelessWidget {
           icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.secondary),
           onPressed: () => Navigator.of(context).push(to(const HomeScreen())),
         ),
-        title: Text('Select your packs', style: Theme.of(context).textTheme.button),
+        title: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('SELECT', style: Theme.of(context).textTheme.headline1),
+            Text('YOUR PACKS', style: Theme.of(context).textTheme.headline2)
+          ],
+        ),
+        toolbarHeight: 150,
         backgroundColor: Colors.transparent,
+        shadowColor: Colors.transparent,
       ),
       body: GridView(
         padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
