@@ -19,8 +19,7 @@ class GameCreationScreen extends StatelessWidget {
             Text('Game Creation Screen', style: Theme.of(context).textTheme.button),
             PrimaryButton(text: 'Back to Home', function: () => Navigator.of(context).push(to(const HomeScreen()))),
             PrimaryButton(text: 'Go to Game', function: () => Navigator.of(context).push(to(const GameScreen()))),
-            PrimaryButton(
-                text: 'Choose Pack', function: () => Navigator.of(context).push(to(const PackSelectionScreen()))),
+            PrimaryButton(text: 'Choose Pack', function: () => Navigator.of(context).push(to(PackSelectionScreen()))),
           ],
         ),
       ),
