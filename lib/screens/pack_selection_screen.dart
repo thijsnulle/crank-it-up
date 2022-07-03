@@ -1,16 +1,10 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import 'package:crank_it_up/components/buttons.dart';
-
-import 'package:crank_it_up/screens/home_screen.dart';
-import 'package:crank_it_up/screens/transitions.dart';
-
 import '../app.dart';
-import '../components/pack.dart';
 
 class PackSelectionScreen extends StatelessWidget {
-  PackSelectionScreen({super.key});
+  const PackSelectionScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +12,7 @@ class PackSelectionScreen extends StatelessWidget {
       appBar: AppBar(
         leading: IconButton(
           icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.secondary),
-          onPressed: () => Navigator.of(context).push(to(const HomeScreen())),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
