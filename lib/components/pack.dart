@@ -52,7 +52,7 @@ class _Pack extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
           padding: const EdgeInsets.all(30),
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(image: Svg('assets/' + widget.img + '.svg', color: widget.color)),
+                  image: DecorationImage(image: Svg('assets/images/' + widget.img + '.svg', color: widget.color)),
                   borderRadius: BorderRadius.circular(20))),
         ),
         GestureDetector(
