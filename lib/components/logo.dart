@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 
-const Color highlightColour = Color(0xFF247BA0);
-
 class Logo extends StatelessWidget {
   const Logo({super.key});
 
