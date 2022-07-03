@@ -55,6 +55,15 @@ class _Pack extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
                   image: DecorationImage(image: Svg('assets/images/' + widget.img + '.svg', color: widget.color)),
                   borderRadius: BorderRadius.circular(20))),
         ),
+        Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Text(
+                  widget.name,
+                  style: TextStyle(
+                      color: widget.color, fontFamily: 'Montserrat', fontSize: 30, fontWeight: FontWeight.bold),
+                ))),
         GestureDetector(
             onTap: () {
               setState(() {
