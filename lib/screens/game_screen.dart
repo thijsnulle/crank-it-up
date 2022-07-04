@@ -17,6 +17,13 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
+  String currentScenario = '';
+
+  @override
+  void initState() {
+    game.scenarios.shuffle();
+    currentScenario = game.scenarios.removeLast();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -42,9 +49,8 @@ class GameScreenState extends State<GameScreen> {
                 Expanded(
                   child: PageFlipBuilder(
                     key: pageFlipKey,
-                    frontBuilder: (_) => PackView(
-                        onFlip: () => pageFlipKey.currentState?.flip(),
-                        text: 'You walk into a festival, right up to the neartest stage.'),
+                    frontBuilder: (_) =>
+                        PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
                     backBuilder: (_) => ScoreBoard(
                       onFlip: () => pageFlipKey.currentState?.flip(),
                     ),
