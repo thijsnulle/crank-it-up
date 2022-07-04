@@ -1,5 +1,8 @@
+import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
 import 'package:crank_it_up/screens/transitions.dart';
+import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
 
@@ -65,9 +68,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
               Expanded(child: Container()),
               PrimaryButton(
                 text: 'START GAME',
-                function: () => {
-                  Navigator.of(context).push(to(const GameScreen())),
-                },
+                function: () => {if (setupGame(context)) Navigator.of(context).push(to(const GameScreen()))},
               ),
               const SizedBox(height: 32)
             ],
@@ -75,5 +76,32 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
         ),
       ),
     );
+  }
+
+  bool setupGame(BuildContext context) {
+    if (playerNames.any((n) => n.isEmpty || n.length > 16)) {
+      showFlash(
+        duration: const Duration(seconds: 5),
+        context: context,
+        builder: (_, controller) => Flash(
+          controller: controller,
+          position: FlashPosition.top,
+          behavior: FlashBehavior.floating,
+          child: FlashBar(
+            content: const Text('Ensure all player names are between 1-16 characters.'),
+            indicatorColor: colorScheme.primary,
+          ),
+        ),
+      );
+      return false;
+    }
+
+    game = GameObject(
+      players: List<Player>.from(playerNames.map((name) => Player(name))),
+      scenarios: List<String>.from(packs.where((p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
+      totalRounds: numberOfRounds,
+    );
+
+    return true;
   }
 }

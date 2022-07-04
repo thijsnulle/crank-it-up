@@ -17,6 +17,7 @@ class HomeScreen extends StatelessWidget {
       builder: (context) => Scaffold(
         body: Column(
           children: [
+            const SizedBox(height: 64.0),
             const Logo(),
             PrimaryButton(
                 text: 'PLAY GAME', function: () => Navigator.of(context).push(to(const GameCreationScreen()))),
