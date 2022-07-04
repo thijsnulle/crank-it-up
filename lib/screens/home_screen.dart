@@ -21,8 +21,7 @@ class HomeScreen extends StatelessWidget {
             PrimaryButton(
                 text: 'PLAY GAME', function: () => Navigator.of(context).push(to(const GameCreationScreen()))),
             const SizedBox(height: 16),
-            SecondaryButton(
-                text: 'CHOOSE PACK', function: () => Navigator.of(context).push(to(const PackSelectionScreen()))),
+            SecondaryButton(text: 'CHOOSE PACK', function: () => Navigator.of(context).push(to(PackSelectionScreen()))),
             Expanded(child: Container()),
             ClickableIcon(
                 iconData: Icons.settings, function: () => Navigator.of(context).push(to(const SettingsScreen()))),
