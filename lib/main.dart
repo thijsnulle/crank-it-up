@@ -1,4 +1,3 @@
-import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/screens/home_screen.dart';
@@ -19,8 +18,12 @@ class CrankItUp extends StatelessWidget {
             scaffoldBackgroundColor: colorScheme.background,
             fontFamily: 'Montserrat',
             textTheme: TextTheme(
-              headline1: TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: colorScheme.primary),
+              headline1: TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: colorScheme.secondary),
               headline2: TextStyle(fontWeight: FontWeight.w300, fontSize: 48.0, color: colorScheme.secondary),
+              headline3: TextStyle(fontWeight: FontWeight.w700, fontSize: 36.0, color: colorScheme.secondary),
+              headline4: TextStyle(fontWeight: FontWeight.w300, fontSize: 36.0, color: colorScheme.secondary),
+              headline5: TextStyle(fontWeight: FontWeight.w500, fontSize: 24.0, color: colorScheme.secondary),
+              headline6: TextStyle(fontWeight: FontWeight.w300, fontSize: 24.0, color: colorScheme.secondary),
               button: TextStyle(
                   fontWeight: FontWeight.w500, fontSize: 14.0, color: colorScheme.secondary, letterSpacing: 2),
             ),

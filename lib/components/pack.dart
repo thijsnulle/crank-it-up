@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:crank_it_up/app.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
@@ -22,10 +20,10 @@ class Pack extends StatefulWidget {
       this.isSelected = false});
 
   @override
-  _Pack createState() => _Pack();
+  PackState createState() => PackState();
 }
 
-class _Pack extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
+class PackState extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
   @override
   bool get wantKeepAlive => true;
 
@@ -52,7 +50,7 @@ class _Pack extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
           padding: const EdgeInsets.all(30),
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(image: Svg('assets/images/' + widget.img + '.svg', color: widget.color)),
+                  image: DecorationImage(image: Svg('assets/images/${widget.img}.svg', color: widget.color)),
                   borderRadius: BorderRadius.circular(20))),
         ),
         Padding(

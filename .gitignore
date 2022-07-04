@@ -54,3 +54,4 @@ linux/
 web/
 
 .metadata
+pubspec.lock
