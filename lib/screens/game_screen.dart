@@ -24,8 +24,9 @@ class GameScreenState extends State<GameScreen> {
       builder: (context) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
-              icon: const Icon(Icons.home_outlined),
-              onPressed: () => Navigator.of(context).push(to(const HomeScreen()))),
+            onPressed: () => Navigator.of(context).push(to(const HomeScreen())),
+            icon: const Icon(Icons.home_outlined),
+          ),
           title: Text('ROUND ${game.currentRound}', style: Theme.of(context).textTheme.headline1),
           actions: <Widget>[
             IconButton(icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),

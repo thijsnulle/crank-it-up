@@ -21,6 +21,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppBar(
+          leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
           title: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
