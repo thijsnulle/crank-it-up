@@ -1,10 +1,7 @@
 import 'package:crank_it_up/components/buttons.dart';
-
-import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/transitions.dart';
-
 import 'package:crank_it_up/app.dart' as app;
-import 'package:flutter/cupertino.dart';
+import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'game_screen.dart';
@@ -46,8 +43,20 @@ class VotingScreen extends StatelessWidget {
             Padding(
                 padding: const EdgeInsets.only(bottom: 30),
                 child: PrimaryButton(
-                    text: 'Next Round', function: () => {Navigator.of(context).push(to(const GameScreen()))}))
+                    text: 'Next Round',
+                    function: () => {
+                          determineWinner(context)
+                              ? Navigator.of(context).push(to(const WinnerScreen()))
+                              : Navigator.of(context).push(to(const GameScreen()))
+                        }))
           ],
         ));
+  }
+
+  bool determineWinner(BuildContext context) {
+    if (app.game.currentRound == app.game.totalRounds) return true;
+    app.game.currentRound++;
+
+    return false;
   }
 }
