@@ -9,6 +9,7 @@ class PackSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

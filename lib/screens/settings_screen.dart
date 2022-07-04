@@ -12,10 +12,20 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        body: Column(children: [
-          Text('Settings Screen', style: Theme.of(context).textTheme.button),
-          PrimaryButton(text: 'Back to Home', function: () => Navigator.of(context).push(to(const HomeScreen()))),
-        ]),
+        appBar: AppBar(
+          leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
+          title: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('SETTINGS', style: Theme.of(context).textTheme.headline1),
+              Text('SCREEN', style: Theme.of(context).textTheme.headline2)
+            ],
+          ),
+          toolbarHeight: 200,
+          backgroundColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+        ),
+        body: Container(),
       ),
     );
   }
