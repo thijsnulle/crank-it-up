@@ -1,3 +1,4 @@
+import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/screens/home_screen.dart';
@@ -13,7 +14,7 @@ class CrankItUp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: const HomeScreen(),
+        home: VotingScreen(),
         theme: ThemeData(
             scaffoldBackgroundColor: colorScheme.background,
             fontFamily: 'Montserrat',
