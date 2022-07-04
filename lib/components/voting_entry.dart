@@ -63,10 +63,12 @@ class VotingEntryState extends State<VotingEntry> {
                               height: 40,
                               decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
                             ),
-                            Text(
-                              widget.name,
-                              style: Theme.of(context).textTheme.button,
-                            )
+                            Padding(
+                                padding: const EdgeInsets.only(top: 10),
+                                child: Text(
+                                  widget.name,
+                                  style: Theme.of(context).textTheme.button,
+                                ))
                           ],
                         )))
               ],
