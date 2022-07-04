@@ -1,7 +1,7 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 
-import '../app.dart';
+import 'package:crank_it_up/app.dart';
 
 class PackSelectionScreen extends StatelessWidget {
   const PackSelectionScreen({super.key});
@@ -10,18 +10,14 @@ class PackSelectionScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_ios_new_rounded, color: colorScheme.secondary),
-          onPressed: () => Navigator.of(context).pop(),
-        ),
         title: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('SELECT', style: Theme.of(context).textTheme.headline1),
-            Text('YOUR PACKS', style: Theme.of(context).textTheme.headline2)
+            Text('PACK', style: Theme.of(context).textTheme.headline1),
+            Text('SELECTION', style: Theme.of(context).textTheme.headline2)
           ],
         ),
-        toolbarHeight: 150,
+        toolbarHeight: 200,
         backgroundColor: Colors.transparent,
         shadowColor: Colors.transparent,
       ),
