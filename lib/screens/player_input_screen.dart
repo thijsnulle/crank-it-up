@@ -64,10 +64,11 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
               )),
               Expanded(child: Container()),
               PrimaryButton(
-                  text: 'START GAME',
-                  function: () => {
-                        Navigator.of(context).push(to(const GameScreen())),
-                      }),
+                text: 'START GAME',
+                function: () => {
+                  Navigator.of(context).push(to(const GameScreen())),
+                },
+              ),
               const SizedBox(height: 32)
             ],
           ),

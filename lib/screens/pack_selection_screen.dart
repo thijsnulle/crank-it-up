@@ -1,4 +1,3 @@
-import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/app.dart';
