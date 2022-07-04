@@ -14,7 +14,7 @@ class GameCreationScreen extends StatefulWidget {
 
 class GameCreationScreenState extends State<GameCreationScreen> {
   int numberOfPlayers = 4;
-  int numberOfRounds = 10;
+  int numberOfRounds = 5;
 
   @override
   Widget build(BuildContext context) {
@@ -76,8 +76,8 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                     ),
                     NumberPicker(
                       value: numberOfRounds,
-                      minValue: 5,
-                      maxValue: 20,
+                      minValue: 3,
+                      maxValue: 10,
                       itemWidth: 30,
                       itemHeight: 30,
                       onChanged: (v) => setState(() => numberOfRounds = v),

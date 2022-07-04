@@ -3,7 +3,7 @@ import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/transitions.dart';
-import 'package:crank_it_up/screens/winner_screen.dart';
+import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:page_flip_builder/page_flip_builder.dart';
@@ -52,7 +52,8 @@ class GameScreenState extends State<GameScreen> {
                   ),
                 ),
                 const SizedBox(height: 32.0),
-                PrimaryButton(text: 'NEXT ROUND', function: () => Navigator.of(context).push(to(const WinnerScreen())))
+                PrimaryButton(
+                    text: 'START VOTING', function: () => Navigator.of(context).push(to(const VotingScreen())))
               ],
             )),
       ),

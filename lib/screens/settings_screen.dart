@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'package:crank_it_up/components/buttons.dart';
-
-import 'package:crank_it_up/screens/home_screen.dart';
-import 'package:crank_it_up/screens/transitions.dart';
-
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
