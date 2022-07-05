@@ -1,4 +1,3 @@
-import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/screens/home_screen.dart';
