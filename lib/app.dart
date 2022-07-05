@@ -3,11 +3,8 @@ library crank_it_up.lib.app;
 import 'dart:ui';
 import 'components/pack.dart';
 
-class Ranks {
-  static bool first = false;
-  static bool second = false;
-  static bool third = false;
-}
+int maxRanks = 1;
+List<bool> ranks = List<bool>.filled(maxRanks, false);
 
 List<Pack> packs = [
   Pack(
@@ -183,13 +180,11 @@ class GameObject {
 class Player {
   final String name;
   int score = 0;
-  int rank = 4;
+  int rank = maxRanks;
 
-  Player(this.name);
+  Player({required this.name});
 
-  updateScore() {
-    score += 4 - rank;
-  }
+  updateScore() => {score += maxRanks - rank, rank = maxRanks};
 }
 
 GameObject game = GameObject(players: [], totalRounds: -1, scenarios: []);

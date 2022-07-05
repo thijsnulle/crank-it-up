@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
@@ -102,8 +104,11 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
       return false;
     }
 
+    maxRanks = max(1, min(playerNames.length - 1, 3));
+    ranks = List<bool>.filled(maxRanks, false);
+
     game = GameObject(
-      players: List<Player>.from(playerNames.map((name) => Player(name))),
+      players: List<Player>.from(playerNames.map((name) => Player(name: name))),
       scenarios: List<String>.from(packs.where((p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
       totalRounds: numberOfRounds,
     );
