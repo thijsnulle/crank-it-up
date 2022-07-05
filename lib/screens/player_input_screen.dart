@@ -1,9 +1,8 @@
 import 'dart:math';
 
 import 'package:crank_it_up/app.dart';
-import 'package:crank_it_up/color_scheme.dart';
+import 'package:crank_it_up/components/alert.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -90,20 +89,11 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
 
   bool setupGame(BuildContext context) {
     if (playerNames.any((n) => n.isEmpty || n.length > 12)) {
-      showFlash(
-        duration: const Duration(seconds: 5),
-        context: context,
-        builder: (_, controller) => Flash(
-          controller: controller,
-          position: FlashPosition.top,
-          behavior: FlashBehavior.floating,
-          child: FlashBar(
-            content: const Text('Ensure all player names are between 1-12 characters.'),
-            indicatorColor: colorScheme.primary,
-          ),
-        ),
-      );
-      return false;
+      return alert('Ensure all player names are between 1-12 characters!', context);
+    }
+
+    if (validate(playerNames)) {
+      return alert('Make sure all player names are unique!', context);
     }
 
     maxRanks = max(1, min(playerNames.length - 1, 3));
@@ -116,5 +106,9 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     );
 
     return true;
+  }
+
+  bool validate(List<String> playerNames) {
+    return playerNames.length != {...playerNames}.length;
   }
 }
