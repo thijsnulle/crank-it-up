@@ -1,3 +1,4 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
@@ -92,7 +93,7 @@ class PackView extends StatelessWidget {
             child: Padding(
               key: const ValueKey<int>(0),
               padding: const EdgeInsets.all(32.0),
-              child: Text(
+              child: AutoSizeText(
                 text,
                 style: Theme.of(context).textTheme.headline4,
               ),
