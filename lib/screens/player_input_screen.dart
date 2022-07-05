@@ -1,10 +1,10 @@
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
-import 'package:crank_it_up/screens/transitions.dart';
 import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
+import 'package:page_transition/page_transition.dart';
 
 class PlayerInputScreen extends StatefulWidget {
   const PlayerInputScreen({super.key, required this.numberOfPlayers, required this.numberOfRounds});
@@ -69,7 +69,12 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
               Expanded(child: Container()),
               PrimaryButton(
                 text: 'START GAME',
-                function: () => {if (setupGame(context)) Navigator.of(context).push(to(const GameScreen()))},
+                function: () => {
+                  if (setupGame(context))
+                    Navigator.of(context).push(
+                      PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
+                    )
+                },
               ),
               const SizedBox(height: 32)
             ],
@@ -80,7 +85,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
   }
 
   bool setupGame(BuildContext context) {
-    if (playerNames.any((n) => n.isEmpty || n.length > 16)) {
+    if (playerNames.any((n) => n.isEmpty || n.length > 12)) {
       showFlash(
         duration: const Duration(seconds: 5),
         context: context,
@@ -89,7 +94,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
           position: FlashPosition.top,
           behavior: FlashBehavior.floating,
           child: FlashBar(
-            content: const Text('Ensure all player names are between 1-16 characters.'),
+            content: const Text('Ensure all player names are between 1-12 characters.'),
             indicatorColor: colorScheme.primary,
           ),
         ),

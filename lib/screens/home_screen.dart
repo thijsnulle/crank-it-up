@@ -6,7 +6,7 @@ import 'package:crank_it_up/components/logo.dart';
 
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/settings_screen.dart';
-import 'package:crank_it_up/screens/transitions.dart';
+import 'package:page_transition/page_transition.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -20,13 +20,25 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 64.0),
             const Logo(),
             PrimaryButton(
-                text: 'PLAY GAME', function: () => Navigator.of(context).push(to(const GameCreationScreen()))),
+              text: 'PLAY GAME',
+              function: () => Navigator.of(context).push(
+                PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen()),
+              ),
+            ),
             const SizedBox(height: 16),
             SecondaryButton(
-                text: 'CHOOSE PACK', function: () => Navigator.of(context).push(to(const PackSelectionScreen()))),
+              text: 'CHOOSE PACK',
+              function: () => Navigator.of(context).push(
+                PageTransition(type: PageTransitionType.leftToRight, child: const PackSelectionScreen()),
+              ),
+            ),
             Expanded(child: Container()),
             ClickableIcon(
-                iconData: Icons.settings, function: () => Navigator.of(context).push(to(const SettingsScreen()))),
+              iconData: Icons.settings,
+              function: () => Navigator.of(context).push(
+                PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
+              ),
+            ),
             const SizedBox(height: 64),
           ],
         ),

@@ -17,7 +17,7 @@ class Pack extends StatefulWidget {
       required this.img,
       required this.scenarios,
       required this.color,
-      this.isSelected = false});
+      this.isSelected = true});
 
   @override
   PackState createState() => PackState();
