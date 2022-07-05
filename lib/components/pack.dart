@@ -2,22 +2,24 @@ import 'package:crank_it_up/app.dart' as app;
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
+//ignore: must_be_immutable
 class Pack extends StatefulWidget {
-  int id;
+  final int id;
   final String name;
   final String img;
   final List scenarios;
   final Color color;
   bool isSelected;
 
-  Pack(
-      {super.key,
-      required this.id,
-      required this.name,
-      required this.img,
-      required this.scenarios,
-      required this.color,
-      this.isSelected = true});
+  Pack({
+    super.key,
+    required this.id,
+    required this.name,
+    required this.img,
+    required this.scenarios,
+    required this.color,
+    this.isSelected = true,
+  });
 
   @override
   PackState createState() => PackState();
@@ -29,6 +31,7 @@ class PackState extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
         body: Stack(
       children: [

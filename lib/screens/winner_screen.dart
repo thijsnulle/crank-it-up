@@ -17,6 +17,8 @@ class WinnerScreenState extends State<WinnerScreen> {
   void initState() {
     controller = ConfettiController(duration: const Duration(seconds: 5));
     controller.play();
+    game.players.sort((p1, p2) => p2.score.compareTo(p1.score));
+    super.initState();
   }
 
   @override
@@ -52,24 +54,24 @@ class WinnerScreenState extends State<WinnerScreen> {
                       style: Theme.of(context).textTheme.headline5,
                     ),
                     Align(
-                        alignment: Alignment.topLeft,
+                        alignment: Alignment.centerLeft,
                         child: Padding(
-                          padding: const EdgeInsets.only(top: 32.0),
-                          child: Column(
+                            padding: const EdgeInsets.only(top: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: List.generate(
-                            game.players.length,
-                            (index) => Wrap(children: [
-                              Text(
-                                ' ${index + 1}. ',
-                                style: Theme.of(context).textTheme.headline5,
+                                game.players.length,
+                                (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                  Wrap(children: [
+                                    SizedBox(
+                                        width: 30,
+                                        child: Text('${index + 1}. ', style: Theme.of(context).textTheme.headline5)),
+                                    Text(game.players[index].name, style: Theme.of(context).textTheme.headline6),
+                                  ]),
+                                  Text('\t${game.players[index].score}', style: Theme.of(context).textTheme.headline5),
+                                ]),
                               ),
-                              Text(
-                                game.players[index].name,
-                                style: Theme.of(context).textTheme.headline6,
-                              )
-                            ]),
-                          )),
-                        )),
+                            ))),
                     Expanded(child: Container()),
                     PrimaryButton(
                         text: 'END GAME',

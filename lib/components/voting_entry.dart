@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/app.dart';
 
+//ignore: must_be_immutable
 class VotingEntry extends StatefulWidget {
   Player player;
 
