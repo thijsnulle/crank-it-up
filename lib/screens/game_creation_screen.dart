@@ -1,3 +1,4 @@
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,19 +21,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('CREATE', style: Theme.of(context).textTheme.headline1),
-              Text('GAME', style: Theme.of(context).textTheme.headline2)
-            ],
-          ),
-          toolbarHeight: 200,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
+        appBar: AppHeader.create('CREATE', 'GAME', null, Icons.west_rounded, context),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(

@@ -1,4 +1,5 @@
 import 'package:crank_it_up/components/alert.dart';
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
@@ -13,22 +14,7 @@ class VotingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).pop(),
-            icon: const Icon(Icons.west),
-          ),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('VOTING', style: Theme.of(context).textTheme.headline1),
-              Text('SCREEN', style: Theme.of(context).textTheme.headline2),
-            ],
-          ),
-          toolbarHeight: 200,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
+        appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, context),
         body: Column(
           children: <Widget>[
             Expanded(
