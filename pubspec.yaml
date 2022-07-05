@@ -65,18 +65,17 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-      - assets/images/vacation.svg
       - assets/images/18+.svg
-      - assets/images/movies.svg
-      - assets/images/cars.svg
+      - assets/images/religion.svg
+      - assets/images/countries.svg
       - assets/images/drugs.svg
-      - assets/images/animals.svg
-      - assets/images/music.svg
-      - assets/images/games.svg
-      - assets/images/history.svg
-      - assets/images/politics.svg
-      - assets/images/books.svg
+      - assets/images/scary.svg
+      - assets/images/chill.svg
+      - assets/images/weed.svg
+      - assets/images/pop-culture.svg
       - assets/images/sports.svg
+      - assets/images/sci-fi.svg
+      - assets/images/vacation.svg
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
