@@ -35,30 +35,48 @@ class VotingScreen extends StatelessWidget {
                 itemCount: game.players.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    name: game.players[index].name,
+                    playerName: game.players[index].name,
                   );
                 },
               ),
             ),
             Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: PrimaryButton(
-                    text: 'Next Round',
-                    function: () => {
-                          determineWinner(context)
-                              ? Navigator.of(context).push(
-                                  PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
-                              : Navigator.of(context)
-                                  .push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft))
-                        }))
+                child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
         ));
   }
 
-  bool determineWinner(BuildContext context) {
-    if (game.currentRound == game.totalRounds) return true;
-    game.currentRound++;
+  void determineWinner(BuildContext context) {
+    if (game.players.length == 2) {
+      if (!Ranks.first || !Ranks.second) {
+        return;
+      }
+      nextScreen(context);
+    } else {
+      if (!Ranks.first || !Ranks.second || !Ranks.third) {
+        return;
+      }
+      nextScreen(context);
+    }
+  }
 
-    return false;
+  void nextRound() {
+    Ranks.first = false;
+    Ranks.second = false;
+    Ranks.third = false;
+    for (int i = 0; i < game.players.length; i++) {
+      game.players[i].updateScore();
+      game.players[i].rank = -1;
+    }
+    game.players.sort(((a, b) => b.score.compareTo(a.score)));
+    game.currentRound++;
+  }
+
+  void nextScreen(BuildContext context) {
+    nextRound();
+    (game.currentRound > game.totalRounds)
+        ? Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
+        : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }
 }
