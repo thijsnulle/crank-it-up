@@ -1,14 +1,11 @@
-import 'dart:developer';
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/app.dart';
 
 class VotingEntry extends StatefulWidget {
-  final String name;
+  final String playerName;
   String rank = "";
 
-  VotingEntry({super.key, required this.name});
+  VotingEntry({super.key, required this.playerName});
 
   @override
   VotingEntryState createState() => VotingEntryState();
@@ -66,7 +63,7 @@ class VotingEntryState extends State<VotingEntry> {
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),
                                 child: Text(
-                                  widget.name,
+                                  widget.playerName,
                                   style: Theme.of(context).textTheme.button,
                                 ))
                           ],
@@ -78,7 +75,7 @@ class VotingEntryState extends State<VotingEntry> {
   }
 
   updateRank(int newRank) {
-    game.players.firstWhere((element) => element.name == widget.name).rank = newRank;
+    game.players.firstWhere((element) => element.name == widget.playerName).rank = newRank;
 
     if (newRank == -1) {
       widget.rank = "";

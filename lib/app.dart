@@ -49,18 +49,12 @@ class GameObject {
 class Player {
   final String name;
   int score = 0;
-  int rank = -1;
+  int rank = 4;
 
   Player(this.name);
 
   updateScore() {
-    if (rank == 1) {
-      score += 3;
-    } else if (rank == 2) {
-      score += 2;
-    } else if (rank == 3) {
-      score += 1;
-    }
+    score += 4 - rank;
   }
 }
 

@@ -35,7 +35,7 @@ class VotingScreen extends StatelessWidget {
                 itemCount: game.players.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    name: game.players[index].name,
+                    playerName: game.players[index].name,
                   );
                 },
               ),
@@ -70,16 +70,13 @@ class VotingScreen extends StatelessWidget {
       game.players[i].rank = -1;
     }
     game.players.sort(((a, b) => b.score.compareTo(a.score)));
+    game.currentRound++;
   }
 
   void nextScreen(BuildContext context) {
-    if (game.currentRound == game.totalRounds) {
-      nextRound();
-      Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft));
-      return;
-    }
-    game.currentRound++;
     nextRound();
-    Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
+    (game.currentRound > game.totalRounds)
+        ? Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
+        : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }
 }
