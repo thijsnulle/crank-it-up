@@ -24,6 +24,7 @@ class GameScreenState extends State<GameScreen> {
   void initState() {
     game.scenarios.shuffle();
     currentScenario = game.scenarios.removeLast();
+    super.initState();
   }
 
   @override

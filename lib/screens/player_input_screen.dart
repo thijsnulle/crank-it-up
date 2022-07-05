@@ -15,17 +15,19 @@ class PlayerInputScreen extends StatefulWidget {
   final int numberOfRounds;
 
   @override
-  PlayerInputScreenState createState() =>
-      PlayerInputScreenState(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds);
+  PlayerInputScreenState createState() => PlayerInputScreenState();
 }
 
 class PlayerInputScreenState extends State<PlayerInputScreen> {
-  final int numberOfPlayers;
-  final int numberOfRounds;
-  List<String> playerNames;
+  List<String> playerNames = [];
 
-  PlayerInputScreenState({required this.numberOfPlayers, required this.numberOfRounds})
-      : playerNames = List.filled(numberOfPlayers, '');
+  PlayerInputScreenState();
+
+  @override
+  void initState() {
+    playerNames = List.filled(widget.numberOfPlayers, '');
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +52,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
             children: [
               Column(
                   children: List.generate(
-                numberOfPlayers,
+                widget.numberOfPlayers,
                 (index) => SizedBox(
                   height: 40,
                   child: TextFormField(
@@ -110,7 +112,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     game = GameObject(
       players: List<Player>.from(playerNames.map((name) => Player(name: name))),
       scenarios: List<String>.from(packs.where((p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
-      totalRounds: numberOfRounds,
+      totalRounds: widget.numberOfRounds,
     );
 
     return true;
