@@ -1,8 +1,7 @@
-import 'package:crank_it_up/color_scheme.dart';
+import 'package:crank_it_up/components/alert.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
-import 'package:flash/flash.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:page_transition/page_transition.dart';
@@ -51,18 +50,7 @@ class VotingScreen extends StatelessWidget {
 
   void determineWinner(BuildContext context) {
     if (!ranks.every((r) => r)) {
-      showFlash(
-          duration: const Duration(seconds: 5),
-          context: context,
-          builder: (_, controller) => Flash(
-                controller: controller,
-                position: FlashPosition.top,
-                behavior: FlashBehavior.floating,
-                child: FlashBar(
-                  content: Text('Make sure to vote for ${maxRanks.toString()} players.'),
-                  indicatorColor: colorScheme.primary,
-                ),
-              ));
+      alert('Make sure to vote for ${maxRanks.toString()} players!', context);
       return;
     }
 
