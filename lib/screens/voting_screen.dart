@@ -1,14 +1,6 @@
 import 'package:crank_it_up/components/buttons.dart';
-<<<<<<< HEAD
-
-=======
 import 'package:crank_it_up/app.dart';
->>>>>>> master
 import 'package:crank_it_up/screens/winner_screen.dart';
-
-import 'package:crank_it_up/screens/transitions.dart';
-
-import 'package:crank_it_up/app.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:page_transition/page_transition.dart';
@@ -50,26 +42,11 @@ class VotingScreen extends StatelessWidget {
             ),
             Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: PrimaryButton(
-<<<<<<< HEAD
-                  text: 'Next Round',
-                  function: () => determineWinner(context),
-                ))
-=======
-                    text: 'Next Round',
-                    function: () => {
-                          determineWinner(context)
-                              ? Navigator.of(context).push(
-                                  PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
-                              : Navigator.of(context)
-                                  .push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft))
-                        }))
->>>>>>> master
+                child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
         ));
   }
 
-<<<<<<< HEAD
   void determineWinner(BuildContext context) {
     if (game.players.length == 2) {
       if (!Ranks.first || !Ranks.second) {
@@ -83,11 +60,6 @@ class VotingScreen extends StatelessWidget {
       nextScreen(context);
     }
   }
-=======
-  bool determineWinner(BuildContext context) {
-    if (game.currentRound == game.totalRounds) return true;
-    game.currentRound++;
->>>>>>> master
 
   void nextRound() {
     Ranks.first = false;
@@ -103,11 +75,11 @@ class VotingScreen extends StatelessWidget {
   void nextScreen(BuildContext context) {
     if (game.currentRound == game.totalRounds) {
       nextRound();
-      Navigator.of(context).push(to(const WinnerScreen()));
+      Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft));
       return;
     }
     game.currentRound++;
     nextRound();
-    Navigator.of(context).push(to(const GameScreen()));
+    Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }
 }
