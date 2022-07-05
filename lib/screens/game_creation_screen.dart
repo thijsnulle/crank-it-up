@@ -2,8 +2,8 @@ import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:numberpicker/numberpicker.dart';
-import 'package:crank_it_up/screens/transitions.dart';
 import 'package:crank_it_up/components/buttons.dart';
+import 'package:page_transition/page_transition.dart';
 
 class GameCreationScreen extends StatefulWidget {
   const GameCreationScreen({super.key});
@@ -96,7 +96,9 @@ class GameCreationScreenState extends State<GameCreationScreen> {
               Row(
                 children: [
                   GestureDetector(
-                      onTap: () => Navigator.of(context).push(to(const PackSelectionScreen())),
+                      onTap: () => Navigator.of(context).push(
+                            PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()),
+                          ),
                       child: Text(
                         'Still want to change your pack?',
                         style: TextStyle(color: Colors.grey.shade500, decoration: TextDecoration.underline),
@@ -106,8 +108,11 @@ class GameCreationScreenState extends State<GameCreationScreen> {
               Expanded(child: Container()),
               PrimaryButton(
                   text: 'LET\'S GO',
-                  function: () => Navigator.of(context)
-                      .push(to(PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)))),
+                  function: () => Navigator.of(context).push(
+                        PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
+                      )),
               const SizedBox(height: 32)
             ],
           ),

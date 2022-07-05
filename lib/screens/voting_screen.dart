@@ -1,9 +1,9 @@
 import 'package:crank_it_up/components/buttons.dart';
-import 'package:crank_it_up/screens/transitions.dart';
-import 'package:crank_it_up/app.dart' as app;
+import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
+import 'package:page_transition/page_transition.dart';
 import 'game_screen.dart';
 
 class VotingScreen extends StatelessWidget {
@@ -32,31 +32,51 @@ class VotingScreen extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                itemCount: app.game.players.length,
+                itemCount: game.players.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    name: app.game.players[index].name,
+                    playerName: game.players[index].name,
                   );
                 },
               ),
             ),
             Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: PrimaryButton(
-                    text: 'Next Round',
-                    function: () => {
-                          determineWinner(context)
-                              ? Navigator.of(context).push(to(const WinnerScreen()))
-                              : Navigator.of(context).push(to(const GameScreen()))
-                        }))
+                child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
         ));
   }
 
-  bool determineWinner(BuildContext context) {
-    if (app.game.currentRound == app.game.totalRounds) return true;
-    app.game.currentRound++;
+  void determineWinner(BuildContext context) {
+    if (game.players.length == 2) {
+      if (!Ranks.first || !Ranks.second) {
+        return;
+      }
+      nextScreen(context);
+    } else {
+      if (!Ranks.first || !Ranks.second || !Ranks.third) {
+        return;
+      }
+      nextScreen(context);
+    }
+  }
 
-    return false;
+  void nextRound() {
+    Ranks.first = false;
+    Ranks.second = false;
+    Ranks.third = false;
+    for (int i = 0; i < game.players.length; i++) {
+      game.players[i].updateScore();
+      game.players[i].rank = -1;
+    }
+    game.players.sort(((a, b) => b.score.compareTo(a.score)));
+    game.currentRound++;
+  }
+
+  void nextScreen(BuildContext context) {
+    nextRound();
+    (game.currentRound > game.totalRounds)
+        ? Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
+        : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }
 }

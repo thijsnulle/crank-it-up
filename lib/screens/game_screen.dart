@@ -1,12 +1,13 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
-import 'package:crank_it_up/screens/transitions.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:page_flip_builder/page_flip_builder.dart';
+import 'package:page_transition/page_transition.dart';
 
 class GameScreen extends StatefulWidget {
   const GameScreen({super.key});
@@ -31,7 +32,10 @@ class GameScreenState extends State<GameScreen> {
       builder: (context) => Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            onPressed: () => Navigator.of(context).push(to(const HomeScreen())),
+            onPressed: () => Navigator.of(context).push(PageTransition(
+              child: const HomeScreen(),
+              type: PageTransitionType.bottomToTop,
+            )),
             icon: const Icon(Icons.home_outlined),
           ),
           title: Text('ROUND ${game.currentRound}', style: Theme.of(context).textTheme.headline1),
@@ -59,7 +63,11 @@ class GameScreenState extends State<GameScreen> {
                 ),
                 const SizedBox(height: 32.0),
                 PrimaryButton(
-                    text: 'START VOTING', function: () => Navigator.of(context).push(to(const VotingScreen())))
+                    text: 'START VOTING',
+                    function: () => Navigator.of(context).push(PageTransition(
+                          child: const VotingScreen(),
+                          type: PageTransitionType.rightToLeft,
+                        )))
               ],
             )),
       ),
@@ -85,7 +93,7 @@ class PackView extends StatelessWidget {
             child: Padding(
               key: const ValueKey<int>(0),
               padding: const EdgeInsets.all(32.0),
-              child: Text(
+              child: AutoSizeText(
                 text,
                 style: Theme.of(context).textTheme.headline4,
               ),
@@ -116,24 +124,24 @@ class ScoreBoard extends StatelessWidget {
                     style: Theme.of(context).textTheme.headline3,
                   ),
                   Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.centerLeft,
                       child: Padding(
-                        padding: const EdgeInsets.only(top: 32.0),
-                        child: Column(
+                          padding: const EdgeInsets.only(top: 16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                          game.players.length,
-                          (index) => Wrap(children: [
-                            Text(
-                              ' ${index + 1}. ',
-                              style: Theme.of(context).textTheme.headline5,
+                              game.players.length,
+                              (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                                Wrap(children: [
+                                  SizedBox(
+                                      width: 30,
+                                      child: Text('${index + 1}. ', style: Theme.of(context).textTheme.headline5)),
+                                  Text(game.players[index].name, style: Theme.of(context).textTheme.headline6),
+                                ]),
+                                Text('\t${game.players[index].score}', style: Theme.of(context).textTheme.headline5),
+                              ]),
                             ),
-                            Text(
-                              game.players[index].name,
-                              style: Theme.of(context).textTheme.headline6,
-                            )
-                          ]),
-                        )),
-                      ))
+                          )))
                 ]))));
   }
 }

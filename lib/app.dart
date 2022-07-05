@@ -3,6 +3,12 @@ library crank_it_up.lib.app;
 import 'dart:ui';
 import 'components/pack.dart';
 
+class Ranks {
+  static bool first = false;
+  static bool second = false;
+  static bool third = false;
+}
+
 List<Pack> packs = [
   Pack(
       id: 0,
@@ -43,8 +49,13 @@ class GameObject {
 class Player {
   final String name;
   int score = 0;
+  int rank = 4;
 
   Player(this.name);
+
+  updateScore() {
+    score += 4 - rank;
+  }
 }
 
 GameObject game = GameObject(players: [], totalRounds: -1, scenarios: []);
