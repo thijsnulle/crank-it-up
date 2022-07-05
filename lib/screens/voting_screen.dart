@@ -1,9 +1,9 @@
 import 'package:crank_it_up/components/buttons.dart';
-import 'package:crank_it_up/screens/transitions.dart';
-import 'package:crank_it_up/app.dart' as app;
+import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
+import 'package:page_transition/page_transition.dart';
 import 'game_screen.dart';
 
 class VotingScreen extends StatelessWidget {
@@ -32,10 +32,10 @@ class VotingScreen extends StatelessWidget {
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                itemCount: app.game.players.length,
+                itemCount: game.players.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    name: app.game.players[index].name,
+                    name: game.players[index].name,
                   );
                 },
               ),
@@ -46,16 +46,18 @@ class VotingScreen extends StatelessWidget {
                     text: 'Next Round',
                     function: () => {
                           determineWinner(context)
-                              ? Navigator.of(context).push(to(const WinnerScreen()))
-                              : Navigator.of(context).push(to(const GameScreen()))
+                              ? Navigator.of(context).push(
+                                  PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
+                              : Navigator.of(context)
+                                  .push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft))
                         }))
           ],
         ));
   }
 
   bool determineWinner(BuildContext context) {
-    if (app.game.currentRound == app.game.totalRounds) return true;
-    app.game.currentRound++;
+    if (game.currentRound == game.totalRounds) return true;
+    game.currentRound++;
 
     return false;
   }
