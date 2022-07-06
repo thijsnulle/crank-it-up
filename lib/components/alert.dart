@@ -12,7 +12,7 @@ bool alert(String text, BuildContext context) {
       behavior: FlashBehavior.floating,
       child: FlashBar(
         content: Text(text),
-        indicatorColor: colorScheme.primary,
+        indicatorColor: colorScheme.secondaryContainer,
       ),
     ),
   );

@@ -10,7 +10,7 @@ class AppHeader {
     List<Widget> actions = const [],
   }) {
     return AppBar(
-      leading: (function == null)
+      leading: (icon != null)
           ? IconButton(
               onPressed: function ?? () => Navigator.of(context).pop(),
               icon: Icon(icon),

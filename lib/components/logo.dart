@@ -10,10 +10,10 @@ class Logo extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('CRANK', style: Theme.of(context).textTheme.headline1),
+            Text('CRANK', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 64.0)),
             Wrap(children: [
-              Text('IT', style: Theme.of(context).textTheme.headline2),
-              Text('UP', style: Theme.of(context).textTheme.headline1),
+              Text('IT', style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 64.0)),
+              Text('UP', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 64.0)),
             ])
           ],
         ));

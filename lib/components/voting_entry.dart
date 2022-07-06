@@ -1,3 +1,4 @@
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/app.dart';
 
@@ -35,7 +36,8 @@ class VotingEntryState extends State<VotingEntry> {
                 Expanded(
                     flex: 3,
                     child: Container(
-                      decoration: BoxDecoration(border: Border.all(color: Colors.white), shape: BoxShape.circle),
+                      decoration:
+                          BoxDecoration(border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle),
                       height: 40,
                       child: Center(
                         child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '',
@@ -50,7 +52,8 @@ class VotingEntryState extends State<VotingEntry> {
                           children: [
                             Container(
                               height: 40,
-                              decoration: const BoxDecoration(border: Border(bottom: BorderSide(color: Colors.white))),
+                              decoration:
+                                  BoxDecoration(border: Border(bottom: BorderSide(color: colorScheme.onBackground))),
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),
