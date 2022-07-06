@@ -81,15 +81,19 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
       return alert('Ensure all player names are between 1-12 characters!', context);
     }
 
-    if (validate(playerNames)) {
+    if (playerNames.length != {...playerNames}.length) {
       return alert('Make sure all player names are unique!', context);
+    }
+
+    if (playerNames.any((p) => p.trim().isEmpty)) {
+      return alert('Make sure every player has a name!', context);
     }
 
     maxRanks = max(1, min(playerNames.length - 1, 3));
     ranks = List<bool>.filled(maxRanks, false);
 
     game = GameObject(
-      players: List<Player>.from(playerNames.map((name) => Player(name: name))),
+      players: List<Player>.from(playerNames.map((name) => Player(name: capitalise(name.trim())))),
       scenarios: List<String>.from(packs.where((p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
       totalRounds: widget.numberOfRounds,
     );
@@ -97,7 +101,5 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     return true;
   }
 
-  bool validate(List<String> playerNames) {
-    return playerNames.length != {...playerNames}.length;
-  }
+  String capitalise(String s) => s[0].toUpperCase() + s.substring(1);
 }
