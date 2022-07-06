@@ -8,7 +8,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppHeader.create('SETTINGS', 'SCREEN', null, Icons.west_rounded, context),
+        appBar: AppHeader.create('SETTINGS', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
         body: Container(),
       ),
     );

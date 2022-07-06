@@ -34,7 +34,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, context),
+        appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, CrossAxisAlignment.start, context),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(
