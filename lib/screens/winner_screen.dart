@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
@@ -41,7 +42,7 @@ class WinnerScreenState extends State<WinnerScreen> {
                   child: Column(children: [
                     Text(
                       'Final Scoreboard',
-                      style: Theme.of(context).textTheme.headline5,
+                      style: Theme.of(context).textTheme.headline5!.copyWith(color: colorScheme.onBackground),
                     ),
                     Align(
                         alignment: Alignment.centerLeft,
@@ -55,10 +56,22 @@ class WinnerScreenState extends State<WinnerScreen> {
                                   Wrap(children: [
                                     SizedBox(
                                         width: 30,
-                                        child: Text('${index + 1}. ', style: Theme.of(context).textTheme.headline5)),
-                                    Text(game.players[index].name, style: Theme.of(context).textTheme.headline6),
+                                        child: Text('${index + 1}. ',
+                                            style: Theme.of(context)
+                                                .textTheme
+                                                .headline5!
+                                                .copyWith(color: colorScheme.onBackground))),
+                                    Text(game.players[index].name,
+                                        style: Theme.of(context)
+                                            .textTheme
+                                            .headline6!
+                                            .copyWith(color: colorScheme.onBackground)),
                                   ]),
-                                  Text('\t${game.players[index].score}', style: Theme.of(context).textTheme.headline5),
+                                  Text('\t${game.players[index].score}',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headline5!
+                                          .copyWith(color: colorScheme.onBackground)),
                                 ]),
                               ),
                             ))),

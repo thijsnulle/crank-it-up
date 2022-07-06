@@ -1,3 +1,4 @@
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
@@ -33,7 +34,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                     IconButton(
                       icon: const Icon(Icons.remove),
                       onPressed: () => setState(() => numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8)),
-                      color: Colors.white,
+                      color: colorScheme.onBackground,
                     ),
                     NumberPicker(
                       value: numberOfPlayers,
@@ -42,14 +43,14 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       itemWidth: 30,
                       itemHeight: 30,
                       onChanged: (v) => setState(() => numberOfPlayers = v),
-                      selectedTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
-                      textStyle: const TextStyle(color: Colors.grey, fontSize: 16),
+                      selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
+                      textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
                       haptics: true,
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () => setState(() => numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8)),
-                      color: Colors.white,
+                      color: colorScheme.onBackground,
                     )
                   ])
                 ]),
@@ -61,7 +62,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                     IconButton(
                       icon: const Icon(Icons.remove),
                       onPressed: () => setState(() => numberOfRounds = (numberOfRounds - 1).clamp(5, 20)),
-                      color: Colors.white,
+                      color: colorScheme.onBackground,
                     ),
                     NumberPicker(
                       value: numberOfRounds,
@@ -70,14 +71,14 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       itemWidth: 30,
                       itemHeight: 30,
                       onChanged: (v) => setState(() => numberOfRounds = v),
-                      selectedTextStyle: const TextStyle(color: Colors.white, fontSize: 24),
-                      textStyle: const TextStyle(color: Colors.grey, fontSize: 16),
+                      selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
+                      textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
                       haptics: true,
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
                       onPressed: () => setState(() => numberOfRounds = (numberOfRounds + 1).clamp(5, 20)),
-                      color: Colors.white,
+                      color: colorScheme.onBackground,
                     )
                   ])
                 ]),
@@ -90,7 +91,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                           ),
                       child: Text(
                         'Still want to change your pack?',
-                        style: TextStyle(color: Colors.grey.shade500, decoration: TextDecoration.underline),
+                        style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
                       ))
                 ],
               ),

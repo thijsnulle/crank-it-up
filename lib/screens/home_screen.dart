@@ -1,7 +1,7 @@
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_creation_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/components/logo.dart';
 
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
@@ -19,25 +19,27 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 64.0),
             const Logo(),
-            PrimaryButton(
-              text: 'PLAY GAME',
-              function: () => Navigator.of(context).push(
-                PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen()),
-              ),
+            TextButton(
+              onPressed: () => Navigator.of(context)
+                  .push(PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen())),
+              style: Theme.of(context).textButtonTheme.style,
+              child: Text('PLAY GAME', style: Theme.of(context).textTheme.button!.copyWith(fontSize: 24.0)),
             ),
             const SizedBox(height: 16),
-            SecondaryButton(
-              text: 'CHOOSE PACK',
-              function: () => Navigator.of(context).push(
-                PageTransition(type: PageTransitionType.leftToRight, child: const PackSelectionScreen()),
-              ),
+            TextButton(
+              onPressed: () => Navigator.of(context)
+                  .push(PageTransition(type: PageTransitionType.rightToLeft, child: const PackSelectionScreen())),
+              style: Theme.of(context).elevatedButtonTheme.style,
+              child: Text('SELECT PACKS', style: Theme.of(context).textTheme.button!.copyWith(fontSize: 24.0)),
             ),
             Expanded(child: Container()),
-            ClickableIcon(
-              iconData: Icons.settings,
-              function: () => Navigator.of(context).push(
+            IconButton(
+              onPressed: () => Navigator.of(context).push(
                 PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
               ),
+              icon: const Icon(Icons.settings),
+              color: colorScheme.onBackground,
+              iconSize: 36,
             ),
             const SizedBox(height: 64),
           ],

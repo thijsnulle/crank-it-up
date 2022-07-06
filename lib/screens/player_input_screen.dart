@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/alert.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
@@ -45,17 +46,17 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
                   height: 40,
                   child: TextFormField(
                       decoration: InputDecoration(
-                        enabledBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: colorScheme.onBackground),
                         ),
-                        focusedBorder: const UnderlineInputBorder(
-                          borderSide: BorderSide(color: Colors.green),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: colorScheme.secondary),
                         ),
                         hintText: 'Player Name',
-                        hintStyle: TextStyle(color: Colors.grey.shade600),
+                        hintStyle: TextStyle(color: colorScheme.tertiary),
                       ),
                       onChanged: (s) => playerNames[index] = s,
-                      style: const TextStyle(color: Colors.white)),
+                      style: TextStyle(color: colorScheme.onBackground)),
                 ),
               )),
               Expanded(child: Container()),

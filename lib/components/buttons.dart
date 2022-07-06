@@ -31,20 +31,3 @@ class SecondaryButton extends StatelessWidget {
     );
   }
 }
-
-class ClickableIcon extends StatelessWidget {
-  final IconData iconData;
-  final Function() function;
-
-  const ClickableIcon({required this.iconData, required this.function, super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IconButton(
-      onPressed: function,
-      icon: Icon(iconData),
-      iconSize: 36,
-      color: Colors.white,
-    );
-  }
-}
