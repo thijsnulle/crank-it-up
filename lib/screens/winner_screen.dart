@@ -1,5 +1,6 @@
 import 'package:confetti/confetti.dart';
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -31,19 +32,8 @@ class WinnerScreenState extends State<WinnerScreen> {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) => Scaffold(
-            appBar: AppBar(
-              automaticallyImplyLeading: false,
-              title: Column(
-                children: [
-                  Text(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name,
-                      style: Theme.of(context).textTheme.headline1),
-                  Text('WINS!!!', style: Theme.of(context).textTheme.headline2)
-                ],
-              ),
-              toolbarHeight: 200,
-              backgroundColor: Colors.transparent,
-              shadowColor: Colors.transparent,
-            ),
+            appBar: AppHeader.create(
+                game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, context),
             body: Stack(
               children: [
                 Padding(

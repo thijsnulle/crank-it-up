@@ -1,3 +1,4 @@
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/app.dart';
@@ -8,19 +9,7 @@ class PackSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
-        title: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('PACK', style: Theme.of(context).textTheme.headline1),
-            Text('SELECTION', style: Theme.of(context).textTheme.headline2)
-          ],
-        ),
-        toolbarHeight: 200,
-        backgroundColor: Colors.transparent,
-        shadowColor: Colors.transparent,
-      ),
+      appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, context),
       body: GridView(
         padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

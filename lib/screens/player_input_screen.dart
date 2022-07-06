@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/components/alert.dart';
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
@@ -32,19 +33,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(onPressed: () => Navigator.of(context).pop(), icon: const Icon(Icons.west_rounded)),
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('CHOOSE', style: Theme.of(context).textTheme.headline1),
-              Text('PLAYERS', style: Theme.of(context).textTheme.headline2)
-            ],
-          ),
-          toolbarHeight: 200,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
+        appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, context),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(

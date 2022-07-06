@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crank_it_up/color_scheme.dart';
+import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
@@ -31,22 +32,19 @@ class GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            onPressed: () => Navigator.of(context).push(PageTransition(
-              child: const HomeScreen(),
-              type: PageTransitionType.bottomToTop,
-            )),
-            icon: const Icon(Icons.home_outlined),
-          ),
-          title: Text('ROUND ${game.currentRound}', style: Theme.of(context).textTheme.headline1),
-          actions: <Widget>[
-            IconButton(icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
-          ],
-          toolbarHeight: 200,
-          backgroundColor: Colors.transparent,
-          shadowColor: Colors.transparent,
-        ),
+        appBar: AppHeader.create(
+            'ROUND ${game.currentRound}',
+            null,
+            () => Navigator.of(context).push(PageTransition(
+                  child: const HomeScreen(),
+                  type: PageTransitionType.bottomToTop,
+                )),
+            Icons.home_outlined,
+            context,
+            actions: [
+              IconButton(
+                  icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+            ]),
         body: Padding(
             padding: const EdgeInsets.all(32.0),
             child: Column(
