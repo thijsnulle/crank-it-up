@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/color_scheme.dart';
+import 'package:flutter/services.dart';
 
 void main() {
-  runApp(const CrankItUp());
+  WidgetsFlutterBinding.ensureInitialized();
+  SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]).then((_) {
+    runApp(const CrankItUp());
+  });
 }
 
 class CrankItUp extends StatelessWidget {
