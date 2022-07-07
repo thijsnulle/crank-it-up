@@ -24,14 +24,22 @@ class HomeScreen extends StatelessWidget {
               onPressed: () => Navigator.of(context)
                   .push(PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen())),
               style: Theme.of(context).textButtonTheme.style,
-              child: Text('PLAY GAME', style: Theme.of(context).textTheme.button!.copyWith(fontSize: 24.0)),
+              child: SizedBox(
+                  width: 200,
+                  child: Text('PLAY GAME',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.button!.copyWith(fontSize: 20.0))),
             ),
             const SizedBox(height: 16),
             TextButton(
               onPressed: () => Navigator.of(context)
                   .push(PageTransition(type: PageTransitionType.rightToLeft, child: const PackSelectionScreen())),
               style: Theme.of(context).elevatedButtonTheme.style,
-              child: Text('SELECT PACKS', style: Theme.of(context).textTheme.button!.copyWith(fontSize: 24.0)),
+              child: SizedBox(
+                  width: 200,
+                  child: Text('SELECT PACKS',
+                      textAlign: TextAlign.center,
+                      style: Theme.of(context).textTheme.button!.copyWith(fontSize: 20.0))),
             ),
             Expanded(child: Container()),
             Wrap(children: [
