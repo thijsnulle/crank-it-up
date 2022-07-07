@@ -1,5 +1,6 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_creation_screen.dart';
+import 'package:crank_it_up/screens/rules_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/components/logo.dart';
@@ -33,14 +34,24 @@ class HomeScreen extends StatelessWidget {
               child: Text('SELECT PACKS', style: Theme.of(context).textTheme.button!.copyWith(fontSize: 24.0)),
             ),
             Expanded(child: Container()),
-            IconButton(
-              onPressed: () => Navigator.of(context).push(
-                PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
+            Wrap(children: [
+              IconButton(
+                onPressed: () => Navigator.of(context).push(
+                  PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
+                ),
+                icon: const Icon(Icons.settings),
+                color: colorScheme.onBackground,
+                iconSize: 36,
               ),
-              icon: const Icon(Icons.settings),
-              color: colorScheme.onBackground,
-              iconSize: 36,
-            ),
+              IconButton(
+                onPressed: () => Navigator.of(context).push(
+                  PageTransition(type: PageTransitionType.bottomToTop, child: RulesScreen()),
+                ),
+                icon: const Icon(Icons.rule),
+                color: colorScheme.onBackground,
+                iconSize: 36,
+              )
+            ]),
             const SizedBox(height: 64),
           ],
         ),
