@@ -1,4 +1,5 @@
 import 'package:crank_it_up/components/app_header.dart';
+import 'package:crank_it_up/components/pack.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/app.dart';
@@ -14,7 +15,9 @@ class PackSelectionScreen extends StatelessWidget {
         padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
-        children: packs,
+        children: packs
+            .map((element) => PackCard(id: element.id, name: element.name, color: element.color, img: element.img))
+            .toList(),
       ),
     );
   }

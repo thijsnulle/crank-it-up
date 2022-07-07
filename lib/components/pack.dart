@@ -1,31 +1,20 @@
-import 'package:crank_it_up/app.dart' as app;
+import 'package:crank_it_up/app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
-//ignore: must_be_immutable
-class Pack extends StatefulWidget {
+class PackCard extends StatefulWidget {
   final int id;
   final String name;
-  final String img;
-  final List scenarios;
   final Color color;
-  bool isSelected;
+  final String img;
 
-  Pack({
-    super.key,
-    required this.id,
-    required this.name,
-    required this.img,
-    required this.scenarios,
-    required this.color,
-    this.isSelected = true,
-  });
+  const PackCard({super.key, required this.id, required this.name, required this.color, required this.img});
 
   @override
   PackState createState() => PackState();
 }
 
-class PackState extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
+class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackCard> {
   @override
   bool get wantKeepAlive => true;
 
@@ -68,7 +57,7 @@ class PackState extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
         GestureDetector(
             onTap: () {
               setState(() {
-                app.packs[widget.id].isSelected = !app.packs[widget.id].isSelected;
+                packs[widget.id].isSelected = !packs[widget.id].isSelected;
               });
             },
             child: Stack(
@@ -76,14 +65,13 @@ class PackState extends State<Pack> with AutomaticKeepAliveClientMixin<Pack> {
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: app.packs[widget.id].isSelected ? Colors.black.withOpacity(0.5) : Colors.transparent),
+                      color: packs[widget.id].isSelected ? Colors.black.withOpacity(0.5) : Colors.transparent),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 5, top: 5),
                   child: Icon(
                     Icons.check_rounded,
-                    color:
-                        app.packs[widget.id].isSelected ? const Color.fromARGB(255, 26, 200, 35) : Colors.transparent,
+                    color: packs[widget.id].isSelected ? const Color.fromARGB(255, 26, 200, 35) : Colors.transparent,
                     size: 40,
                   ),
                 )
