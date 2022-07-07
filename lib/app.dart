@@ -28,22 +28,22 @@ List<Pack> packs = [
         'You are rolling around in whipped cream, what did you put on?',
       ],
       color: const Color.fromARGB(255, 43, 41, 41)),
-  // Pack(
-  //     id: 1,
-  //     name: "18+",
-  //     img: "18+",
-  //     scenarios: const [
-  //       'You walk into the black room of a gay bar, what do you hear?',
-  //       'You walk onto a porn set, what’s playing in the background of the recording?',
-  //       'You’re playing soggy biscuit. What’s playing in the background?',
-  //       'You accidentally enter a furry orgy. What music are they playing?',
-  //       'You’re fucking a MILF, what’s your song?',
-  //       'You catch your parents having sex, what did they put on?',
-  //       'Your lover is seducing you, what did they put on?',
-  //     ],
-  //     color: const Color.fromARGB(255, 160, 44, 36)),
   Pack(
       id: 1,
+      name: "18+",
+      img: "18+",
+      scenarios: const [
+        'You walk into the black room of a gay bar, what do you hear?',
+        'You walk onto a porn set, what’s playing in the background of the recording?',
+        'You’re playing soggy biscuit. What’s playing in the background?',
+        'You accidentally enter a furry orgy. What music are they playing?',
+        'You’re fucking a MILF, what’s your song?',
+        'You catch your parents having sex, what did they put on?',
+        'Your lover is seducing you, what did they put on?',
+      ],
+      color: const Color.fromARGB(255, 160, 44, 36)),
+  Pack(
+      id: 2,
       name: "CHILL",
       img: "chill",
       scenarios: const [
@@ -53,7 +53,7 @@ List<Pack> packs = [
       ],
       color: const Color(0xFF247BA0)),
   Pack(
-      id: 2,
+      id: 3,
       name: "COUNTRIES",
       img: "countries",
       scenarios: const [
@@ -63,25 +63,25 @@ List<Pack> packs = [
         'You are on a research mission in the arctics, what’s your coworker playing?',
       ],
       color: const Color.fromARGB(255, 73, 155, 74)),
-  // Pack(
-  //     id: 3,
-  //     name: "DRUGS",
-  //     img: "drugs",
-  //     scenarios: const [
-  //       'You’re about to take XTC on a festival for the first time, what’s playing in the tent behind you?',
-  //       'You’re going hard on a festival, what’s the worst song to come on?',
-  //       'What song gives you a bad LSD trip?',
-  //       'You’re tripping on top of the Eiffel Tower, what do you hear?',
-  //       'You’re sitting on top of the Egyptian pyramids in the desert, tripping on LSD, what do you put on?',
-  //       'You’re smuggling drugs on the border of Mexico, what song do you listen to to keep calm?',
-  //       'On a DMT trip, what do other entities play for you?',
-  //       'You’re on your way to rehab, about to take your last hit, what do you put on?',
-  //       'You’re trip sitting your friend for the first time, what do you play for them?',
-  //       'You just drank a bottle of vodka by yourself, what’s the song on?',
-  //     ],
-  //     color: const Color.fromARGB(255, 119, 36, 160)),
   Pack(
-      id: 3,
+      id: 4,
+      name: "DRUGS",
+      img: "drugs",
+      scenarios: const [
+        'You’re about to take XTC on a festival for the first time, what’s playing in the tent behind you?',
+        'You’re going hard on a festival, what’s the worst song to come on?',
+        'What song gives you a bad LSD trip?',
+        'You’re tripping on top of the Eiffel Tower, what do you hear?',
+        'You’re sitting on top of the Egyptian pyramids in the desert, tripping on LSD, what do you put on?',
+        'You’re smuggling drugs on the border of Mexico, what song do you listen to to keep calm?',
+        'On a DMT trip, what do other entities play for you?',
+        'You’re on your way to rehab, about to take your last hit, what do you put on?',
+        'You’re trip sitting your friend for the first time, what do you play for them?',
+        'You just drank a bottle of vodka by yourself, what’s the song on?',
+      ],
+      color: const Color.fromARGB(255, 119, 36, 160)),
+  Pack(
+      id: 5,
       name: "MEDIA",
       img: "pop-culture",
       scenarios: const [
@@ -94,7 +94,7 @@ List<Pack> packs = [
       ],
       color: const Color.fromARGB(255, 160, 44, 36)),
   Pack(
-      id: 4,
+      id: 6,
       name: "RELIGION",
       img: "religion",
       scenarios: const [
@@ -107,7 +107,7 @@ List<Pack> packs = [
       ],
       color: const Color.fromARGB(255, 207, 210, 212)),
   Pack(
-      id: 5,
+      id: 7,
       name: "SCARY",
       img: "scary",
       scenarios: const [
@@ -119,7 +119,7 @@ List<Pack> packs = [
       ],
       color: const Color.fromARGB(255, 222, 152, 12)),
   Pack(
-      id: 6,
+      id: 8,
       name: "SCI-FI",
       img: "sci-fi",
       scenarios: const [
@@ -131,7 +131,7 @@ List<Pack> packs = [
       ],
       color: const Color.fromARGB(255, 119, 36, 160)),
   Pack(
-      id: 7,
+      id: 9,
       name: "SPORTS",
       img: "sports",
       scenarios: const [
@@ -144,7 +144,7 @@ List<Pack> packs = [
       ],
       color: const Color.fromARGB(255, 160, 44, 36)),
   Pack(
-      id: 8,
+      id: 10,
       name: "VACATION",
       img: "vacation",
       scenarios: const [
@@ -154,17 +154,17 @@ List<Pack> packs = [
         'You’re in a Japanese elevator, what’s the tune?',
       ],
       color: const Color.fromARGB(255, 222, 152, 12)),
-  // Pack(
-  //     id: 11,
-  //     name: "WEED",
-  //     img: "weed",
-  //     scenarios: const [
-  //       'You join a smoke sesh with Snoop Dogg, Bob Marley, MLK and Obama, what do they play?',
-  //       'You’re high and on your way to meet your family in law, what do you play to calm yourself down?',
-  //       'You’re in smoking the car with your mate with a seaside view, what’s on the car radio?',
-  //       'You just rolled your first cross joint, what do you play to celebrate?',
-  //     ],
-  //     color: const Color.fromARGB(255, 73, 155, 74)),
+  Pack(
+      id: 11,
+      name: "WEED",
+      img: "weed",
+      scenarios: const [
+        'You join a smoke sesh with Snoop Dogg, Bob Marley, MLK and Obama, what do they play?',
+        'You’re high and on your way to meet your family in law, what do you play to calm yourself down?',
+        'You’re in smoking the car with your mate with a seaside view, what’s on the car radio?',
+        'You just rolled your first cross joint, what do you play to celebrate?',
+      ],
+      color: const Color.fromARGB(255, 73, 155, 74)),
 ];
 
 class GameObject {
