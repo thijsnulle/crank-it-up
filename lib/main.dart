@@ -28,6 +28,7 @@ class CrankItUp extends StatelessWidget {
               headline4: TextStyle(fontWeight: FontWeight.w300, fontSize: 36.0, color: colorScheme.onPrimary),
               headline5: TextStyle(fontWeight: FontWeight.w500, fontSize: 24.0, color: colorScheme.onPrimary),
               headline6: TextStyle(fontWeight: FontWeight.w300, fontSize: 24.0, color: colorScheme.onPrimary),
+              bodyText2: TextStyle(fontWeight: FontWeight.w400, fontSize: 18.0, color: colorScheme.onPrimary),
               button: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 14.0,
