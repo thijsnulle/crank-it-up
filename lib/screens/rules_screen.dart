@@ -40,6 +40,12 @@ class BasicRules extends StatelessWidget {
         onTap: onFlip,
         child: Container(
             decoration: BoxDecoration(
+                gradient: const LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
+                  Color.fromARGB(255, 30, 21, 65),
+                  Color.fromARGB(255, 44, 31, 95),
+                  Color(0xFF473198),
+                  Color.fromARGB(255, 98, 67, 207)
+                ]),
                 color: colorScheme.primaryContainer,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),

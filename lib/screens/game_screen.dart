@@ -45,30 +45,38 @@ class GameScreenState extends State<GameScreen> {
               IconButton(
                   icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
             ]),
-        body: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageFlipBuilder(
-                    key: pageFlipKey,
-                    frontBuilder: (_) =>
-                        PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
-                    backBuilder: (_) => ScoreBoard(
-                      onFlip: () => pageFlipKey.currentState?.flip(),
+        body: Container(
+            decoration: const BoxDecoration(
+                gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
+              Color.fromARGB(255, 30, 21, 65),
+              Color.fromARGB(255, 44, 31, 95),
+              Color(0xFF473198),
+              Color.fromARGB(255, 98, 67, 207)
+            ])),
+            child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: PageFlipBuilder(
+                        key: pageFlipKey,
+                        frontBuilder: (_) =>
+                            PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
+                        backBuilder: (_) => ScoreBoard(
+                          onFlip: () => pageFlipKey.currentState?.flip(),
+                        ),
+                        flipAxis: Axis.horizontal,
+                      ),
                     ),
-                    flipAxis: Axis.horizontal,
-                  ),
-                ),
-                const SizedBox(height: 32.0),
-                PrimaryButton(
-                    text: 'START VOTING',
-                    function: () => Navigator.of(context).push(PageTransition(
-                          child: const VotingScreen(),
-                          type: PageTransitionType.rightToLeft,
-                        )))
-              ],
-            )),
+                    const SizedBox(height: 32.0),
+                    PrimaryButton(
+                        text: 'START VOTING',
+                        function: () => Navigator.of(context).push(PageTransition(
+                              child: const VotingScreen(),
+                              type: PageTransitionType.rightToLeft,
+                            )))
+                  ],
+                ))),
       ),
     );
   }

@@ -27,7 +27,7 @@ class AppHeader {
       ),
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: Colors.transparent,
+      backgroundColor: const Color.fromARGB(255, 97, 67, 206),
       shadowColor: Colors.transparent,
     );
   }
