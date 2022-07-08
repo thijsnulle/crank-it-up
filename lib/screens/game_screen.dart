@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
@@ -20,11 +22,40 @@ class GameScreen extends StatefulWidget {
 class GameScreenState extends State<GameScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
   String currentScenario = '';
+  Timer? timer;
 
   @override
   void initState() {
     game.scenarios.shuffle();
     currentScenario = game.scenarios.removeLast();
+
+    timer = Timer(
+        const Duration(seconds: 10),
+        () => showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                content: Text(
+                  'Get ready to play your songs!',
+                  style: Theme.of(context).textTheme.headline5!.copyWith(color: Colors.black),
+                ),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(16.0),
+                ),
+                actions: <Widget>[
+                  Center(
+                      child: TextButton(
+                    onPressed: () => Navigator.pop(context),
+                    style: Theme.of(context).textButtonTheme.style,
+                    child: Text(
+                      'OK',
+                      style: Theme.of(context).textTheme.button,
+                    ),
+                  )),
+                ],
+              );
+            }));
+
     super.initState();
   }
 
@@ -64,10 +95,13 @@ class GameScreenState extends State<GameScreen> {
                 const SizedBox(height: 32.0),
                 PrimaryButton(
                     text: 'START VOTING',
-                    function: () => Navigator.of(context).push(PageTransition(
-                          child: const VotingScreen(),
-                          type: PageTransitionType.rightToLeft,
-                        )))
+                    function: () => {
+                          timer!.cancel(),
+                          Navigator.of(context).push(PageTransition(
+                            child: const VotingScreen(),
+                            type: PageTransitionType.rightToLeft,
+                          ))
+                        })
               ],
             )),
       ),
@@ -87,7 +121,7 @@ class PackView extends StatelessWidget {
         onTap: onFlip,
         child: Container(
             decoration: BoxDecoration(
-                color: colorScheme.onPrimary,
+                color: colorScheme.primaryContainer,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
             child: Padding(
@@ -98,7 +132,7 @@ class PackView extends StatelessWidget {
                 style: Theme.of(context)
                     .textTheme
                     .headline4
-                    ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold),
+                    ?.copyWith(color: colorScheme.onPrimary, fontWeight: FontWeight.bold),
               ),
             )));
   }
