@@ -13,7 +13,8 @@ class RulesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, context, actions: [
+        appBar:
+            AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, CrossAxisAlignment.center, context, actions: [
           IconButton(icon: const Icon(Icons.rotate_left), onPressed: () => pageFlipKey.currentState?.flip()),
         ]),
         body: Padding(
