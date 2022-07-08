@@ -14,6 +14,12 @@ class Logo extends StatelessWidget {
             Wrap(children: [
               Text('IT', style: Theme.of(context).textTheme.headline2!.copyWith(fontSize: 64.0)),
               Text('UP', style: Theme.of(context).textTheme.headline1!.copyWith(fontSize: 64.0)),
+              Padding(
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: Image.asset(
+                    "assets/images/logo.gif",
+                    height: 75.0,
+                  )),
             ])
           ],
         ));
