@@ -1,7 +1,6 @@
 library crank_it_up.lib.app;
 
 import 'dart:ui';
-import 'components/pack.dart';
 
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);

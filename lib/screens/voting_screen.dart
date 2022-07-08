@@ -8,9 +8,14 @@ import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:page_transition/page_transition.dart';
 import 'game_screen.dart';
 
-class VotingScreen extends StatelessWidget {
+class VotingScreen extends StatefulWidget {
   const VotingScreen({super.key});
 
+  @override
+  VotingScreenState createState() => VotingScreenState();
+}
+
+class VotingScreenState extends State<VotingScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,6 +28,7 @@ class VotingScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return VotingEntry(
                     player: game.players[index],
+                    notifyParent: refresh,
                   );
                 },
               ),
@@ -32,6 +38,10 @@ class VotingScreen extends StatelessWidget {
                 child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
         ));
+  }
+
+  void refresh() {
+    setState(() {});
   }
 
   void determineWinner(BuildContext context) {
