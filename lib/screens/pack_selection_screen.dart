@@ -9,7 +9,7 @@ class PackSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, context),
+      appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, CrossAxisAlignment.start, context),
       body: GridView(
         padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

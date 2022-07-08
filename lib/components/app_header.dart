@@ -6,6 +6,7 @@ class AppHeader {
     String? headline2,
     Function()? function,
     IconData? icon,
+    CrossAxisAlignment crossAxisAlignment,
     BuildContext context, {
     List<Widget> actions = const [],
   }) {
@@ -17,7 +18,7 @@ class AppHeader {
             )
           : null,
       title: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: crossAxisAlignment,
         children: [
           Text(headline1, style: Theme.of(context).textTheme.headline1),
           if (headline2 != null) ...[
@@ -25,6 +26,7 @@ class AppHeader {
           ]
         ],
       ),
+      centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
       backgroundColor: Colors.transparent,

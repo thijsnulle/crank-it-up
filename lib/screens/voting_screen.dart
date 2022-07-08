@@ -14,7 +14,7 @@ class VotingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, context),
+        appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
         body: Column(
           children: <Widget>[
             Expanded(

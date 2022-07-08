@@ -33,8 +33,8 @@ class WinnerScreenState extends State<WinnerScreen> {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) => Scaffold(
-            appBar: AppHeader.create(
-                game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, context),
+            appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!',
+                null, null, CrossAxisAlignment.center, context),
             body: Stack(
               children: [
                 Padding(
