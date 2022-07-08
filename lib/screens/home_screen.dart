@@ -48,7 +48,7 @@ class HomeScreen extends StatelessWidget {
             Wrap(children: [
               IconButton(
                 onPressed: () => Navigator.of(context).push(
-                  PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
+                  PageTransition(type: PageTransitionType.bottomToTop, child: SettingsScreen()),
                 ),
                 icon: const Icon(Icons.settings),
                 color: colorScheme.onBackground,
