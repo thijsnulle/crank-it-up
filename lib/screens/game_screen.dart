@@ -3,6 +3,7 @@ import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
@@ -46,30 +47,31 @@ class GameScreenState extends State<GameScreen> {
               IconButton(
                   icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
             ]),
-        body: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: Column(
-              children: [
-                Expanded(
-                  child: PageFlipBuilder(
-                    key: pageFlipKey,
-                    frontBuilder: (_) =>
-                        PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
-                    backBuilder: (_) => ScoreBoard(
-                      onFlip: () => pageFlipKey.currentState?.flip(),
+        body: GradientBackground(
+            child: Padding(
+                padding: const EdgeInsets.all(32.0),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: PageFlipBuilder(
+                        key: pageFlipKey,
+                        frontBuilder: (_) =>
+                            PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
+                        backBuilder: (_) => ScoreBoard(
+                          onFlip: () => pageFlipKey.currentState?.flip(),
+                        ),
+                        flipAxis: Axis.horizontal,
+                      ),
                     ),
-                    flipAxis: Axis.horizontal,
-                  ),
-                ),
-                const SizedBox(height: 32.0),
-                PrimaryButton(
-                    text: 'START VOTING',
-                    function: () => Navigator.of(context).push(PageTransition(
-                          child: const VotingScreen(),
-                          type: PageTransitionType.rightToLeft,
-                        )))
-              ],
-            )),
+                    const SizedBox(height: 32.0),
+                    PrimaryButton(
+                        text: 'START VOTING',
+                        function: () => Navigator.of(context).push(PageTransition(
+                              child: const VotingScreen(),
+                              type: PageTransitionType.rightToLeft,
+                            )))
+                  ],
+                ))),
       ),
     );
   }

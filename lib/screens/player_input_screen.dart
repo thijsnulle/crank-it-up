@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
 
+import 'package:crank_it_up/components/gradient_background.dart';
+
 class PlayerInputScreen extends StatefulWidget {
   const PlayerInputScreen({super.key, required this.numberOfPlayers, required this.numberOfRounds});
 
@@ -35,7 +37,8 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-        body: Padding(
+        body: GradientBackground(
+            child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(
             children: [
@@ -72,7 +75,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
               const SizedBox(height: 32)
             ],
           ),
-        ),
+        )),
       ),
     );
   }

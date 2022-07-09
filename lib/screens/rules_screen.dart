@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
+import 'package:crank_it_up/components/gradient_background.dart';
+
 class RulesScreen extends StatelessWidget {
   RulesScreen({super.key});
 
@@ -17,14 +19,15 @@ class RulesScreen extends StatelessWidget {
             AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, CrossAxisAlignment.center, context, actions: [
           IconButton(icon: const Icon(Icons.rotate_left), onPressed: () => pageFlipKey.currentState?.flip()),
         ]),
-        body: Padding(
+        body: GradientBackground(
+            child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: PageFlipBuilder(
             key: pageFlipKey,
             frontBuilder: (_) => BasicRules(onFlip: () => pageFlipKey.currentState?.flip()),
             backBuilder: (_) => DrinkingRules(onFlip: () => pageFlipKey.currentState?.flip()),
           ),
-        ),
+        )),
       ),
     );
   }

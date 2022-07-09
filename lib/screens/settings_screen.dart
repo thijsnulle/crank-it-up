@@ -1,6 +1,8 @@
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:flutter/material.dart';
 
+import 'package:crank_it_up/components/gradient_background.dart';
+
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
@@ -9,7 +11,7 @@ class SettingsScreen extends StatelessWidget {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('SETTINGS', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-        body: Container(),
+        body: GradientBackground(child: Container()),
       ),
     );
   }

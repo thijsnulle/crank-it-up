@@ -19,7 +19,7 @@ class CrankItUp extends StatelessWidget {
     return MaterialApp(
         home: const HomeScreen(),
         theme: ThemeData(
-            scaffoldBackgroundColor: colorScheme.background,
+            scaffoldBackgroundColor: Colors.transparent,
             fontFamily: 'Montserrat',
             textTheme: TextTheme(
               headline1: TextStyle(fontWeight: FontWeight.w700, fontSize: 48.0, color: colorScheme.onBackground),

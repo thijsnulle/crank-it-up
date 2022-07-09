@@ -6,6 +6,7 @@ import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 import 'game_screen.dart';
 
 class VotingScreen extends StatefulWidget {
@@ -20,7 +21,8 @@ class VotingScreenState extends State<VotingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-        body: Column(
+        body: GradientBackground(
+            child: Column(
           children: <Widget>[
             Expanded(
               child: ListView.builder(
@@ -37,7 +39,7 @@ class VotingScreenState extends State<VotingScreen> {
                 padding: const EdgeInsets.only(bottom: 30),
                 child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
-        ));
+        )));
   }
 
   void refresh() {

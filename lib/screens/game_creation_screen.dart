@@ -1,5 +1,6 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
 import 'package:flutter/material.dart';
@@ -23,7 +24,8 @@ class GameCreationScreenState extends State<GameCreationScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('CREATE', 'GAME', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-        body: Padding(
+        body: GradientBackground(
+            child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),
           child: Column(
             children: [
@@ -106,7 +108,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
               const SizedBox(height: 32)
             ],
           ),
-        ),
+        )),
       ),
     );
   }

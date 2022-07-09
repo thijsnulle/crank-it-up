@@ -5,6 +5,8 @@ import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
 
+import 'package:crank_it_up/components/gradient_background.dart';
+
 class WinnerScreen extends StatefulWidget {
   const WinnerScreen({super.key});
 
@@ -35,7 +37,8 @@ class WinnerScreenState extends State<WinnerScreen> {
         builder: (context) => Scaffold(
             appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!',
                 null, null, CrossAxisAlignment.center, context),
-            body: Stack(
+            body: GradientBackground(
+                child: Stack(
               children: [
                 Padding(
                   padding: const EdgeInsets.all(32.0),
@@ -55,17 +58,13 @@ class WinnerScreenState extends State<WinnerScreen> {
                                 (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                   Wrap(children: [
                                     SizedBox(
-                                        width: 30,
-                                        child: Text('${index + 1}. ',
-                                            style: Theme.of(context)
-                                                .textTheme
-                                                .headline5!
-                                                .copyWith(color: colorScheme.onBackground))),
-                                    Text(game.players[index].name,
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headline6!
-                                            .copyWith(color: colorScheme.onBackground)),
+                                      width: 30,
+                                      child: Text('${index + 1}. ',
+                                          style: Theme.of(context)
+                                              .textTheme
+                                              .headline6!
+                                              .copyWith(color: colorScheme.onBackground)),
+                                    )
                                   ]),
                                   Text('\t${game.players[index].score}',
                                       style: Theme.of(context)
@@ -91,6 +90,6 @@ class WinnerScreenState extends State<WinnerScreen> {
                       numberOfParticles: 25,
                     )),
               ],
-            )));
+            ))));
   }
 }
