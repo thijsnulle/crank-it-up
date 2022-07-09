@@ -23,7 +23,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppHeader.create('CREATE', 'GAME', null, Icons.west_rounded, context),
+        appBar: AppHeader.create('CREATE', 'GAME', null, Icons.west_rounded, CrossAxisAlignment.start, context),
         body: GradientBackground(
             child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 32.0),

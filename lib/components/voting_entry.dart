@@ -5,8 +5,9 @@ import 'package:crank_it_up/app.dart';
 //ignore: must_be_immutable
 class VotingEntry extends StatefulWidget {
   Player player;
+  final Function() notifyParent;
 
-  VotingEntry({super.key, required this.player});
+  VotingEntry({super.key, required this.player, required this.notifyParent});
 
   @override
   VotingEntryState createState() => VotingEntryState();
@@ -21,14 +22,21 @@ class VotingEntryState extends State<VotingEntry> {
           child: GestureDetector(
             onTap: () {
               setState(() {
-                if (widget.player.rank == maxRanks && ranks.contains(false)) {
-                  int newRank = ranks.indexOf(false);
-                  widget.player.rank = newRank;
-                  ranks[newRank] = true;
+                if (widget.player.rank == maxRanks) {
+                  if (ranks.contains(false)) {
+                    int newRank = ranks.indexOf(false);
+                    widget.player.rank = newRank;
+                    ranks[newRank] = true;
+                  } else {
+                    Player p = game.players.firstWhere((p) => p.rank == maxRanks - 1);
+                    p.rank = maxRanks;
+                    widget.player.rank = maxRanks - 1;
+                  }
                 } else if (widget.player.rank != maxRanks) {
                   ranks[widget.player.rank] = false;
                   widget.player.rank = maxRanks;
                 }
+                widget.notifyParent();
               });
             },
             child: Row(

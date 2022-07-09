@@ -1,7 +1,6 @@
 library crank_it_up.lib.app;
 
 import 'dart:ui';
-import 'components/pack.dart';
 
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);
@@ -185,6 +184,24 @@ class Player {
   Player({required this.name});
 
   updateScore() => {score += maxRanks - rank, rank = maxRanks};
+}
+
+class Pack {
+  final int id;
+  final String name;
+  final String img;
+  final List scenarios;
+  final Color color;
+  bool isSelected;
+
+  Pack({
+    required this.id,
+    required this.name,
+    required this.img,
+    required this.scenarios,
+    required this.color,
+    this.isSelected = true,
+  });
 }
 
 GameObject game = GameObject(players: [], totalRounds: -1, scenarios: []);

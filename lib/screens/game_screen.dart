@@ -41,6 +41,7 @@ class GameScreenState extends State<GameScreen> {
                   type: PageTransitionType.bottomToTop,
                 )),
             Icons.home_outlined,
+            CrossAxisAlignment.center,
             context,
             actions: [
               IconButton(

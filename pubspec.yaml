@@ -80,6 +80,7 @@ flutter:
       - assets/images/sports.svg
       - assets/images/vacation.svg
       - assets/images/weed.svg
+      - assets/images/logo.gif
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

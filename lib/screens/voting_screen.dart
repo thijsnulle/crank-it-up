@@ -9,13 +9,18 @@ import 'package:page_transition/page_transition.dart';
 import '../components/gradient_background.dart';
 import 'game_screen.dart';
 
-class VotingScreen extends StatelessWidget {
+class VotingScreen extends StatefulWidget {
   const VotingScreen({super.key});
 
   @override
+  VotingScreenState createState() => VotingScreenState();
+}
+
+class VotingScreenState extends State<VotingScreen> {
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, context),
+        appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
         body: GradientBackground(
             child: Column(
           children: <Widget>[
@@ -25,6 +30,7 @@ class VotingScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return VotingEntry(
                     player: game.players[index],
+                    notifyParent: refresh,
                   );
                 },
               ),
@@ -34,6 +40,10 @@ class VotingScreen extends StatelessWidget {
                 child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
           ],
         )));
+  }
+
+  void refresh() {
+    setState(() {});
   }
 
   void determineWinner(BuildContext context) {
