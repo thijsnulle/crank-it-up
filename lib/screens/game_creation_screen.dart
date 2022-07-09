@@ -63,7 +63,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                   Row(children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds - 1).clamp(5, 20)),
+                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds - 1).clamp(3, 10)),
                       color: colorScheme.onBackground,
                     ),
                     NumberPicker(
@@ -79,7 +79,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds + 1).clamp(5, 20)),
+                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds + 1).clamp(3, 10)),
                       color: colorScheme.onBackground,
                     )
                   ])

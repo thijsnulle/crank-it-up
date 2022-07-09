@@ -53,6 +53,8 @@ class HomeScreen extends StatelessWidget {
                 icon: const Icon(Icons.settings),
                 color: colorScheme.onBackground,
                 iconSize: 36,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
               ),
               IconButton(
                 onPressed: () => Navigator.of(context).push(
@@ -61,6 +63,8 @@ class HomeScreen extends StatelessWidget {
                 icon: const Icon(Icons.rule),
                 color: colorScheme.onBackground,
                 iconSize: 36,
+                splashColor: Colors.transparent,
+                highlightColor: Colors.transparent,
               )
             ]),
             const SizedBox(height: 64),

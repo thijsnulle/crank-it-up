@@ -1,14 +1,14 @@
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class PackCard extends StatefulWidget {
   final int id;
   final String name;
-  final Color color;
   final String img;
 
-  const PackCard({super.key, required this.id, required this.name, required this.color, required this.img});
+  const PackCard({super.key, required this.id, required this.name, required this.img});
 
   @override
   PackState createState() => PackState();
@@ -27,7 +27,7 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
         Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20),
-            color: HSLColor.fromColor(widget.color).withLightness(0.6).toColor(),
+            color: colorScheme.primaryContainer,
             boxShadow: const [
               BoxShadow(
                 color: Color(0x66000000),
@@ -42,7 +42,8 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
           padding: const EdgeInsets.all(30),
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(image: Svg('assets/images/${widget.img}.svg', color: widget.color)),
+                  image: DecorationImage(
+                      image: Svg('assets/images/${widget.img}.svg', color: colorScheme.onPrimaryContainer)),
                   borderRadius: BorderRadius.circular(20))),
         ),
         Padding(
@@ -52,7 +53,10 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
                 child: Text(
                   widget.name,
                   style: TextStyle(
-                      color: widget.color, fontFamily: 'Montserrat', fontSize: 30, fontWeight: FontWeight.bold),
+                      color: colorScheme.onPrimaryContainer,
+                      fontFamily: 'Montserrat',
+                      fontSize: 30,
+                      fontWeight: FontWeight.bold),
                 ))),
         GestureDetector(
             onTap: () {
@@ -65,7 +69,8 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
                 Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      color: packs[widget.id].isSelected ? Colors.black.withOpacity(0.5) : Colors.transparent),
+                      color:
+                          packs[widget.id].isSelected ? colorScheme.background.withOpacity(0.5) : Colors.transparent),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 5, top: 5),
