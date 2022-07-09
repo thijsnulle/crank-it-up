@@ -12,14 +12,14 @@ class PackSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-      body: GradientBackground(
+        appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        body: GradientBackground(
           child: GridView(
-        padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
-        children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
-      ),
-    );
+            padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
+            children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
+          ),
+        ));
   }
 }
