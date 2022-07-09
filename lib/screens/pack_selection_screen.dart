@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/app.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class PackSelectionScreen extends StatelessWidget {
   const PackSelectionScreen({super.key});

@@ -9,7 +9,7 @@ import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/settings_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});

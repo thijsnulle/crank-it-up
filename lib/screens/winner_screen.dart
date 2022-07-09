@@ -5,7 +5,7 @@ import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class WinnerScreen extends StatefulWidget {
   const WinnerScreen({super.key});

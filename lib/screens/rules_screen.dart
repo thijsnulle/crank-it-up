@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class RulesScreen extends StatelessWidget {
   RulesScreen({super.key});

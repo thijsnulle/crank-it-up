@@ -1,7 +1,7 @@
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:flutter/material.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});

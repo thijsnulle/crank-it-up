@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
 
-import '../components/gradient_background.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 
 class PlayerInputScreen extends StatefulWidget {
   const PlayerInputScreen({super.key, required this.numberOfPlayers, required this.numberOfRounds});
