@@ -5,6 +5,8 @@ import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
 
+import '../components/gradient_background.dart';
+
 class WinnerScreen extends StatefulWidget {
   const WinnerScreen({super.key});
 
@@ -43,7 +45,8 @@ class WinnerScreenState extends State<WinnerScreen> {
                   Color(0xFF473198),
                   Color.fromARGB(255, 98, 67, 207)
                 ])),
-                child: Stack(
+                child: GradientBackground(
+                    child: Stack(
                   children: [
                     Padding(
                       padding: const EdgeInsets.all(32.0),
@@ -99,6 +102,6 @@ class WinnerScreenState extends State<WinnerScreen> {
                           numberOfParticles: 25,
                         )),
                   ],
-                ))));
+                )))));
   }
 }

@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
+import '../components/gradient_background.dart';
+
 class RulesScreen extends StatelessWidget {
   RulesScreen({super.key});
 
@@ -12,28 +14,21 @@ class RulesScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Builder(
-        builder: (context) => Scaffold(
-              appBar: AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, context, actions: [
-                IconButton(icon: const Icon(Icons.rotate_left), onPressed: () => pageFlipKey.currentState?.flip()),
-              ]),
-              body: Container(
-                decoration: const BoxDecoration(
-                    gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-                  Color.fromARGB(255, 30, 21, 65),
-                  Color.fromARGB(255, 44, 31, 95),
-                  Color(0xFF473198),
-                  Color.fromARGB(255, 98, 67, 207)
-                ])),
-                child: Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: PageFlipBuilder(
-                    key: pageFlipKey,
-                    frontBuilder: (_) => BasicRules(onFlip: () => pageFlipKey.currentState?.flip()),
-                    backBuilder: (_) => DrinkingRules(onFlip: () => pageFlipKey.currentState?.flip()),
-                  ),
-                ),
-              ),
-            ));
+      builder: (context) => Scaffold(
+        appBar: AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, context, actions: [
+          IconButton(icon: const Icon(Icons.rotate_left), onPressed: () => pageFlipKey.currentState?.flip()),
+        ]),
+        body: GradientBackground(
+            child: Padding(
+          padding: const EdgeInsets.all(32.0),
+          child: PageFlipBuilder(
+            key: pageFlipKey,
+            frontBuilder: (_) => BasicRules(onFlip: () => pageFlipKey.currentState?.flip()),
+            backBuilder: (_) => DrinkingRules(onFlip: () => pageFlipKey.currentState?.flip()),
+          ),
+        )),
+      ),
+    );
   }
 }
 

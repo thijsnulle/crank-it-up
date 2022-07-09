@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../components/gradient_background.dart';
+
 class PlayerInputScreen extends StatefulWidget {
   const PlayerInputScreen({super.key, required this.numberOfPlayers, required this.numberOfRounds});
 
@@ -35,52 +37,45 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, context),
-        body: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 30, 21, 65),
-              Color.fromARGB(255, 44, 31, 95),
-              Color(0xFF473198),
-              Color.fromARGB(255, 98, 67, 207)
-            ])),
+        body: GradientBackground(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 32.0),
-              child: Column(
-                children: [
-                  Column(
-                      children: List.generate(
-                    widget.numberOfPlayers,
-                    (index) => SizedBox(
-                      height: 40,
-                      child: TextFormField(
-                          decoration: InputDecoration(
-                            enabledBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorScheme.onBackground),
-                            ),
-                            focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: colorScheme.secondary),
-                            ),
-                            hintText: 'Player Name',
-                            hintStyle: TextStyle(color: colorScheme.tertiary),
-                          ),
-                          onChanged: (s) => playerNames[index] = s,
-                          style: TextStyle(color: colorScheme.onBackground)),
-                    ),
-                  )),
-                  Expanded(child: Container()),
-                  PrimaryButton(
-                    text: 'START GAME',
-                    function: () => {
-                      if (setupGame(context))
-                        Navigator.of(context).push(
-                          PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
-                        )
-                    },
-                  ),
-                  const SizedBox(height: 32)
-                ],
+          padding: const EdgeInsets.symmetric(horizontal: 32.0),
+          child: Column(
+            children: [
+              Column(
+                  children: List.generate(
+                widget.numberOfPlayers,
+                (index) => SizedBox(
+                  height: 40,
+                  child: TextFormField(
+                      decoration: InputDecoration(
+                        enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: colorScheme.onBackground),
+                        ),
+                        focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: colorScheme.secondary),
+                        ),
+                        hintText: 'Player Name',
+                        hintStyle: TextStyle(color: colorScheme.tertiary),
+                      ),
+                      onChanged: (s) => playerNames[index] = s,
+                      style: TextStyle(color: colorScheme.onBackground)),
+                ),
+              )),
+              Expanded(child: Container()),
+              PrimaryButton(
+                text: 'START GAME',
+                function: () => {
+                  if (setupGame(context))
+                    Navigator.of(context).push(
+                      PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
+                    )
+                },
               ),
-            )),
+              const SizedBox(height: 32)
+            ],
+          ),
+        )),
       ),
     );
   }

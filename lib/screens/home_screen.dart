@@ -9,6 +9,8 @@ import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/settings_screen.dart';
 import 'package:page_transition/page_transition.dart';
 
+import '../components/gradient_background.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
@@ -16,15 +18,8 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-          body: Container(
-        decoration: const BoxDecoration(
-            gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-          Color.fromARGB(255, 30, 21, 65),
-          Color.fromARGB(255, 44, 31, 95),
-          Color(0xFF473198),
-          Color.fromARGB(255, 98, 67, 207)
-        ])),
-        child: Column(
+        body: GradientBackground(
+            child: Column(
           children: [
             const SizedBox(height: 64.0),
             const Logo(),
@@ -70,8 +65,8 @@ class HomeScreen extends StatelessWidget {
             ]),
             const SizedBox(height: 64),
           ],
-        ),
-      )),
+        )),
+      ),
     );
   }
 }

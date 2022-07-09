@@ -6,6 +6,7 @@ import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:page_transition/page_transition.dart';
+import '../components/gradient_background.dart';
 import 'game_screen.dart';
 
 class VotingScreen extends StatelessWidget {
@@ -15,31 +16,24 @@ class VotingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, context),
-        body: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 30, 21, 65),
-              Color.fromARGB(255, 44, 31, 95),
-              Color(0xFF473198),
-              Color.fromARGB(255, 98, 67, 207)
-            ])),
+        body: GradientBackground(
             child: Column(
-              children: <Widget>[
-                Expanded(
-                  child: ListView.builder(
-                    itemCount: game.players.length,
-                    itemBuilder: (context, index) {
-                      return VotingEntry(
-                        player: game.players[index],
-                      );
-                    },
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.only(bottom: 30),
-                    child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
-              ],
-            )));
+          children: <Widget>[
+            Expanded(
+              child: ListView.builder(
+                itemCount: game.players.length,
+                itemBuilder: (context, index) {
+                  return VotingEntry(
+                    player: game.players[index],
+                  );
+                },
+              ),
+            ),
+            Padding(
+                padding: const EdgeInsets.only(bottom: 30),
+                child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
+          ],
+        )));
   }
 
   void determineWinner(BuildContext context) {

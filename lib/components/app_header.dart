@@ -1,3 +1,4 @@
+import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 
 class AppHeader {
@@ -27,7 +28,7 @@ class AppHeader {
       ),
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: const Color.fromARGB(255, 97, 67, 206),
+      backgroundColor: colorScheme.surfaceVariant,
       shadowColor: Colors.transparent,
     );
   }

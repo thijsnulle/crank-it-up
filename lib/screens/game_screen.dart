@@ -3,6 +3,7 @@ import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
+import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
@@ -45,14 +46,7 @@ class GameScreenState extends State<GameScreen> {
               IconButton(
                   icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
             ]),
-        body: Container(
-            decoration: const BoxDecoration(
-                gradient: LinearGradient(begin: Alignment.bottomCenter, end: Alignment.topCenter, colors: [
-              Color.fromARGB(255, 30, 21, 65),
-              Color.fromARGB(255, 44, 31, 95),
-              Color(0xFF473198),
-              Color.fromARGB(255, 98, 67, 207)
-            ])),
+        body: GradientBackground(
             child: Padding(
                 padding: const EdgeInsets.all(32.0),
                 child: Column(

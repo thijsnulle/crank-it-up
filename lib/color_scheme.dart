@@ -10,4 +10,7 @@ final ColorScheme colorScheme = ColorScheme.fromSwatch().copyWith(
   primary: const Color(0xFFEFEFEF),
   secondary: Colors.grey,
   tertiary: Colors.grey.shade500,
+  surface: const Color.fromARGB(255, 30, 21, 65),
+  surfaceTint: const Color(0xFF473198),
+  surfaceVariant: const Color.fromARGB(255, 98, 67, 207),
 );
