@@ -11,7 +11,10 @@ bool alert(String text, BuildContext context) {
       position: FlashPosition.top,
       behavior: FlashBehavior.floating,
       child: FlashBar(
-        content: Text(text),
+        content: Text(
+          text,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
         indicatorColor: colorScheme.secondaryContainer,
       ),
     ),

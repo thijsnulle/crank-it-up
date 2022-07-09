@@ -1,4 +1,5 @@
 import 'package:crank_it_up/color_scheme.dart';
+import 'package:crank_it_up/components/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/app.dart';
 
@@ -28,9 +29,7 @@ class VotingEntryState extends State<VotingEntry> {
                     widget.player.rank = newRank;
                     ranks[newRank] = true;
                   } else {
-                    Player p = game.players.firstWhere((p) => p.rank == maxRanks - 1);
-                    p.rank = maxRanks;
-                    widget.player.rank = maxRanks - 1;
+                    alert('Deselect a player to change your vote.', context);
                   }
                 } else if (widget.player.rank != maxRanks) {
                   ranks[widget.player.rank] = false;
