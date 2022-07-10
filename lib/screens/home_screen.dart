@@ -7,6 +7,7 @@ import 'package:crank_it_up/components/logo.dart';
 
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/settings_screen.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'package:crank_it_up/components/gradient_background.dart';
@@ -24,8 +25,11 @@ class HomeScreen extends StatelessWidget {
             const SizedBox(height: 64.0),
             const Logo(),
             TextButton(
-              onPressed: () => Navigator.of(context)
-                  .push(PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen())),
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Navigator.of(context)
+                    .push(PageTransition(type: PageTransitionType.rightToLeft, child: const GameCreationScreen()));
+              },
               style: Theme.of(context).textButtonTheme.style,
               child: SizedBox(
                   width: 200,
@@ -35,8 +39,11 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 16),
             TextButton(
-              onPressed: () => Navigator.of(context)
-                  .push(PageTransition(type: PageTransitionType.rightToLeft, child: const PackSelectionScreen())),
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Navigator.of(context)
+                    .push(PageTransition(type: PageTransitionType.rightToLeft, child: const PackSelectionScreen()));
+              },
               style: Theme.of(context).elevatedButtonTheme.style,
               child: SizedBox(
                   width: 200,
@@ -47,9 +54,12 @@ class HomeScreen extends StatelessWidget {
             Expanded(child: Container()),
             Wrap(children: [
               IconButton(
-                onPressed: () => Navigator.of(context).push(
-                  PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
-                ),
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  Navigator.of(context).push(
+                    PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
+                  );
+                },
                 icon: const Icon(Icons.settings),
                 color: colorScheme.onBackground,
                 iconSize: 36,
@@ -57,9 +67,12 @@ class HomeScreen extends StatelessWidget {
                 highlightColor: Colors.transparent,
               ),
               IconButton(
-                onPressed: () => Navigator.of(context).push(
-                  PageTransition(type: PageTransitionType.bottomToTop, child: RulesScreen()),
-                ),
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  Navigator.of(context).push(
+                    PageTransition(type: PageTransitionType.bottomToTop, child: RulesScreen()),
+                  );
+                },
                 icon: const Icon(Icons.rule),
                 color: colorScheme.onBackground,
                 iconSize: 36,

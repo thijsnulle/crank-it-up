@@ -7,6 +7,7 @@ import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/screens/game_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/buttons.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 
 import 'package:crank_it_up/components/gradient_background.dart';
@@ -65,11 +66,13 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
               Expanded(child: Container()),
               PrimaryButton(
                 text: 'START GAME',
-                function: () => {
-                  if (setupGame(context))
+                function: () {
+                  HapticFeedback.mediumImpact();
+                  if (setupGame(context)) {
                     Navigator.of(context).push(
                       PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
-                    )
+                    );
+                  }
                 },
               ),
               const SizedBox(height: 32)

@@ -7,6 +7,7 @@ import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:page_flip_builder/page_flip_builder.dart';
 import 'package:page_transition/page_transition.dart';
@@ -33,20 +34,20 @@ class GameScreenState extends State<GameScreen> {
   Widget build(BuildContext context) {
     return Builder(
       builder: (context) => Scaffold(
-        appBar: AppHeader.create(
-            'ROUND ${game.currentRound}',
-            null,
-            () => Navigator.of(context).push(PageTransition(
-                  child: const HomeScreen(),
-                  type: PageTransitionType.bottomToTop,
-                )),
-            Icons.home_outlined,
-            CrossAxisAlignment.center,
-            context,
-            actions: [
-              IconButton(
-                  icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
-            ]),
+        appBar: AppHeader.create('ROUND ${game.currentRound}', null, () {
+          HapticFeedback.mediumImpact();
+          Navigator.of(context).push(PageTransition(
+            child: const HomeScreen(),
+            type: PageTransitionType.bottomToTop,
+          ));
+        }, Icons.home_outlined, CrossAxisAlignment.center, context, actions: [
+          IconButton(
+              icon: const Icon(Icons.leaderboard_outlined),
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
+        ]),
         body: GradientBackground(
             child: Padding(
                 padding: const EdgeInsets.all(32.0),
@@ -55,10 +56,17 @@ class GameScreenState extends State<GameScreen> {
                     Expanded(
                       child: PageFlipBuilder(
                         key: pageFlipKey,
-                        frontBuilder: (_) =>
-                            PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
+                        frontBuilder: (_) => PackView(
+                            onFlip: () {
+                              HapticFeedback.mediumImpact();
+                              pageFlipKey.currentState?.flip();
+                            },
+                            text: currentScenario),
                         backBuilder: (_) => ScoreBoard(
-                          onFlip: () => pageFlipKey.currentState?.flip(),
+                          onFlip: () {
+                            HapticFeedback.mediumImpact();
+                            pageFlipKey.currentState?.flip();
+                          },
                         ),
                         flipAxis: Axis.horizontal,
                       ),
@@ -66,10 +74,13 @@ class GameScreenState extends State<GameScreen> {
                     const SizedBox(height: 32.0),
                     PrimaryButton(
                         text: 'START VOTING',
-                        function: () => Navigator.of(context).push(PageTransition(
-                              child: const VotingScreen(),
-                              type: PageTransitionType.rightToLeft,
-                            )))
+                        function: () {
+                          HapticFeedback.mediumImpact();
+                          Navigator.of(context).push(PageTransition(
+                            child: const VotingScreen(),
+                            type: PageTransitionType.rightToLeft,
+                          ));
+                        })
                   ],
                 ))),
       ),

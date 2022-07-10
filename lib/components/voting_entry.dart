@@ -1,6 +1,7 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/app.dart';
+import 'package:flutter/services.dart';
 
 //ignore: must_be_immutable
 class VotingEntry extends StatefulWidget {
@@ -22,6 +23,7 @@ class VotingEntryState extends State<VotingEntry> {
           child: GestureDetector(
             onTap: () {
               setState(() {
+                HapticFeedback.mediumImpact();
                 if (widget.player.rank == maxRanks) {
                   if (ranks.contains(false)) {
                     int newRank = ranks.indexOf(false);

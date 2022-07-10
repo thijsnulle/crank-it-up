@@ -5,6 +5,7 @@ import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
+import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:crank_it_up/components/gradient_background.dart';
 import 'game_screen.dart';
@@ -37,7 +38,12 @@ class VotingScreenState extends State<VotingScreen> {
             ),
             Padding(
                 padding: const EdgeInsets.only(bottom: 30),
-                child: PrimaryButton(text: 'Next Round', function: () => {determineWinner(context)}))
+                child: PrimaryButton(
+                    text: 'Next Round',
+                    function: () {
+                      HapticFeedback.mediumImpact;
+                      determineWinner(context);
+                    }))
           ],
         )));
   }
