@@ -48,41 +48,46 @@ class GameScreenState extends State<GameScreen> {
                 pageFlipKey.currentState?.flip();
               }),
         ]),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-            child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PageFlipBuilder(
-                        key: pageFlipKey,
-                        frontBuilder: (_) => PackView(
+            child: Column(children: [
+          const SizedBox(height: 200),
+          Expanded(
+              child: Padding(
+                  padding: const EdgeInsets.all(32.0),
+                  child: Column(
+                    children: [
+                      Expanded(
+                        child: PageFlipBuilder(
+                          key: pageFlipKey,
+                          frontBuilder: (_) => PackView(
+                              onFlip: () {
+                                HapticFeedback.mediumImpact();
+                                pageFlipKey.currentState?.flip();
+                              },
+                              text: currentScenario),
+                          backBuilder: (_) => ScoreBoard(
                             onFlip: () {
                               HapticFeedback.mediumImpact();
                               pageFlipKey.currentState?.flip();
                             },
-                            text: currentScenario),
-                        backBuilder: (_) => ScoreBoard(
-                          onFlip: () {
-                            HapticFeedback.mediumImpact();
-                            pageFlipKey.currentState?.flip();
-                          },
+                          ),
+                          flipAxis: Axis.horizontal,
                         ),
-                        flipAxis: Axis.horizontal,
                       ),
-                    ),
-                    const SizedBox(height: 32.0),
-                    PrimaryButton(
-                        text: 'START VOTING',
-                        function: () {
-                          HapticFeedback.mediumImpact();
-                          Navigator.of(context).push(PageTransition(
-                            child: const VotingScreen(),
-                            type: PageTransitionType.rightToLeft,
-                          ));
-                        })
-                  ],
-                ))),
+                      const SizedBox(height: 32.0),
+                      PrimaryButton(
+                          text: 'START VOTING',
+                          function: () {
+                            HapticFeedback.mediumImpact();
+                            Navigator.of(context).push(PageTransition(
+                              child: const VotingScreen(),
+                              type: PageTransitionType.rightToLeft,
+                            ));
+                          })
+                    ],
+                  )))
+        ])),
       ),
     );
   }

@@ -15,14 +15,20 @@ class PackSelectionScreen extends StatelessWidget {
     return Scaffold(
         appBar: AppHeader.create('PACK', 'SELECTION', () => assertPackSelection(context), Icons.west_rounded,
             CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-          child: GridView(
+            child: Column(children: [
+          const SizedBox(
+            height: 200,
+          ),
+          Expanded(
+              child: GridView(
             padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
             children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
-          ),
-        ));
+          )),
+        ])));
   }
 
   void assertPackSelection(BuildContext context) {

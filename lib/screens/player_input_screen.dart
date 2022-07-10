@@ -38,47 +38,54 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('CHOOSE', 'PLAYERS', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            children: [
-              Column(
-                  children: List.generate(
-                widget.numberOfPlayers,
-                (index) => SizedBox(
-                  height: 40,
-                  child: TextFormField(
-                      decoration: InputDecoration(
-                        enabledBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.onBackground),
-                        ),
-                        focusedBorder: UnderlineInputBorder(
-                          borderSide: BorderSide(color: colorScheme.secondary),
-                        ),
-                        hintText: 'Player Name',
-                        hintStyle: TextStyle(color: colorScheme.tertiary),
-                      ),
-                      onChanged: (s) => playerNames[index] = s,
-                      style: TextStyle(color: colorScheme.onBackground)),
-                ),
-              )),
-              Expanded(child: Container()),
-              PrimaryButton(
-                text: 'START GAME',
-                function: () {
-                  HapticFeedback.mediumImpact();
-                  if (setupGame(context)) {
-                    Navigator.of(context).push(
-                      PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
-                    );
-                  }
-                },
-              ),
-              const SizedBox(height: 32)
-            ],
+            child: Column(children: [
+          const SizedBox(
+            height: 200,
           ),
-        )),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.only(right: 32, left: 32, top: 32),
+            child: Column(
+              children: [
+                Column(
+                    children: List.generate(
+                  widget.numberOfPlayers,
+                  (index) => SizedBox(
+                    height: 40,
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                          enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: colorScheme.onBackground),
+                          ),
+                          focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: colorScheme.secondary),
+                          ),
+                          hintText: 'Player Name',
+                          hintStyle: TextStyle(color: colorScheme.tertiary),
+                        ),
+                        onChanged: (s) => playerNames[index] = s,
+                        style: TextStyle(color: colorScheme.onBackground)),
+                  ),
+                )),
+                Expanded(child: Container()),
+                PrimaryButton(
+                  text: 'START GAME',
+                  function: () {
+                    HapticFeedback.mediumImpact();
+                    if (setupGame(context)) {
+                      Navigator.of(context).push(
+                        PageTransition(type: PageTransitionType.leftToRight, child: const GameScreen()),
+                      );
+                    }
+                  },
+                ),
+                const SizedBox(height: 32)
+              ],
+            ),
+          ))
+        ])),
       ),
     );
   }

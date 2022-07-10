@@ -35,8 +35,9 @@ class AppHeader {
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

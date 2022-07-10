@@ -25,21 +25,28 @@ class RulesScreen extends StatelessWidget {
                 pageFlipKey.currentState?.flip();
               }),
         ]),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-            child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: PageFlipBuilder(
-            key: pageFlipKey,
-            frontBuilder: (_) => BasicRules(onFlip: () {
-              HapticFeedback.mediumImpact();
-              pageFlipKey.currentState?.flip();
-            }),
-            backBuilder: (_) => DrinkingRules(onFlip: () {
-              HapticFeedback.mediumImpact();
-              pageFlipKey.currentState?.flip();
-            }),
+            child: Column(children: [
+          const SizedBox(
+            height: 200,
           ),
-        )),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: PageFlipBuilder(
+              key: pageFlipKey,
+              frontBuilder: (_) => BasicRules(onFlip: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
+              backBuilder: (_) => DrinkingRules(onFlip: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
+            ),
+          ))
+        ])),
       ),
     );
   }
