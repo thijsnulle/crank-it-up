@@ -1,5 +1,7 @@
+import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/screens/game_creation_screen.dart';
+import 'package:crank_it_up/screens/game_screen.dart';
 import 'package:crank_it_up/screens/rules_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -38,6 +40,25 @@ class HomeScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.button!.copyWith(fontSize: 20.0))),
             ),
             const SizedBox(height: 16),
+            if (game != null) ...[
+              TextButton(
+                onPressed: () {
+                  HapticFeedback.mediumImpact();
+                  Navigator.of(context)
+                      .push(PageTransition(type: PageTransitionType.rightToLeft, child: const GameScreen()));
+                },
+                style: Theme.of(context)
+                    .textButtonTheme
+                    .style!
+                    .copyWith(backgroundColor: MaterialStateProperty.all(colorScheme.surfaceVariant)),
+                child: SizedBox(
+                    width: 200,
+                    child: Text('CONTINUE',
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.button!.copyWith(fontSize: 20.0))),
+              ),
+              const SizedBox(height: 16),
+            ],
             TextButton(
               onPressed: () {
                 HapticFeedback.mediumImpact();

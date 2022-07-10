@@ -22,7 +22,7 @@ class WinnerScreenState extends State<WinnerScreen> {
   void initState() {
     controller = ConfettiController(duration: const Duration(seconds: 5));
     controller.play();
-    game.players.sort((p1, p2) => p2.score.compareTo(p1.score));
+    game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
     super.initState();
   }
 
@@ -38,7 +38,7 @@ class WinnerScreenState extends State<WinnerScreen> {
         onWillPop: () => Future.value(false),
         child: Builder(
             builder: (context) => Scaffold(
-                appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name,
+                appBar: AppHeader.create(game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name,
                     'WINS!!!', null, null, CrossAxisAlignment.center, context),
                 extendBodyBehindAppBar: true,
                 body: GradientBackground(
@@ -61,7 +61,7 @@ class WinnerScreenState extends State<WinnerScreen> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: List.generate(
-                                      game.players.length,
+                                      game!.players.length,
                                       (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                         Wrap(children: [
                                           SizedBox(
@@ -73,7 +73,7 @@ class WinnerScreenState extends State<WinnerScreen> {
                                                     .copyWith(color: colorScheme.onBackground)),
                                           )
                                         ]),
-                                        Text('\t${game.players[index].score}',
+                                        Text('\t${game!.players[index].score}',
                                             style: Theme.of(context)
                                                 .textTheme
                                                 .headline5!
@@ -85,6 +85,7 @@ class WinnerScreenState extends State<WinnerScreen> {
                           PrimaryButton(
                               text: 'END GAME',
                               function: () {
+                                game = null;
                                 HapticFeedback.mediumImpact();
                                 Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
                               }),
@@ -95,9 +96,11 @@ class WinnerScreenState extends State<WinnerScreen> {
                           alignment: Alignment.topCenter,
                           child: ConfettiWidget(
                             confettiController: controller,
+                            maxBlastForce: 100,
                             blastDirectionality: BlastDirectionality.explosive,
                             colors: const [Colors.green, Colors.blue, Colors.pinkAccent, Colors.orange, Colors.purple],
                             numberOfParticles: 25,
+                            shouldLoop: true,
                           )),
                     ],
                   ))

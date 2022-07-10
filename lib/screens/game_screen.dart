@@ -21,14 +21,6 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
-  String currentScenario = '';
-
-  @override
-  void initState() {
-    game.scenarios.shuffle();
-    currentScenario = game.scenarios.removeLast();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +29,7 @@ class GameScreenState extends State<GameScreen> {
         child: Builder(
           builder: (context) => Scaffold(
             appBar: AppHeader.create(
-                'ROUND ${game.currentRound}',
+                'ROUND ${game!.currentRound}',
                 null,
                 () => Navigator.of(context).push(PageTransition(
                       child: const HomeScreen(),
@@ -67,7 +59,7 @@ class GameScreenState extends State<GameScreen> {
                                     HapticFeedback.mediumImpact();
                                     pageFlipKey.currentState?.flip();
                                   },
-                                  text: currentScenario),
+                                  text: game!.currentScenario),
                               backBuilder: (_) => ScoreBoard(
                                 onFlip: () {
                                   HapticFeedback.mediumImpact();
@@ -154,7 +146,7 @@ class ScoreBoard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              game.players.length,
+                              game!.players.length,
                               (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                 Wrap(children: [
                                   SizedBox(
@@ -164,13 +156,13 @@ class ScoreBoard extends StatelessWidget {
                                               .textTheme
                                               .headline5
                                               ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
-                                  Text(game.players[index].name,
+                                  Text(game!.players[index].name,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
                                           ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
                                 ]),
-                                Text('\t${game.players[index].score}',
+                                Text('\t${game!.players[index].score}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline5
