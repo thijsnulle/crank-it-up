@@ -1,5 +1,6 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class AppHeader {
   static AppBar create(
@@ -14,7 +15,11 @@ class AppHeader {
     return AppBar(
       leading: (icon != null)
           ? IconButton(
-              onPressed: function ?? () => Navigator.of(context).pop(),
+              onPressed: function ??
+                  () {
+                    HapticFeedback.mediumImpact();
+                    Navigator.of(context).pop();
+                  },
               icon: Icon(icon),
             )
           : const Icon(null),
@@ -30,8 +35,9 @@ class AppHeader {
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

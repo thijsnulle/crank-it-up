@@ -7,6 +7,7 @@ import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:page_flip_builder/page_flip_builder.dart';
 import 'package:page_transition/page_transition.dart';
@@ -49,31 +50,46 @@ class GameScreenState extends State<GameScreen> {
                   IconButton(
                       icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
                 ]),
+            extendBodyBehindAppBar: true,
             body: GradientBackground(
-                child: Padding(
-                    padding: const EdgeInsets.all(32.0),
-                    child: Column(
-                      children: [
-                        Expanded(
-                          child: PageFlipBuilder(
-                            key: pageFlipKey,
-                            frontBuilder: (_) =>
-                                PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
-                            backBuilder: (_) => ScoreBoard(
-                              onFlip: () => pageFlipKey.currentState?.flip(),
+                child: Column(children: [
+              const SizedBox(height: 200),
+              Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(32.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: PageFlipBuilder(
+                              key: pageFlipKey,
+                              frontBuilder: (_) => PackView(
+                                  onFlip: () {
+                                    HapticFeedback.mediumImpact();
+                                    pageFlipKey.currentState?.flip();
+                                  },
+                                  text: currentScenario),
+                              backBuilder: (_) => ScoreBoard(
+                                onFlip: () {
+                                  HapticFeedback.mediumImpact();
+                                  pageFlipKey.currentState?.flip();
+                                },
+                              ),
+                              flipAxis: Axis.horizontal,
                             ),
-                            flipAxis: Axis.horizontal,
                           ),
-                        ),
-                        const SizedBox(height: 32.0),
-                        PrimaryButton(
-                            text: 'START VOTING',
-                            function: () => Navigator.of(context).push(PageTransition(
+                          const SizedBox(height: 32.0),
+                          PrimaryButton(
+                              text: 'START VOTING',
+                              function: () {
+                                HapticFeedback.mediumImpact();
+                                Navigator.of(context).push(PageTransition(
                                   child: const VotingScreen(),
                                   type: PageTransitionType.rightToLeft,
-                                )))
-                      ],
-                    ))),
+                                ));
+                              })
+                        ],
+                      )))
+            ])),
           ),
         ));
   }

@@ -1,6 +1,7 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 
@@ -17,17 +18,35 @@ class RulesScreen extends StatelessWidget {
       builder: (context) => Scaffold(
         appBar:
             AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, CrossAxisAlignment.center, context, actions: [
-          IconButton(icon: const Icon(Icons.rotate_left), onPressed: () => pageFlipKey.currentState?.flip()),
+          IconButton(
+              icon: const Icon(Icons.rotate_left),
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
         ]),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-            child: Padding(
-          padding: const EdgeInsets.all(32.0),
-          child: PageFlipBuilder(
-            key: pageFlipKey,
-            frontBuilder: (_) => BasicRules(onFlip: () => pageFlipKey.currentState?.flip()),
-            backBuilder: (_) => DrinkingRules(onFlip: () => pageFlipKey.currentState?.flip()),
+            child: Column(children: [
+          const SizedBox(
+            height: 200,
           ),
-        )),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.all(32.0),
+            child: PageFlipBuilder(
+              key: pageFlipKey,
+              frontBuilder: (_) => BasicRules(onFlip: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
+              backBuilder: (_) => DrinkingRules(onFlip: () {
+                HapticFeedback.mediumImpact();
+                pageFlipKey.currentState?.flip();
+              }),
+            ),
+          ))
+        ])),
       ),
     );
   }

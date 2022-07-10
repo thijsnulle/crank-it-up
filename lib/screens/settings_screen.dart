@@ -11,7 +11,14 @@ class SettingsScreen extends StatelessWidget {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('SETTINGS', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
-        body: GradientBackground(child: Container()),
+        extendBodyBehindAppBar: true,
+        body: GradientBackground(
+            child: Column(children: [
+          const SizedBox(
+            height: 200,
+          ),
+          Container()
+        ])),
       ),
     );
   }
