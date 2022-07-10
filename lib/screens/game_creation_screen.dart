@@ -4,6 +4,7 @@ import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
@@ -35,7 +36,10 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                   Row(children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: () => setState(() => numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8)),
+                      onPressed: () => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8);
+                      }),
                       color: colorScheme.onBackground,
                     ),
                     NumberPicker(
@@ -44,14 +48,20 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       maxValue: 8,
                       itemWidth: 30,
                       itemHeight: 30,
-                      onChanged: (v) => setState(() => numberOfPlayers = v),
+                      onChanged: (v) => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfPlayers = v;
+                      }),
                       selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
                       textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
                       haptics: true,
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: () => setState(() => numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8)),
+                      onPressed: () => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8);
+                      }),
                       color: colorScheme.onBackground,
                     )
                   ])
@@ -63,7 +73,10 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                   Row(children: [
                     IconButton(
                       icon: const Icon(Icons.remove),
-                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds - 1).clamp(3, 10)),
+                      onPressed: () => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfRounds = (numberOfRounds - 1).clamp(3, 10);
+                      }),
                       color: colorScheme.onBackground,
                     ),
                     NumberPicker(
@@ -72,14 +85,20 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       maxValue: 10,
                       itemWidth: 30,
                       itemHeight: 30,
-                      onChanged: (v) => setState(() => numberOfRounds = v),
+                      onChanged: (v) => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfRounds = v;
+                      }),
                       selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
                       textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
                       haptics: true,
                     ),
                     IconButton(
                       icon: const Icon(Icons.add),
-                      onPressed: () => setState(() => numberOfRounds = (numberOfRounds + 1).clamp(3, 10)),
+                      onPressed: () => setState(() {
+                        HapticFeedback.mediumImpact();
+                        numberOfRounds = (numberOfRounds + 1).clamp(3, 10);
+                      }),
                       color: colorScheme.onBackground,
                     )
                   ])
@@ -88,9 +107,11 @@ class GameCreationScreenState extends State<GameCreationScreen> {
               Row(
                 children: [
                   GestureDetector(
-                      onTap: () => Navigator.of(context).push(
-                            PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()),
-                          ),
+                      onTap: () {
+                        HapticFeedback.mediumImpact();
+                        Navigator.of(context).push(
+                            PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()));
+                      },
                       child: Text(
                         'Still want to change your pack?',
                         style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
@@ -100,11 +121,14 @@ class GameCreationScreenState extends State<GameCreationScreen> {
               Expanded(child: Container()),
               PrimaryButton(
                   text: 'LET\'S GO',
-                  function: () => Navigator.of(context).push(
-                        PageTransition(
-                            type: PageTransitionType.rightToLeft,
-                            child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
-                      )),
+                  function: () {
+                    HapticFeedback.mediumImpact();
+                    Navigator.of(context).push(
+                      PageTransition(
+                          type: PageTransitionType.rightToLeft,
+                          child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
+                    );
+                  }),
               const SizedBox(height: 32)
             ],
           ),

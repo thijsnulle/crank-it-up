@@ -6,6 +6,7 @@ import 'package:crank_it_up/components/buttons.dart';
 import 'package:flutter/material.dart';
 
 import 'package:crank_it_up/components/gradient_background.dart';
+import 'package:flutter/services.dart';
 
 class WinnerScreen extends StatefulWidget {
   const WinnerScreen({super.key});
@@ -77,7 +78,10 @@ class WinnerScreenState extends State<WinnerScreen> {
                     Expanded(child: Container()),
                     PrimaryButton(
                         text: 'END GAME',
-                        function: () => Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false)),
+                        function: () {
+                          HapticFeedback.mediumImpact();
+                          Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                        }),
                     const SizedBox(height: 32.0)
                   ]),
                 ),

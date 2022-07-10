@@ -1,6 +1,7 @@
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class PackCard extends StatefulWidget {
@@ -61,6 +62,7 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
         GestureDetector(
             onTap: () {
               setState(() {
+                HapticFeedback.mediumImpact();
                 packs[widget.id].isSelected = !packs[widget.id].isSelected;
               });
             },
