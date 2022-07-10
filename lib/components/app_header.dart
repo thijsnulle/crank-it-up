@@ -22,7 +22,7 @@ class AppHeader {
                   },
               icon: Icon(icon),
             )
-          : null,
+          : const Icon(null),
       title: Column(
         crossAxisAlignment: crossAxisAlignment,
         children: [
