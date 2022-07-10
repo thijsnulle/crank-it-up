@@ -7,21 +7,55 @@ import 'package:crank_it_up/app.dart';
 
 import 'package:crank_it_up/components/gradient_background.dart';
 
-class PackSelectionScreen extends StatelessWidget {
+class PackSelectionScreen extends StatefulWidget {
   const PackSelectionScreen({super.key});
 
+  @override
+  PackSelectionScreenState createState() => PackSelectionScreenState();
+}
+
+class PackSelectionScreenState extends State<PackSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppHeader.create('PACK', 'SELECTION', () => assertPackSelection(context), Icons.west_rounded,
             CrossAxisAlignment.start, context),
         body: GradientBackground(
-          child: GridView(
-            padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
-            children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
-          ),
+          child: Column(children: [
+            Row(
+              children: <Widget>[
+                Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                        child: TextButton(
+                          onPressed: () => {
+                            for (int i = 0; i < packs.length; i++) {packs[i].isSelected = true},
+                            setState(() {})
+                          },
+                          style: Theme.of(context).textButtonTheme.style,
+                          child: Text('SELECT ALL', style: Theme.of(context).textTheme.button),
+                        ))),
+                Expanded(
+                    child: Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
+                        child: TextButton(
+                          onPressed: () => {
+                            for (int i = 0; i < packs.length; i++) {packs[i].isSelected = false},
+                            setState(() {})
+                          },
+                          style: Theme.of(context).textButtonTheme.style,
+                          child: Text('DESELECT ALL', style: Theme.of(context).textTheme.button),
+                        ))),
+              ],
+            ),
+            Expanded(
+                child: GridView(
+              padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
+              children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
+            ))
+          ]),
         ));
   }
 
