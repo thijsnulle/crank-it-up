@@ -59,7 +59,7 @@ class GameScreenState extends State<GameScreen> {
                                     HapticFeedback.mediumImpact();
                                     pageFlipKey.currentState?.flip();
                                   },
-                                  text: currentScenario),
+                                  text: game!.currentScenario),
                               backBuilder: (_) => ScoreBoard(
                                 onFlip: () {
                                   HapticFeedback.mediumImpact();
