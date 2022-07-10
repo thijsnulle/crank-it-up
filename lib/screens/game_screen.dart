@@ -31,49 +31,51 @@ class GameScreenState extends State<GameScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => Scaffold(
-        appBar: AppHeader.create(
-            'ROUND ${game.currentRound}',
-            null,
-            () => Navigator.of(context).push(PageTransition(
-                  child: const HomeScreen(),
-                  type: PageTransitionType.bottomToTop,
-                )),
-            Icons.home_outlined,
-            CrossAxisAlignment.center,
-            context,
-            actions: [
-              IconButton(
-                  icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
-            ]),
-        body: GradientBackground(
-            child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PageFlipBuilder(
-                        key: pageFlipKey,
-                        frontBuilder: (_) =>
-                            PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
-                        backBuilder: (_) => ScoreBoard(
-                          onFlip: () => pageFlipKey.currentState?.flip(),
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Builder(
+          builder: (context) => Scaffold(
+            appBar: AppHeader.create(
+                'ROUND ${game.currentRound}',
+                null,
+                () => Navigator.of(context).push(PageTransition(
+                      child: const HomeScreen(),
+                      type: PageTransitionType.bottomToTop,
+                    )),
+                Icons.home_outlined,
+                CrossAxisAlignment.center,
+                context,
+                actions: [
+                  IconButton(
+                      icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+                ]),
+            body: GradientBackground(
+                child: Padding(
+                    padding: const EdgeInsets.all(32.0),
+                    child: Column(
+                      children: [
+                        Expanded(
+                          child: PageFlipBuilder(
+                            key: pageFlipKey,
+                            frontBuilder: (_) =>
+                                PackView(onFlip: () => pageFlipKey.currentState?.flip(), text: currentScenario),
+                            backBuilder: (_) => ScoreBoard(
+                              onFlip: () => pageFlipKey.currentState?.flip(),
+                            ),
+                            flipAxis: Axis.horizontal,
+                          ),
                         ),
-                        flipAxis: Axis.horizontal,
-                      ),
-                    ),
-                    const SizedBox(height: 32.0),
-                    PrimaryButton(
-                        text: 'START VOTING',
-                        function: () => Navigator.of(context).push(PageTransition(
-                              child: const VotingScreen(),
-                              type: PageTransitionType.rightToLeft,
-                            )))
-                  ],
-                ))),
-      ),
-    );
+                        const SizedBox(height: 32.0),
+                        PrimaryButton(
+                            text: 'START VOTING',
+                            function: () => Navigator.of(context).push(PageTransition(
+                                  child: const VotingScreen(),
+                                  type: PageTransitionType.rightToLeft,
+                                )))
+                      ],
+                    ))),
+          ),
+        ));
   }
 }
 
