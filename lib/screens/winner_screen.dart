@@ -44,45 +44,20 @@ class WinnerScreenState extends State<WinnerScreen> {
                 Padding(
                   padding: const EdgeInsets.all(32.0),
                   child: Column(children: [
-                    Text(
-                      'Final Scoreboard',
-                      style: Theme.of(context).textTheme.headline5!.copyWith(color: colorScheme.onBackground),
+                    const Podium(),
+                    const ScoreBoard(),
+                    const SizedBox(
+                      height: 20,
                     ),
-                    Align(
-                        alignment: Alignment.centerLeft,
-                        child: Padding(
-                            padding: const EdgeInsets.only(top: 16.0),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: List.generate(
-                                game.players.length,
-                                (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                  Wrap(children: [
-                                    SizedBox(
-                                      width: 30,
-                                      child: Text('${index + 1}. ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline6!
-                                              .copyWith(color: colorScheme.onBackground)),
-                                    )
-                                  ]),
-                                  Text('\t${game.players[index].score}',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline5!
-                                          .copyWith(color: colorScheme.onBackground)),
-                                ]),
-                              ),
-                            ))),
-                    Expanded(child: Container()),
+                    Expanded(
+                      child: Container(),
+                    ),
                     PrimaryButton(
                         text: 'END GAME',
                         function: () {
                           HapticFeedback.mediumImpact();
                           Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
                         }),
-                    const SizedBox(height: 32.0)
                   ]),
                 ),
                 Align(
@@ -95,5 +70,166 @@ class WinnerScreenState extends State<WinnerScreen> {
                     )),
               ],
             ))));
+  }
+}
+
+class Podium extends StatelessWidget {
+  const Podium({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    if (game.players.length > 2) {
+      return Stack(
+        children: const [
+          Positioned(bottom: 0, left: 0, child: Pillar(height: 240, rank: 2)),
+          Positioned(bottom: 0, right: 0, child: Pillar(height: 165, rank: 3)),
+          Align(alignment: Alignment.bottomCenter, child: Pillar(height: 310, rank: 1)),
+        ],
+      );
+    } else {
+      return Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(
+                  game.players.length,
+                  (index) => Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Row(children: [
+                        Wrap(children: [
+                          SizedBox(
+                            width: 30,
+                            child: Text(
+                              '${index + 1}. ',
+                              style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
+                            ),
+                          )
+                        ]),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text('\t${game.players[index].name}',
+                            style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
+                        Expanded(
+                            child: Text(
+                          'Score: \t${game.players[index].score}',
+                          style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
+                          textAlign: TextAlign.right,
+                        )),
+                      ])),
+                ),
+              )));
+    }
+  }
+}
+
+class ScoreBoard extends StatelessWidget {
+  const ScoreBoard({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+        color: colorScheme.onBackground,
+        borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
+        boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))],
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: List.generate(
+          game.players.length,
+          (index) {
+            if (index > 2) {
+              return Padding(
+                  padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3, right: 20),
+                  child: Row(children: [
+                    Wrap(children: [
+                      SizedBox(
+                        width: 30,
+                        child: Text(
+                          '${index + 1}. ',
+                          style:
+                              Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
+                        ),
+                      )
+                    ]),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('\t${game.players[index].name}',
+                        style:
+                            Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
+                    Expanded(
+                        child: Text(
+                      'Score: \t${game.players[index].score}',
+                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
+                      textAlign: TextAlign.right,
+                    )),
+                  ]));
+            }
+
+            return Container();
+          },
+        ),
+      ),
+    );
+  }
+}
+
+class Pillar extends StatelessWidget {
+  final double height;
+  final int rank;
+  const Pillar({super.key, required this.height, required this.rank});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: BoxDecoration(
+          color: colorScheme.surfaceVariant,
+          boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))],
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
+      width: 125,
+      height: height,
+      child: Padding(
+          padding: const EdgeInsets.only(top: 10),
+          child: Align(
+              alignment: Alignment.topCenter,
+              child: Column(children: [
+                Padding(
+                    padding: const EdgeInsets.only(top: 20, bottom: 15),
+                    child: Stack(children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          border: Border.all(color: colorScheme.onBackground),
+                          shape: BoxShape.circle,
+                        ),
+                        width: 50,
+                        height: 50,
+                      ),
+                      Positioned(
+                          left: 0,
+                          bottom: 0,
+                          child: Container(
+                            decoration: BoxDecoration(
+                              border: Border.all(color: colorScheme.onBackground),
+                              shape: BoxShape.circle,
+                              color: rankColors[rank - 1],
+                            ),
+                            height: 18,
+                            width: 18,
+                            child: Center(
+                              child: Text(
+                                rank.toString(),
+                                style: Theme.of(context).textTheme.button,
+                              ),
+                            ),
+                          ))
+                    ])),
+                Text(game.players[rank - 1].name),
+                Padding(padding: const EdgeInsets.only(top: 10), child: Text(game.players[rank - 1].score.toString()))
+              ]))),
+    );
   }
 }

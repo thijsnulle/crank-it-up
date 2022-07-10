@@ -16,6 +16,8 @@ class VotingEntry extends StatefulWidget {
 }
 
 class VotingEntryState extends State<VotingEntry> {
+  Color color = Colors.transparent;
+
   @override
   Widget build(BuildContext context) {
     return IntrinsicWidth(
@@ -28,6 +30,7 @@ class VotingEntryState extends State<VotingEntry> {
                 if (widget.player.rank == maxRanks) {
                   if (ranks.contains(false)) {
                     int newRank = ranks.indexOf(false);
+                    color = rankColors[newRank];
                     widget.player.rank = newRank;
                     ranks[newRank] = true;
                   } else {
@@ -36,6 +39,7 @@ class VotingEntryState extends State<VotingEntry> {
                 } else if (widget.player.rank != maxRanks) {
                   ranks[widget.player.rank] = false;
                   widget.player.rank = maxRanks;
+                  color = Colors.transparent;
                 }
                 widget.notifyParent();
               });
@@ -45,8 +49,8 @@ class VotingEntryState extends State<VotingEntry> {
                 Expanded(
                     flex: 3,
                     child: Container(
-                      decoration:
-                          BoxDecoration(border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle),
+                      decoration: BoxDecoration(
+                          border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle, color: color),
                       height: 40,
                       child: Center(
                         child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '',
