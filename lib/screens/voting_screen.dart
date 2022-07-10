@@ -22,6 +22,7 @@ class VotingScreenState extends State<VotingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
             child: Column(
           children: <Widget>[

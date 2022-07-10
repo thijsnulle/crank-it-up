@@ -22,7 +22,7 @@ class AppHeader {
                   },
               icon: Icon(icon),
             )
-          : null,
+          : const Icon(null),
       title: Column(
         crossAxisAlignment: crossAxisAlignment,
         children: [
@@ -36,8 +36,9 @@ class AppHeader {
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }
