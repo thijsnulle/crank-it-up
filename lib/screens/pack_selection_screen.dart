@@ -1,3 +1,4 @@
+import 'package:crank_it_up/components/alert.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/pack.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,8 @@ class PackSelectionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppHeader.create('PACK', 'SELECTION', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        appBar: AppHeader.create('PACK', 'SELECTION', () => assertPackSelection(context), Icons.west_rounded,
+            CrossAxisAlignment.start, context),
         body: GradientBackground(
           child: GridView(
             padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
@@ -21,5 +23,13 @@ class PackSelectionScreen extends StatelessWidget {
             children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
           ),
         ));
+  }
+
+  void assertPackSelection(BuildContext context) {
+    if (packs.any((pack) => pack.isSelected)) {
+      Navigator.of(context).pop();
+    } else {
+      alert('Please select at least one pack!', context);
+    }
   }
 }
