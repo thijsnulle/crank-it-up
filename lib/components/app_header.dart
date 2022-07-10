@@ -32,6 +32,7 @@ class AppHeader {
           ]
         ],
       ),
+      automaticallyImplyLeading: false,
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,

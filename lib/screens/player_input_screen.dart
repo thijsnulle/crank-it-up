@@ -105,6 +105,9 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
       totalRounds: widget.numberOfRounds,
     );
 
+    game!.scenarios.shuffle();
+    game!.currentScenario = game!.scenarios.removeLast();
+
     return true;
   }
 

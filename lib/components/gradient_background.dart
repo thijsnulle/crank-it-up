@@ -13,7 +13,7 @@ class GradientBackground extends StatelessWidget {
             gradient: LinearGradient(
                 begin: Alignment.bottomCenter,
                 end: Alignment.topCenter,
-                colors: [colorScheme.surface, colorScheme.surfaceTint, colorScheme.surfaceVariant])),
+                colors: [colorScheme.surface, colorScheme.surfaceVariant])),
         child: child);
   }
 }
