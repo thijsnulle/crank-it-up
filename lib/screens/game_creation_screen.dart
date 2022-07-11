@@ -5,9 +5,11 @@ import 'package:crank_it_up/screens/pack_selection_screen.dart';
 import 'package:crank_it_up/screens/player_input_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 import 'package:numberpicker/numberpicker.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:crank_it_up/app.dart';
 
 class GameCreationScreen extends StatefulWidget {
   const GameCreationScreen({super.key});
@@ -108,16 +110,45 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                     ])
                   ]),
                 ]),
+                const SizedBox(
+                  height: 20,
+                ),
+                Row(
+                  children: [
+                    Text(
+                      'Selected packs: ',
+                      style: TextStyle(color: colorScheme.tertiary),
+                    )
+                  ],
+                ),
+                Row(
+                    children: List.generate(
+                        (packs.where((p) => p.isSelected)).length,
+                        (index) => Padding(
+                            padding: const EdgeInsets.all(3),
+                            child: Container(
+                                height: 22,
+                                width: 22,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                        image: Svg(
+                                            'assets/images/${(packs.where((p) => p.isSelected)).toList()[index].img}.svg',
+                                            color: colorScheme.tertiary))))))),
+                const SizedBox(
+                  height: 20,
+                ),
                 Row(
                   children: [
                     GestureDetector(
                         onTap: () {
                           HapticFeedback.mediumImpact();
-                          Navigator.of(context).push(
-                              PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()));
+                          Navigator.of(context)
+                              .push(PageTransition(
+                                  type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()))
+                              .then((_) => setState(() {}));
                         },
                         child: Text(
-                          'Still want to change your pack?',
+                          'Still want to change your packs?',
                           style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
                         ))
                   ],
