@@ -5,6 +5,7 @@ import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
+import 'package:crank_it_up/screens/tie_voting_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,7 +30,7 @@ class GameScreenState extends State<GameScreen> {
         child: Builder(
           builder: (context) => Scaffold(
             appBar: AppHeader.create(
-                'ROUND ${game!.currentRound}',
+                (game!.currentRound > game!.totalRounds) ? 'TIEBREAKER' : 'ROUND ${game!.currentRound}',
                 null,
                 () => Navigator.of(context).push(PageTransition(
                       child: const HomeScreen(),
@@ -74,10 +75,15 @@ class GameScreenState extends State<GameScreen> {
                               text: 'START VOTING',
                               function: () {
                                 HapticFeedback.mediumImpact();
-                                Navigator.of(context).push(PageTransition(
-                                  child: const VotingScreen(),
-                                  type: PageTransitionType.rightToLeft,
-                                ));
+                                (game!.currentRound > game!.totalRounds)
+                                    ? Navigator.of(context).push(PageTransition(
+                                        child: const TieVotingScreen(),
+                                        type: PageTransitionType.rightToLeft,
+                                      ))
+                                    : Navigator.of(context).push(PageTransition(
+                                        child: const VotingScreen(),
+                                        type: PageTransitionType.rightToLeft,
+                                      ));
                               })
                         ],
                       )))
