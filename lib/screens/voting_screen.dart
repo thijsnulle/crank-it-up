@@ -68,6 +68,7 @@ class VotingScreenState extends State<VotingScreen> {
 
     game!.scenarios.shuffle();
     game!.currentScenario = game!.scenarios.removeLast();
+    game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
 
     (++game!.currentRound > game!.totalRounds &&
             (game!.players.where((element) => element.score == game!.players[0].score).toList().length == 1))

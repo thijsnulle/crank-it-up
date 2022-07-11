@@ -17,6 +17,18 @@ class TieVotingScreen extends StatefulWidget {
 }
 
 class TieVotingScreenState extends State<TieVotingScreen> {
+  @override
+  void initState() {
+    maxRanks = 1;
+    for (var element in game!.players) {
+      element.rank = 1;
+    }
+    for (int i = 1; i < ranks.length; i++) {
+      ranks[i] = true;
+    }
+    super.initState();
+  }
+
   final tiedPlayers = game!.players.where((element) => element.score == game!.players[0].score).toList();
 
   @override
@@ -56,7 +68,7 @@ class TieVotingScreenState extends State<TieVotingScreen> {
 
   void determineWinner(BuildContext context) {
     if (!ranks[0]) {
-      alert('Make sure to vote for ${maxRanks.toString()} players!', context);
+      alert('Make sure to vote for 1 player!', context);
       return;
     }
 
@@ -65,6 +77,8 @@ class TieVotingScreenState extends State<TieVotingScreen> {
     for (var player in tiedPlayers) {
       player.updateScore();
     }
+
+    game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
 
     Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft));
   }

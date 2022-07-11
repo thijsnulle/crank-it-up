@@ -21,6 +21,20 @@ class GameScreen extends StatefulWidget {
 }
 
 class GameScreenState extends State<GameScreen> {
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (game!.currentRound > game!.totalRounds) {
+        showDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return TieDialog();
+            });
+      }
+    });
+  }
+
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
 
   @override
@@ -30,7 +44,7 @@ class GameScreenState extends State<GameScreen> {
         child: Builder(
           builder: (context) => Scaffold(
             appBar: AppHeader.create(
-                (game!.currentRound > game!.totalRounds) ? 'TIEBREAKER' : 'ROUND ${game!.currentRound}',
+                'ROUND ${game!.currentRound}',
                 null,
                 () => Navigator.of(context).push(PageTransition(
                       child: const HomeScreen(),
@@ -177,5 +191,26 @@ class ScoreBoard extends StatelessWidget {
                             ),
                           )))
                 ]))));
+  }
+}
+
+class TieDialog extends StatelessWidget {
+  TieDialog({super.key});
+  final tiedPlayers = game!.players.where((element) => element.score == game!.players[0].score).toList();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'TIE-BREAKER',
+        style: Theme.of(context).textTheme.headline4?.copyWith(color: colorScheme.surface),
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        '${tiedPlayers.where((element) => element.name != tiedPlayers.last.name).map((e) => e.name).join(", ")} and ${tiedPlayers.last.name} are competing for first place',
+        style: Theme.of(context).textTheme.headline4?.copyWith(color: colorScheme.surface, fontSize: 20),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }
