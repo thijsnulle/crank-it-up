@@ -1,4 +1,3 @@
-import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,7 +21,7 @@ class AppHeader {
                   },
               icon: Icon(icon),
             )
-          : null,
+          : const Icon(null),
       title: Column(
         crossAxisAlignment: crossAxisAlignment,
         children: [
@@ -32,11 +31,13 @@ class AppHeader {
           ]
         ],
       ),
+      automaticallyImplyLeading: false,
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

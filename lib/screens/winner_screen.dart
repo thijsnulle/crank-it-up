@@ -22,7 +22,7 @@ class WinnerScreenState extends State<WinnerScreen> {
   void initState() {
     controller = ConfettiController(duration: const Duration(seconds: 5));
     controller.play();
-    game.players.sort((p1, p2) => p2.score.compareTo(p1.score));
+    game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
     super.initState();
   }
 
@@ -34,41 +34,51 @@ class WinnerScreenState extends State<WinnerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-        builder: (context) => Scaffold(
-            appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, CrossAxisAlignment.center, context),
-            body: GradientBackground(
-                child: Stack(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(32.0),
-                  child: Column(children: [
-                    const Podium(),
-                    const ScoreBoard(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    Expanded(
-                      child: Container(),
-                    ),
-                    PrimaryButton(
-                        text: 'END GAME',
-                        function: () {
-                          HapticFeedback.mediumImpact();
-                          Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-                        }),
-                  ]),
-                ),
-                Align(
-                    alignment: Alignment.topCenter,
-                    child: ConfettiWidget(
-                      confettiController: controller,
-                      blastDirectionality: BlastDirectionality.explosive,
-                      colors: const [Colors.green, Colors.blue, Colors.pinkAccent, Colors.orange, Colors.purple],
-                      numberOfParticles: 25,
-                    )),
-              ],
-            ))));
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Builder(
+            builder: (context) => Scaffold(
+                appBar: AppHeader.create(game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, CrossAxisAlignment.center, context),
+                extendBodyBehindAppBar: true,
+                body: GradientBackground(
+                    child: Column(children: [
+                  const SizedBox(height: 200),
+                  Expanded(
+                      child: Stack(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(32.0),
+                        child: Column(children: [
+                          const Podium(),
+                          const ScoreBoard(),
+                          const SizedBox(
+                            height: 20,
+                          ),
+                          Expanded(
+                            child: Container(),
+                          ),
+                          PrimaryButton(
+                              text: 'END GAME',
+                              function: () {
+                                game = null;
+                                HapticFeedback.mediumImpact();
+                                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+                              }),
+                        ]),
+                      ),
+                      Align(
+                          alignment: Alignment.topCenter,
+                          child: ConfettiWidget(
+                            confettiController: controller,
+                            maxBlastForce: 100,
+                            blastDirectionality: BlastDirectionality.explosive,
+                            colors: const [Colors.green, Colors.blue, Colors.pinkAccent, Colors.orange, Colors.purple],
+                            numberOfParticles: 25,
+                            shouldLoop: true,
+                          )),
+                    ],
+                  ))
+                ])))));
   }
 }
 
@@ -77,7 +87,7 @@ class Podium extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if (game.players.length > 2) {
+    if (game!.players.length > 2) {
       return Stack(
         children: const [
           Positioned(bottom: 0, left: 0, child: Pillar(height: 240, rank: 2)),
@@ -91,7 +101,7 @@ class Podium extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: List.generate(
-              game.players.length,
+              game!.players.length,
               (index) => Padding(
                   padding: const EdgeInsets.only(bottom: 10),
                   child: Row(children: [
@@ -102,10 +112,10 @@ class Podium extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('\t${game.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
+                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
                     Expanded(
                         child: Text(
-                      'Score: \t${game.players[index].score}',
+                      'Score: \t${game!.players[index].score}',
                       style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
                       textAlign: TextAlign.right,
                     )),
@@ -130,7 +140,7 @@ class ScoreBoard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: List.generate(
-          game.players.length,
+          game!.players.length,
           (index) {
             if (index > 2) {
               return Padding(
@@ -148,10 +158,10 @@ class ScoreBoard extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('\t${game.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
+                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
                     Expanded(
                         child: Text(
-                      'Score: \t${game.players[index].score}',
+                      'Score: \t${game!.players[index].score}',
                       style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
                       textAlign: TextAlign.right,
                     )),
@@ -215,8 +225,8 @@ class Pillar extends StatelessWidget {
                             ),
                           ))
                     ])),
-                Text(game.players[rank - 1].name),
-                Padding(padding: const EdgeInsets.only(top: 10), child: Text(game.players[rank - 1].score.toString()))
+                Text(game!.players[rank - 1].name),
+                Padding(padding: const EdgeInsets.only(top: 10), child: Text(game!.players[rank - 1].score.toString()))
               ]))),
     );
   }

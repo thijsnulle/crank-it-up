@@ -21,70 +21,69 @@ class GameScreen extends StatefulWidget {
 
 class GameScreenState extends State<GameScreen> {
   final pageFlipKey = GlobalKey<PageFlipBuilderState>();
-  String currentScenario = '';
-
-  @override
-  void initState() {
-    game.scenarios.shuffle();
-    currentScenario = game.scenarios.removeLast();
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => Scaffold(
-        appBar: AppHeader.create('ROUND ${game.currentRound}', null, () {
-          HapticFeedback.mediumImpact();
-          Navigator.of(context).push(PageTransition(
-            child: const HomeScreen(),
-            type: PageTransitionType.bottomToTop,
-          ));
-        }, Icons.home_outlined, CrossAxisAlignment.center, context, actions: [
-          IconButton(
-              icon: const Icon(Icons.leaderboard_outlined),
-              onPressed: () {
-                HapticFeedback.mediumImpact();
-                pageFlipKey.currentState?.flip();
-              }),
-        ]),
-        body: GradientBackground(
-            child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PageFlipBuilder(
-                        key: pageFlipKey,
-                        frontBuilder: (_) => PackView(
-                            onFlip: () {
-                              HapticFeedback.mediumImpact();
-                              pageFlipKey.currentState?.flip();
-                            },
-                            text: currentScenario),
-                        backBuilder: (_) => ScoreBoard(
-                          onFlip: () {
-                            HapticFeedback.mediumImpact();
-                            pageFlipKey.currentState?.flip();
-                          },
-                        ),
-                        flipAxis: Axis.horizontal,
-                      ),
-                    ),
-                    const SizedBox(height: 32.0),
-                    PrimaryButton(
-                        text: 'START VOTING',
-                        function: () {
-                          HapticFeedback.mediumImpact();
-                          Navigator.of(context).push(PageTransition(
-                            child: const VotingScreen(),
-                            type: PageTransitionType.rightToLeft,
-                          ));
-                        })
-                  ],
-                ))),
-      ),
-    );
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Builder(
+          builder: (context) => Scaffold(
+            appBar: AppHeader.create(
+                'ROUND ${game!.currentRound}',
+                null,
+                () => Navigator.of(context).push(PageTransition(
+                      child: const HomeScreen(),
+                      type: PageTransitionType.bottomToTop,
+                    )),
+                Icons.home_outlined,
+                CrossAxisAlignment.center,
+                context,
+                actions: [
+                  IconButton(
+                      icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+                ]),
+            extendBodyBehindAppBar: true,
+            body: GradientBackground(
+                child: Column(children: [
+              const SizedBox(height: 200),
+              Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(32.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: PageFlipBuilder(
+                              key: pageFlipKey,
+                              frontBuilder: (_) => PackView(
+                                  onFlip: () {
+                                    HapticFeedback.mediumImpact();
+                                    pageFlipKey.currentState?.flip();
+                                  },
+                                  text: game!.currentScenario),
+                              backBuilder: (_) => ScoreBoard(
+                                onFlip: () {
+                                  HapticFeedback.mediumImpact();
+                                  pageFlipKey.currentState?.flip();
+                                },
+                              ),
+                              flipAxis: Axis.horizontal,
+                            ),
+                          ),
+                          const SizedBox(height: 32.0),
+                          PrimaryButton(
+                              text: 'START VOTING',
+                              function: () {
+                                HapticFeedback.mediumImpact();
+                                Navigator.of(context).push(PageTransition(
+                                  child: const VotingScreen(),
+                                  type: PageTransitionType.rightToLeft,
+                                ));
+                              })
+                        ],
+                      )))
+            ])),
+          ),
+        ));
   }
 }
 
@@ -147,7 +146,7 @@ class ScoreBoard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              game.players.length,
+                              game!.players.length,
                               (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                 Wrap(children: [
                                   SizedBox(
@@ -157,13 +156,13 @@ class ScoreBoard extends StatelessWidget {
                                               .textTheme
                                               .headline5
                                               ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
-                                  Text(game.players[index].name,
+                                  Text(game!.players[index].name,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
                                           ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
                                 ]),
-                                Text('\t${game.players[index].score}',
+                                Text('\t${game!.players[index].score}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline5

@@ -22,15 +22,16 @@ class VotingScreenState extends State<VotingScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppHeader.create('VOTING', 'SCREEN', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
             child: Column(
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                itemCount: game.players.length,
+                itemCount: game!.players.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    player: game.players[index],
+                    player: game!.players[index],
                     notifyParent: refresh,
                   );
                 },
@@ -60,11 +61,14 @@ class VotingScreenState extends State<VotingScreen> {
 
     // Update scores and reset ranks for next round.
     ranks = List<bool>.filled(maxRanks, false);
-    for (var player in game.players) {
+    for (var player in game!.players) {
       player.updateScore();
     }
 
-    (++game.currentRound > game.totalRounds)
+    game!.scenarios.shuffle();
+    game!.currentScenario = game!.scenarios.removeLast();
+
+    (++game!.currentRound > game!.totalRounds)
         ? Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft))
         : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }

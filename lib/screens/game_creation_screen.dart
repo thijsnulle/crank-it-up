@@ -25,114 +25,119 @@ class GameCreationScreenState extends State<GameCreationScreen> {
     return Builder(
       builder: (context) => Scaffold(
         appBar: AppHeader.create('CREATE', 'GAME', null, Icons.west_rounded, CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
-            child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 32.0),
-          child: Column(
-            children: [
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text('Number of Players:', style: Theme.of(context).textTheme.button),
-                Wrap(children: [
-                  Row(children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove),
-                      onPressed: () => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8);
-                      }),
-                      color: colorScheme.onBackground,
-                    ),
-                    NumberPicker(
-                      value: numberOfPlayers,
-                      minValue: 2,
-                      maxValue: 8,
-                      itemWidth: 30,
-                      itemHeight: 30,
-                      onChanged: (v) => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfPlayers = v;
-                      }),
-                      selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
-                      textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
-                      haptics: true,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8);
-                      }),
-                      color: colorScheme.onBackground,
-                    )
-                  ])
+            child: Column(children: [
+          const SizedBox(height: 200),
+          Expanded(
+              child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 32.0),
+            child: Column(
+              children: [
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text('Number of Players:', style: Theme.of(context).textTheme.button),
+                  Wrap(children: [
+                    Row(children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8);
+                        }),
+                        color: colorScheme.onBackground,
+                      ),
+                      NumberPicker(
+                        value: numberOfPlayers,
+                        minValue: 2,
+                        maxValue: 8,
+                        itemWidth: 30,
+                        itemHeight: 30,
+                        onChanged: (v) => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfPlayers = v;
+                        }),
+                        selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
+                        textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
+                        haptics: true,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8);
+                        }),
+                        color: colorScheme.onBackground,
+                      )
+                    ])
+                  ]),
                 ]),
-              ]),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                Text('Number of Rounds:', style: Theme.of(context).textTheme.button),
-                Wrap(children: [
-                  Row(children: [
-                    IconButton(
-                      icon: const Icon(Icons.remove),
-                      onPressed: () => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfRounds = (numberOfRounds - 1).clamp(3, 10);
-                      }),
-                      color: colorScheme.onBackground,
-                    ),
-                    NumberPicker(
-                      value: numberOfRounds,
-                      minValue: 3,
-                      maxValue: 10,
-                      itemWidth: 30,
-                      itemHeight: 30,
-                      onChanged: (v) => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfRounds = v;
-                      }),
-                      selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
-                      textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
-                      haptics: true,
-                    ),
-                    IconButton(
-                      icon: const Icon(Icons.add),
-                      onPressed: () => setState(() {
-                        HapticFeedback.mediumImpact();
-                        numberOfRounds = (numberOfRounds + 1).clamp(3, 10);
-                      }),
-                      color: colorScheme.onBackground,
-                    )
-                  ])
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                  Text('Number of Rounds:', style: Theme.of(context).textTheme.button),
+                  Wrap(children: [
+                    Row(children: [
+                      IconButton(
+                        icon: const Icon(Icons.remove),
+                        onPressed: () => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfRounds = (numberOfRounds - 1).clamp(3, 10);
+                        }),
+                        color: colorScheme.onBackground,
+                      ),
+                      NumberPicker(
+                        value: numberOfRounds,
+                        minValue: 3,
+                        maxValue: 10,
+                        itemWidth: 30,
+                        itemHeight: 30,
+                        onChanged: (v) => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfRounds = v;
+                        }),
+                        selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
+                        textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
+                        haptics: true,
+                      ),
+                      IconButton(
+                        icon: const Icon(Icons.add),
+                        onPressed: () => setState(() {
+                          HapticFeedback.mediumImpact();
+                          numberOfRounds = (numberOfRounds + 1).clamp(3, 10);
+                        }),
+                        color: colorScheme.onBackground,
+                      )
+                    ])
+                  ]),
                 ]),
-              ]),
-              Row(
-                children: [
-                  GestureDetector(
-                      onTap: () {
-                        HapticFeedback.mediumImpact();
-                        Navigator.of(context).push(
-                            PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()));
-                      },
-                      child: Text(
-                        'Still want to change your pack?',
-                        style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
-                      ))
-                ],
-              ),
-              Expanded(child: Container()),
-              PrimaryButton(
-                  text: 'LET\'S GO',
-                  function: () {
-                    HapticFeedback.mediumImpact();
-                    Navigator.of(context).push(
-                      PageTransition(
-                          type: PageTransitionType.rightToLeft,
-                          child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
-                    );
-                  }),
-              const SizedBox(height: 32)
-            ],
-          ),
-        )),
+                Row(
+                  children: [
+                    GestureDetector(
+                        onTap: () {
+                          HapticFeedback.mediumImpact();
+                          Navigator.of(context).push(
+                              PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()));
+                        },
+                        child: Text(
+                          'Still want to change your pack?',
+                          style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
+                        ))
+                  ],
+                ),
+                Expanded(child: Container()),
+                PrimaryButton(
+                    text: 'LET\'S GO',
+                    function: () {
+                      HapticFeedback.mediumImpact();
+                      Navigator.of(context).push(
+                        PageTransition(
+                            type: PageTransitionType.rightToLeft,
+                            child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
+                      );
+                    }),
+                const SizedBox(height: 32)
+              ],
+            ),
+          ))
+        ])),
       ),
     );
   }

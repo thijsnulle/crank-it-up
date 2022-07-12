@@ -177,6 +177,7 @@ class GameObject {
   final List<String> scenarios;
 
   int currentRound = 1;
+  String currentScenario = "";
 
   GameObject({required this.players, required this.totalRounds, required this.scenarios});
 }
@@ -207,4 +208,4 @@ class Pack {
   });
 }
 
-GameObject game = GameObject(players: [], totalRounds: -1, scenarios: []);
+GameObject? game;
