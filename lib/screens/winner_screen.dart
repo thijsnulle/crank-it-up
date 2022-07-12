@@ -36,8 +36,7 @@ class WinnerScreenState extends State<WinnerScreen> {
   Widget build(BuildContext context) {
     return Builder(
         builder: (context) => Scaffold(
-            appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!',
-                null, null, CrossAxisAlignment.center, context),
+            appBar: AppHeader.create(game.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, CrossAxisAlignment.center, context),
             body: GradientBackground(
                 child: Stack(
               children: [
@@ -89,38 +88,30 @@ class Podium extends StatelessWidget {
     } else {
       return Align(
           alignment: Alignment.centerLeft,
-          child: Padding(
-              padding: const EdgeInsets.only(top: 16.0),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: List.generate(
-                  game.players.length,
-                  (index) => Padding(
-                      padding: const EdgeInsets.only(bottom: 10),
-                      child: Row(children: [
-                        Wrap(children: [
-                          SizedBox(
-                            width: 30,
-                            child: Text(
-                              '${index + 1}. ',
-                              style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
-                            ),
-                          )
-                        ]),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Text('\t${game.players[index].name}',
-                            style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
-                        Expanded(
-                            child: Text(
-                          'Score: \t${game.players[index].score}',
-                          style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
-                          textAlign: TextAlign.right,
-                        )),
-                      ])),
-                ),
-              )));
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: List.generate(
+              game.players.length,
+              (index) => Padding(
+                  padding: const EdgeInsets.only(bottom: 10),
+                  child: Row(children: [
+                    Text(
+                      '${index + 1}. ',
+                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Text('\t${game.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
+                    Expanded(
+                        child: Text(
+                      'Score: \t${game.players[index].score}',
+                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
+                      textAlign: TextAlign.right,
+                    )),
+                  ])),
+            ),
+          ));
     }
   }
 }
@@ -150,17 +141,14 @@ class ScoreBoard extends StatelessWidget {
                         width: 30,
                         child: Text(
                           '${index + 1}. ',
-                          style:
-                              Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
+                          style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
                         ),
                       )
                     ]),
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('\t${game.players[index].name}',
-                        style:
-                            Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
+                    Text('\t${game.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
                     Expanded(
                         child: Text(
                       'Score: \t${game.players[index].score}',
