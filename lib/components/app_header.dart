@@ -25,9 +25,15 @@ class AppHeader {
       title: Column(
         crossAxisAlignment: crossAxisAlignment,
         children: [
-          Text(headline1, style: Theme.of(context).textTheme.headline1),
+          Text(
+            headline1,
+            style: Theme.of(context).textTheme.headline1,
+          ),
           if (headline2 != null) ...[
-            Text(headline2, style: Theme.of(context).textTheme.headline2),
+            Text(
+              headline2,
+              style: Theme.of(context).textTheme.headline2,
+            ),
           ]
         ],
       ),

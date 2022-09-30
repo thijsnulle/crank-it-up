@@ -22,7 +22,6 @@ class WinnerScreenState extends State<WinnerScreen> {
   void initState() {
     controller = ConfettiController(duration: const Duration(seconds: 5));
     controller.play();
-    game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
     super.initState();
   }
 
