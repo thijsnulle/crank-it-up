@@ -5,6 +5,7 @@ import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/components/gradient_background.dart';
 import 'package:crank_it_up/screens/home_screen.dart';
+import 'package:crank_it_up/screens/tie_voting_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -20,71 +21,89 @@ class GameScreen extends StatefulWidget {
 }
 
 class GameScreenState extends State<GameScreen> {
-  final pageFlipKey = GlobalKey<PageFlipBuilderState>();
-  String currentScenario = '';
-
   @override
   void initState() {
-    game.scenarios.shuffle();
-    currentScenario = game.scenarios.removeLast();
     super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (game!.currentRound > game!.totalRounds) {
+        showDialog(
+            context: context,
+            builder: (BuildContext dialogContext) {
+              return TieDialog();
+            });
+      }
+    });
   }
+
+  final pageFlipKey = GlobalKey<PageFlipBuilderState>();
 
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder: (context) => Scaffold(
-        appBar: AppHeader.create('ROUND ${game.currentRound}', null, () {
-          HapticFeedback.mediumImpact();
-          Navigator.of(context).push(PageTransition(
-            child: const HomeScreen(),
-            type: PageTransitionType.bottomToTop,
-          ));
-        }, Icons.home_outlined, CrossAxisAlignment.center, context, actions: [
-          IconButton(
-              icon: const Icon(Icons.leaderboard_outlined),
-              onPressed: () {
-                HapticFeedback.mediumImpact();
-                pageFlipKey.currentState?.flip();
-              }),
-        ]),
-        body: GradientBackground(
-            child: Padding(
-                padding: const EdgeInsets.all(32.0),
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: PageFlipBuilder(
-                        key: pageFlipKey,
-                        frontBuilder: (_) => PackView(
-                            onFlip: () {
-                              HapticFeedback.mediumImpact();
-                              pageFlipKey.currentState?.flip();
-                            },
-                            text: currentScenario),
-                        backBuilder: (_) => ScoreBoard(
-                          onFlip: () {
-                            HapticFeedback.mediumImpact();
-                            pageFlipKey.currentState?.flip();
-                          },
-                        ),
-                        flipAxis: Axis.horizontal,
-                      ),
-                    ),
-                    const SizedBox(height: 32.0),
-                    PrimaryButton(
-                        text: 'START VOTING',
-                        function: () {
-                          HapticFeedback.mediumImpact();
-                          Navigator.of(context).push(PageTransition(
-                            child: const VotingScreen(),
-                            type: PageTransitionType.rightToLeft,
-                          ));
-                        })
-                  ],
-                ))),
-      ),
-    );
+    return WillPopScope(
+        onWillPop: () => Future.value(false),
+        child: Builder(
+          builder: (context) => Scaffold(
+            appBar: AppHeader.create(
+                'ROUND ${game!.currentRound}',
+                null,
+                () => Navigator.of(context).push(PageTransition(
+                      child: const HomeScreen(),
+                      type: PageTransitionType.bottomToTop,
+                    )),
+                Icons.home_outlined,
+                CrossAxisAlignment.center,
+                context,
+                actions: [
+                  IconButton(
+                      icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+                ]),
+            extendBodyBehindAppBar: true,
+            body: GradientBackground(
+                child: Column(children: [
+              const SizedBox(height: 200),
+              Expanded(
+                  child: Padding(
+                      padding: const EdgeInsets.all(32.0),
+                      child: Column(
+                        children: [
+                          Expanded(
+                            child: PageFlipBuilder(
+                              key: pageFlipKey,
+                              frontBuilder: (_) => PackView(
+                                  onFlip: () {
+                                    HapticFeedback.mediumImpact();
+                                    pageFlipKey.currentState?.flip();
+                                  },
+                                  text: game!.currentScenario),
+                              backBuilder: (_) => ScoreBoard(
+                                onFlip: () {
+                                  HapticFeedback.mediumImpact();
+                                  pageFlipKey.currentState?.flip();
+                                },
+                              ),
+                              flipAxis: Axis.horizontal,
+                            ),
+                          ),
+                          const SizedBox(height: 32.0),
+                          PrimaryButton(
+                              text: 'START VOTING',
+                              function: () {
+                                HapticFeedback.mediumImpact();
+                                (game!.currentRound > game!.totalRounds)
+                                    ? Navigator.of(context).push(PageTransition(
+                                        child: const TieVotingScreen(),
+                                        type: PageTransitionType.rightToLeft,
+                                      ))
+                                    : Navigator.of(context).push(PageTransition(
+                                        child: const VotingScreen(),
+                                        type: PageTransitionType.rightToLeft,
+                                      ));
+                              })
+                        ],
+                      )))
+            ])),
+          ),
+        ));
   }
 }
 
@@ -147,7 +166,7 @@ class ScoreBoard extends StatelessWidget {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: List.generate(
-                              game.players.length,
+                              game!.players.length,
                               (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
                                 Wrap(children: [
                                   SizedBox(
@@ -157,13 +176,13 @@ class ScoreBoard extends StatelessWidget {
                                               .textTheme
                                               .headline5
                                               ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
-                                  Text(game.players[index].name,
+                                  Text(game!.players[index].name,
                                       style: Theme.of(context)
                                           .textTheme
                                           .headline6
                                           ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
                                 ]),
-                                Text('\t${game.players[index].score}',
+                                Text('\t${game!.players[index].score}',
                                     style: Theme.of(context)
                                         .textTheme
                                         .headline5
@@ -172,5 +191,26 @@ class ScoreBoard extends StatelessWidget {
                             ),
                           )))
                 ]))));
+  }
+}
+
+class TieDialog extends StatelessWidget {
+  TieDialog({super.key});
+  final tiedPlayers = game!.players.where((element) => element.score == game!.players[0].score).toList();
+
+  @override
+  Widget build(BuildContext context) {
+    return AlertDialog(
+      title: Text(
+        'TIE-BREAKER',
+        style: Theme.of(context).textTheme.headline4?.copyWith(color: colorScheme.surface),
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        '${tiedPlayers.where((element) => element.name != tiedPlayers.last.name).map((e) => e.name).join(", ")} and ${tiedPlayers.last.name} are competing for first place',
+        style: Theme.of(context).textTheme.headline4?.copyWith(color: colorScheme.surface, fontSize: 20),
+        textAlign: TextAlign.center,
+      ),
+    );
   }
 }

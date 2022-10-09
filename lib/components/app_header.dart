@@ -1,4 +1,3 @@
-import 'package:crank_it_up/color_scheme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -22,21 +21,29 @@ class AppHeader {
                   },
               icon: Icon(icon),
             )
-          : null,
+          : const Icon(null),
       title: Column(
         crossAxisAlignment: crossAxisAlignment,
         children: [
-          Text(headline1, style: Theme.of(context).textTheme.headline1),
+          Text(
+            headline1,
+            style: Theme.of(context).textTheme.headline1,
+          ),
           if (headline2 != null) ...[
-            Text(headline2, style: Theme.of(context).textTheme.headline2),
+            Text(
+              headline2,
+              style: Theme.of(context).textTheme.headline2,
+            ),
           ]
         ],
       ),
+      automaticallyImplyLeading: false,
       centerTitle: true,
       actions: actions,
       toolbarHeight: 200,
-      backgroundColor: colorScheme.surfaceVariant,
+      backgroundColor: Colors.transparent,
       shadowColor: Colors.transparent,
+      elevation: 0,
     );
   }
 }

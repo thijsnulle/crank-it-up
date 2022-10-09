@@ -18,10 +18,13 @@ class PackSelectionScreenState extends State<PackSelectionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppHeader.create('PACK', 'SELECTION', () => assertPackSelection(context), Icons.west_rounded,
-            CrossAxisAlignment.start, context),
+        appBar: AppHeader.create('PACK', 'SELECTION', () => assertPackSelection(context), Icons.west_rounded, CrossAxisAlignment.start, context),
+        extendBodyBehindAppBar: true,
         body: GradientBackground(
           child: Column(children: [
+            const SizedBox(
+              height: 200,
+            ),
             Row(
               children: <Widget>[
                 Expanded(
@@ -51,8 +54,7 @@ class PackSelectionScreenState extends State<PackSelectionScreen> {
             Expanded(
                 child: GridView(
               padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2, mainAxisSpacing: 20, crossAxisSpacing: 20, childAspectRatio: 2 / 3),
               children: packs.map((element) => PackCard(id: element.id, name: element.name, img: element.img)).toList(),
             ))
           ]),

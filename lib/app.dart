@@ -1,7 +1,14 @@
 library crank_it_up.lib.app;
 
+import 'package:flutter/material.dart';
+
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);
+List<Color> rankColors = [
+  const Color.fromARGB(255, 255, 223, 0),
+  const Color.fromARGB(255, 196, 202, 206),
+  const Color.fromARGB(255, 205, 127, 50)
+];
 
 List<Pack> packs = [
   Pack(
@@ -170,6 +177,7 @@ class GameObject {
   final List<String> scenarios;
 
   int currentRound = 1;
+  String currentScenario = "";
 
   GameObject({required this.players, required this.totalRounds, required this.scenarios});
 }
@@ -200,4 +208,4 @@ class Pack {
   });
 }
 
-GameObject game = GameObject(players: [], totalRounds: -1, scenarios: []);
+GameObject? game;

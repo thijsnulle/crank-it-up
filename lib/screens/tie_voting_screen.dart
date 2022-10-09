@@ -2,23 +2,35 @@ import 'package:crank_it_up/components/alert.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:crank_it_up/components/buttons.dart';
 import 'package:crank_it_up/app.dart';
-import 'package:crank_it_up/screens/tie_voting_screen.dart';
 import 'package:crank_it_up/screens/winner_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/voting_entry.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 import 'package:crank_it_up/components/gradient_background.dart';
-import 'game_screen.dart';
 
-class VotingScreen extends StatefulWidget {
-  const VotingScreen({super.key});
+class TieVotingScreen extends StatefulWidget {
+  const TieVotingScreen({super.key});
 
   @override
-  VotingScreenState createState() => VotingScreenState();
+  TieVotingScreenState createState() => TieVotingScreenState();
 }
 
-class VotingScreenState extends State<VotingScreen> {
+class TieVotingScreenState extends State<TieVotingScreen> {
+  @override
+  void initState() {
+    maxRanks = 1;
+    for (var element in game!.players) {
+      element.rank = 1;
+    }
+    for (int i = 1; i < ranks.length; i++) {
+      ranks[i] = true;
+    }
+    super.initState();
+  }
+
+  final tiedPlayers = game!.players.where((element) => element.score == game!.players[0].score).toList();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,10 +41,10 @@ class VotingScreenState extends State<VotingScreen> {
           children: <Widget>[
             Expanded(
               child: ListView.builder(
-                itemCount: game!.players.length,
+                itemCount: tiedPlayers.length,
                 itemBuilder: (context, index) {
                   return VotingEntry(
-                    player: game!.players[index],
+                    player: tiedPlayers[index],
                     notifyParent: refresh,
                   );
                 },
@@ -55,25 +67,19 @@ class VotingScreenState extends State<VotingScreen> {
   }
 
   void determineWinner(BuildContext context) {
-    if (!ranks.every((r) => r)) {
-      alert('Make sure to vote for ${maxRanks.toString()} players!', context);
+    if (!ranks[0]) {
+      alert('Make sure to vote for 1 player!', context);
       return;
     }
 
     // Update scores and reset ranks for next round.
     ranks = List<bool>.filled(maxRanks, false);
-    for (var player in game!.players) {
+    for (var player in tiedPlayers) {
       player.updateScore();
     }
 
-    game!.scenarios.shuffle();
-    game!.currentScenario = game!.scenarios.removeLast();
     game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
 
-    (++game!.currentRound > game!.totalRounds &&
-            (game!.players.where((element) => element.score == game!.players[0].score).toList().length == 1))
-        ? (Navigator.of(context)
-            .push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft)))
-        : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
+    Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft));
   }
 }
