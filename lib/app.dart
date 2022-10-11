@@ -4,11 +4,7 @@ import 'package:flutter/material.dart';
 
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);
-List<Color> rankColors = [
-  const Color.fromARGB(255, 255, 223, 0),
-  const Color.fromARGB(255, 196, 202, 206),
-  const Color.fromARGB(255, 205, 127, 50)
-];
+List<Color> rankColors = [const Color.fromARGB(255, 255, 223, 0), const Color.fromARGB(255, 196, 202, 206), const Color.fromARGB(255, 205, 127, 50)];
 
 List<Pack> packs = [
   Pack(
@@ -109,7 +105,7 @@ List<Pack> packs = [
       'You just set a new limbo record; what was the song that made you able to do it?',
       'What do you play while cleaning someone else’s puke at a party?',
     ],
-  )
+  ),
   Pack(
     id: 4,
     name: "DRUGS",

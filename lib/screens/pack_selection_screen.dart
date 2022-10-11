@@ -23,7 +23,7 @@ class PackSelectionScreenState extends State<PackSelectionScreen> {
         body: GradientBackground(
           child: Column(children: [
             const SizedBox(
-              height: 200,
+              height: 100,
             ),
             Row(
               children: <Widget>[
