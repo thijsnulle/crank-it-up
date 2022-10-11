@@ -51,6 +51,9 @@ class PackSelectionScreenState extends State<PackSelectionScreen> {
                         ))),
               ],
             ),
+            const SizedBox(
+              height: 20,
+            ),
             Expanded(
                 child: GridView(
               padding: const EdgeInsets.only(top: 20, bottom: 20, left: 10, right: 10),

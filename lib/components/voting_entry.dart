@@ -49,12 +49,10 @@ class VotingEntryState extends State<VotingEntry> {
                 Expanded(
                     flex: 3,
                     child: Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle, color: color),
+                      decoration: BoxDecoration(border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle, color: color),
                       height: 40,
                       child: Center(
-                        child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '',
-                            style: Theme.of(context).textTheme.button),
+                        child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '', style: Theme.of(context).textTheme.button),
                       ),
                     )),
                 Expanded(
@@ -65,8 +63,7 @@ class VotingEntryState extends State<VotingEntry> {
                           children: [
                             Container(
                               height: 40,
-                              decoration:
-                                  BoxDecoration(border: Border(bottom: BorderSide(color: colorScheme.onBackground))),
+                              decoration: BoxDecoration(border: Border(bottom: BorderSide(color: colorScheme.onBackground))),
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),
