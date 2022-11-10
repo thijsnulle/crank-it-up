@@ -109,7 +109,7 @@ List<Pack> packs = [
       'You just set a new limbo record; what was the song that made you able to do it?',
       'What do you play while cleaning someone else’s puke at a party?',
     ],
-  )
+  ),
   Pack(
     id: 4,
     name: "DRUGS",
@@ -141,7 +141,7 @@ List<Pack> packs = [
   Pack(
     id: 5,
     name: "MEDIA",
-    img: "pop-culture",
+    img: "media",
     scenarios: const [
       'Which song would you make the opening of the anime about your life?',
       'You are in a car chase; what is banging?',
@@ -222,7 +222,7 @@ List<Pack> packs = [
   Pack(
     id: 8,
     name: "SCI-FI",
-    img: "sci-fi",
+    img: "scifi",
     scenarios: const [
       'You get abducted by aliens; what do they let you hear?',
       'You have to choose a song to send into space for other lifeforms; what do you send?',
