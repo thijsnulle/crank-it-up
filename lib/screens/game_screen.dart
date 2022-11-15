@@ -54,8 +54,7 @@ class GameScreenState extends State<GameScreen> {
                 CrossAxisAlignment.center,
                 context,
                 actions: [
-                  IconButton(
-                      icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+                  IconButton(icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
                 ]),
             extendBodyBehindAppBar: true,
             body: GradientBackground(
@@ -119,18 +118,13 @@ class PackView extends StatelessWidget {
         onTap: onFlip,
         child: Container(
             decoration: BoxDecoration(
-                color: colorScheme.onPrimary,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
+                color: colorScheme.onPrimary, borderRadius: const BorderRadius.all(Radius.circular(20)), boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
             child: Padding(
               key: const ValueKey<int>(0),
               padding: const EdgeInsets.all(32.0),
               child: AutoSizeText(
                 text,
-                style: Theme.of(context)
-                    .textTheme
-                    .headline4
-                    ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold),
+                style: Theme.of(context).textTheme.headline4?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold),
               ),
             )));
   }
@@ -147,17 +141,14 @@ class ScoreBoard extends StatelessWidget {
         onTap: onFlip,
         child: Container(
             decoration: BoxDecoration(
-                color: colorScheme.onPrimary,
-                borderRadius: const BorderRadius.all(Radius.circular(20)),
-                boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
+                color: colorScheme.onPrimary, borderRadius: const BorderRadius.all(Radius.circular(20)), boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
             child: Padding(
                 key: const ValueKey<int>(0),
                 padding: const EdgeInsets.all(32.0),
                 child: Column(children: [
                   Text(
                     'Scoreboard',
-                    style:
-                        Theme.of(context).textTheme.headline3?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)),
+                    style: Theme.of(context).textTheme.headline3?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)),
                   ),
                   Align(
                       alignment: Alignment.centerLeft,
@@ -171,22 +162,10 @@ class ScoreBoard extends StatelessWidget {
                                 Wrap(children: [
                                   SizedBox(
                                       width: 30,
-                                      child: Text('${index + 1}. ',
-                                          style: Theme.of(context)
-                                              .textTheme
-                                              .headline5
-                                              ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
-                                  Text(game!.players[index].name,
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headline6
-                                          ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
+                                      child: Text('${index + 1}. ', style: Theme.of(context).textTheme.headline5?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
+                                  Text(game!.players[index].name, style: Theme.of(context).textTheme.headline6?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
                                 ]),
-                                Text('\t${game!.players[index].score}',
-                                    style: Theme.of(context)
-                                        .textTheme
-                                        .headline5
-                                        ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
+                                Text('\t${game!.players[index].score}', style: Theme.of(context).textTheme.headline5?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
                               ]),
                             ),
                           )))

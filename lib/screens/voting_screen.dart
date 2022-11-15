@@ -70,10 +70,8 @@ class VotingScreenState extends State<VotingScreen> {
     game!.currentScenario = game!.scenarios.removeLast();
     game!.players.sort((p1, p2) => p2.score.compareTo(p1.score));
 
-    (++game!.currentRound > game!.totalRounds &&
-            (game!.players.where((element) => element.score == game!.players[0].score).toList().length == 1))
-        ? (Navigator.of(context)
-            .push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft)))
+    (++game!.currentRound > game!.totalRounds && (game!.players.where((element) => element.score == game!.players[0].score).toList().length == 1))
+        ? (Navigator.of(context).push(PageTransition(child: const WinnerScreen(), type: PageTransitionType.rightToLeft)))
         : Navigator.of(context).push(PageTransition(child: const GameScreen(), type: PageTransitionType.rightToLeft));
   }
 }
