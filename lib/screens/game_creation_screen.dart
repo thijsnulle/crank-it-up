@@ -132,7 +132,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                                 decoration: BoxDecoration(
                                     image: DecorationImage(
                                         image: Svg(
-                                            'assets/images/${(packs.where((p) => p.isSelected)).toList()[index].img}.svg',
+                                            'assets/images/${(packs.where((p) => p.isSelected)).toList()[index].img}',
                                             color: colorScheme.tertiary))))))),
                 const SizedBox(
                   height: 20,
