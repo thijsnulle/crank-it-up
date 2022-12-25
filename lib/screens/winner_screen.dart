@@ -37,7 +37,8 @@ class WinnerScreenState extends State<WinnerScreen> {
         onWillPop: () => Future.value(false),
         child: Builder(
             builder: (context) => Scaffold(
-                appBar: AppHeader.create(game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, CrossAxisAlignment.center, context),
+                appBar: AppHeader.create(game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name,
+                    'WINS!!!', null, null, CrossAxisAlignment.center, context),
                 extendBodyBehindAppBar: true,
                 body: GradientBackground(
                     child: Column(children: [
@@ -111,7 +112,8 @@ class Podium extends StatelessWidget {
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
+                    Text('\t${game!.players[index].name}',
+                        style: Theme.of(context).textTheme.headline5!.copyWith(color: colorScheme.onBackground)),
                     Expanded(
                         child: Text(
                       'Score: \t${game!.players[index].score}',
@@ -150,14 +152,17 @@ class ScoreBoard extends StatelessWidget {
                         width: 30,
                         child: Text(
                           '${index + 1}. ',
-                          style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
+                          style:
+                              Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
                         ),
                       )
                     ]),
                     const SizedBox(
                       width: 10,
                     ),
-                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
+                    Text('\t${game!.players[index].name}',
+                        style:
+                            Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
                     Expanded(
                         child: Text(
                       'Score: \t${game!.players[index].score}',
@@ -187,45 +192,29 @@ class Pillar extends StatelessWidget {
           color: colorScheme.surfaceVariant,
           boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))],
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-      width: 125,
+      width: (MediaQuery.of(context).size.width - 48.0) / 3.0,
       height: height,
       child: Padding(
-          padding: const EdgeInsets.only(top: 10),
+          padding: const EdgeInsets.only(top: 16.0),
           child: Align(
               alignment: Alignment.topCenter,
               child: Column(children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 15),
-                    child: Stack(children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: colorScheme.onBackground),
-                          shape: BoxShape.circle,
-                        ),
-                        width: 50,
-                        height: 50,
-                      ),
-                      Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: colorScheme.onBackground),
-                              shape: BoxShape.circle,
-                              color: rankColors[rank - 1],
-                            ),
-                            height: 18,
-                            width: 18,
-                            child: Center(
-                              child: Text(
-                                rank.toString(),
-                                style: Theme.of(context).textTheme.button,
-                              ),
-                            ),
-                          ))
-                    ])),
+                Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: colorScheme.onBackground),
+                    shape: BoxShape.circle,
+                    color: rankColors[rank - 1],
+                  ),
+                  height: 48,
+                  width: 48,
+                  child: Center(
+                      child: Text('$rank',
+                          style: Theme.of(context).textTheme.headline5!.copyWith(color: colorScheme.onBackground))),
+                ),
+                const SizedBox(height: 16),
                 Text(game!.players[rank - 1].name),
-                Padding(padding: const EdgeInsets.only(top: 10), child: Text(game!.players[rank - 1].score.toString()))
+                const SizedBox(height: 10),
+                Text(game!.players[rank - 1].score.toString()),
               ]))),
     );
   }
