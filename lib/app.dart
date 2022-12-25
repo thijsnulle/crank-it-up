@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);
-List<Color> rankColors = [const Color.fromARGB(255, 255, 223, 0), const Color.fromARGB(255, 196, 202, 206), const Color.fromARGB(255, 205, 127, 50)];
+List<Color> rankColors = [
+  const Color.fromARGB(255, 255, 223, 0),
+  const Color.fromARGB(255, 196, 202, 206),
+  const Color.fromARGB(255, 205, 127, 50)
+];
 
 List<Pack> packs = [
   Pack(
-    id: 0,
     name: "BASE",
     img: "base",
     scenarios: const [
@@ -32,7 +35,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 1,
     name: "18+",
     img: "18+",
     scenarios: const [
@@ -56,7 +58,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 2,
     name: "CHILL",
     img: "chill",
     scenarios: const [
@@ -84,7 +85,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 3,
     name: "PARTY",
     img: "party",
     scenarios: const [
@@ -111,7 +111,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 4,
     name: "DRUGS",
     img: "drugs",
     scenarios: const [
@@ -139,7 +138,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 5,
     name: "MEDIA",
     img: "pop-culture",
     scenarios: const [
@@ -166,7 +164,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 6,
     name: "RELIGION",
     img: "religion",
     scenarios: const [
@@ -194,7 +191,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 7,
     name: "SCARY",
     img: "scary",
     scenarios: const [
@@ -223,7 +219,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 8,
     name: "SCI-FI",
     img: "sci-fi",
     scenarios: const [
@@ -249,7 +244,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 9,
     name: "SPORTS",
     img: "sports",
     scenarios: const [
@@ -276,7 +270,6 @@ List<Pack> packs = [
     ],
   ),
   Pack(
-    id: 10,
     name: "WEED",
     img: "weed",
     scenarios: const [
@@ -326,14 +319,12 @@ class Player {
 }
 
 class Pack {
-  final int id;
   final String name;
   final String img;
   final List scenarios;
   bool isSelected;
 
   Pack({
-    required this.id,
     required this.name,
     required this.img,
     required this.scenarios,

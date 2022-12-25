@@ -1,90 +1,88 @@
 import 'package:crank_it_up/app.dart';
 import 'package:crank_it_up/color_scheme.dart';
+import 'package:crank_it_up/components/alert.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 class PackCard extends StatefulWidget {
-  final int id;
   final String name;
   final String img;
 
-  const PackCard({super.key, required this.id, required this.name, required this.img});
+  const PackCard({super.key, required this.name, required this.img});
 
   @override
-  PackState createState() => PackState();
+  PackCardState createState() => PackCardState();
 }
 
-class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackCard> {
-  @override
-  bool get wantKeepAlive => true;
+class PackCardState extends State<PackCard> {
+  final GlobalKey<PackCardState> packCardKey = GlobalKey<PackCardState>();
 
   @override
   Widget build(BuildContext context) {
-    super.build(context);
-    return Scaffold(
-        body: Stack(
-      children: [
-        Container(
+    return Container(
+      key: packCardKey,
+      decoration: BoxDecoration(
+        color: colorScheme.primaryContainer,
+        boxShadow: const [BoxShadow(color: Color(0x66000000), blurRadius: 12)],
+        borderRadius: BorderRadius.circular(20),
+      ),
+      clipBehavior: Clip.hardEdge,
+      child: Stack(children: [
+        createImage(widget.img),
+        createTitle(widget.name),
+        createOverlay(widget.name),
+        GestureDetector(onTap: () => updatePackState(widget)),
+      ]),
+    );
+  }
+
+  Widget createImage(String img) {
+    return Padding(
+      padding: const EdgeInsets.all(40.0),
+      child: Container(
           decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(20),
-            color: colorScheme.primaryContainer,
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x66000000),
-                spreadRadius: 5,
-                blurRadius: 7,
-                offset: Offset(0, 3), // changes position of shadow
-              ),
-            ],
-          ),
-        ),
-        Padding(
-          padding: const EdgeInsets.all(30),
-          child: Container(
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: Svg('assets/images/${widget.img}.svg', color: colorScheme.onPrimaryContainer)),
-                  borderRadius: BorderRadius.circular(20))),
-        ),
-        Padding(
-            padding: const EdgeInsets.only(bottom: 20),
-            child: Align(
-                alignment: Alignment.bottomCenter,
-                child: Text(
-                  widget.name,
-                  style: TextStyle(
-                      color: colorScheme.onPrimaryContainer,
-                      fontFamily: 'Montserrat',
-                      fontSize: 30,
-                      fontWeight: FontWeight.bold),
-                ))),
-        GestureDetector(
-            onTap: () {
-              setState(() {
-                HapticFeedback.mediumImpact();
-                packs[widget.id].isSelected = !packs[widget.id].isSelected;
-              });
-            },
-            child: Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color:
-                          packs[widget.id].isSelected ? colorScheme.background.withOpacity(0.5) : Colors.transparent),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 5, top: 5),
-                  child: Icon(
-                    Icons.check_rounded,
-                    color: packs[widget.id].isSelected ? const Color.fromARGB(255, 26, 200, 35) : Colors.transparent,
-                    size: 40,
-                  ),
-                )
-              ],
-            ))
-      ],
-    ));
+              image: DecorationImage(
+                  image: Svg('assets/images/${widget.img}.svg', color: colorScheme.onPrimaryContainer)))),
+    );
+  }
+
+  Widget createTitle(String name) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Align(
+          alignment: Alignment.bottomCenter, child: Text(widget.name, style: Theme.of(context).textTheme.headline5)),
+    );
+  }
+
+  Widget createOverlay(String name) {
+    Pack clickedPack = packs.firstWhere((element) => element.name == name);
+
+    if (!clickedPack.isSelected) return Container();
+
+    return Container(
+      color: colorScheme.background.withOpacity(0.5),
+      constraints: const BoxConstraints.expand(),
+      child: const Align(
+          alignment: Alignment.topLeft,
+          child: Padding(
+              padding: EdgeInsets.only(left: 8.0, top: 8.0),
+              child: Icon(Icons.check_rounded, color: Color.fromARGB(255, 26, 200, 35), size: 36.0))),
+    );
+  }
+
+  void updatePackState(PackCard packCard) {
+    int numberOfPacksSelected = packs.where((element) => element.isSelected).length;
+    Pack clickedPack = packs.firstWhere((element) => element.name == packCard.name);
+
+    if (numberOfPacksSelected == 1 && clickedPack.isSelected) {
+      alert('Cannot deselect all packs.', context);
+      return;
+    }
+
+    setState(() {
+      HapticFeedback.mediumImpact();
+      clickedPack.isSelected = !clickedPack.isSelected;
+    });
   }
 }
