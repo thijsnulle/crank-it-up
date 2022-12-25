@@ -4,7 +4,11 @@ import 'package:flutter/material.dart';
 
 int maxRanks = 1;
 List<bool> ranks = List<bool>.filled(maxRanks, false);
-List<Color> rankColors = [const Color.fromARGB(255, 255, 223, 0), const Color.fromARGB(255, 196, 202, 206), const Color.fromARGB(255, 205, 127, 50)];
+List<Color> rankColors = [
+  const Color.fromARGB(255, 212, 175, 55),
+  const Color.fromARGB(255, 192, 192, 192),
+  const Color.fromARGB(255, 205, 127, 50),
+];
 
 List<Pack> packs = [
   Pack(
