@@ -30,7 +30,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
         extendBodyBehindAppBar: true,
         body: GradientBackground(
             child: Column(children: [
-          const SizedBox(height: 200),
+          const SizedBox(height: 240),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
