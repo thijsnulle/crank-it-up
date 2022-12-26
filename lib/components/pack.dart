@@ -50,8 +50,7 @@ class PackCardState extends State<PackCard> {
   Widget createTitle(String name) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
-      child: Align(
-          alignment: Alignment.bottomCenter, child: Text(widget.name, style: Theme.of(context).textTheme.headline5)),
+      child: Align(alignment: Alignment.bottomCenter, child: Text(widget.name, style: Theme.of(context).textTheme.headline5)),
     );
   }
 
@@ -65,9 +64,7 @@ class PackCardState extends State<PackCard> {
       constraints: const BoxConstraints.expand(),
       child: const Align(
           alignment: Alignment.topLeft,
-          child: Padding(
-              padding: EdgeInsets.only(left: 8.0, top: 8.0),
-              child: Icon(Icons.check_rounded, color: Color.fromARGB(255, 26, 200, 35), size: 36.0))),
+          child: Padding(padding: EdgeInsets.only(left: 8.0, top: 8.0), child: Icon(Icons.check_rounded, color: Color.fromARGB(255, 26, 200, 35), size: 36.0))),
     );
   }
 
