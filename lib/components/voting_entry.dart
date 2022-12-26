@@ -16,11 +16,12 @@ class VotingEntry extends StatefulWidget {
 }
 
 class VotingEntryState extends State<VotingEntry> {
-  Color color = Colors.transparent;
+  GlobalKey<VotingEntryState> votingEntryKey = GlobalKey<VotingEntryState>();
 
   @override
   Widget build(BuildContext context) {
     return IntrinsicWidth(
+      key: votingEntryKey,
       child: Padding(
           padding: const EdgeInsets.only(bottom: 25),
           child: GestureDetector(
@@ -30,7 +31,6 @@ class VotingEntryState extends State<VotingEntry> {
                 if (widget.player.rank == maxRanks) {
                   if (ranks.contains(false)) {
                     int newRank = ranks.indexOf(false);
-                    color = rankColors[newRank];
                     widget.player.rank = newRank;
                     ranks[newRank] = true;
                   } else {
@@ -39,7 +39,6 @@ class VotingEntryState extends State<VotingEntry> {
                 } else if (widget.player.rank != maxRanks) {
                   ranks[widget.player.rank] = false;
                   widget.player.rank = maxRanks;
-                  color = Colors.transparent;
                 }
                 widget.notifyParent();
               });
@@ -49,10 +48,15 @@ class VotingEntryState extends State<VotingEntry> {
                 Expanded(
                     flex: 3,
                     child: Container(
-                      decoration: BoxDecoration(border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle, color: color),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: colorScheme.onBackground),
+                        shape: BoxShape.circle,
+                        color: (widget.player.rank < maxRanks) ? rankColors[widget.player.rank] : Colors.transparent,
+                      ),
                       height: 40,
                       child: Center(
-                        child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '', style: Theme.of(context).textTheme.button),
+                        child: Text(widget.player.rank != maxRanks ? (widget.player.rank + 1).toString() : '',
+                            style: Theme.of(context).textTheme.button),
                       ),
                     )),
                 Expanded(
@@ -63,7 +67,8 @@ class VotingEntryState extends State<VotingEntry> {
                           children: [
                             Container(
                               height: 40,
-                              decoration: BoxDecoration(border: Border(bottom: BorderSide(color: colorScheme.onBackground))),
+                              decoration:
+                                  BoxDecoration(border: Border(bottom: BorderSide(color: colorScheme.onBackground))),
                             ),
                             Padding(
                                 padding: const EdgeInsets.only(top: 10),

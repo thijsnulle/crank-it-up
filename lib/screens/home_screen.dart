@@ -73,34 +73,19 @@ class HomeScreen extends StatelessWidget {
                       style: Theme.of(context).textTheme.button!.copyWith(fontSize: 20.0))),
             ),
             Expanded(child: Container()),
-            Wrap(children: [
-              IconButton(
-                onPressed: () {
-                  HapticFeedback.mediumImpact();
-                  Navigator.of(context).push(
-                    PageTransition(type: PageTransitionType.bottomToTop, child: const SettingsScreen()),
-                  );
-                },
-                icon: const Icon(Icons.settings),
-                color: colorScheme.onBackground,
-                iconSize: 36,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-              ),
-              IconButton(
-                onPressed: () {
-                  HapticFeedback.mediumImpact();
-                  Navigator.of(context).push(
-                    PageTransition(type: PageTransitionType.bottomToTop, child: RulesScreen()),
-                  );
-                },
-                icon: const Icon(Icons.rule),
-                color: colorScheme.onBackground,
-                iconSize: 36,
-                splashColor: Colors.transparent,
-                highlightColor: Colors.transparent,
-              )
-            ]),
+            IconButton(
+              onPressed: () {
+                HapticFeedback.mediumImpact();
+                Navigator.of(context).push(
+                  PageTransition(type: PageTransitionType.bottomToTop, child: RulesScreen()),
+                );
+              },
+              icon: const Icon(Icons.rule),
+              color: colorScheme.onBackground,
+              iconSize: 36,
+              splashColor: Colors.transparent,
+              highlightColor: Colors.transparent,
+            ),
             const SizedBox(height: 64),
           ],
         )),
