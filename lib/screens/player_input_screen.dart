@@ -42,7 +42,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
         body: GradientBackground(
             child: Column(children: [
           const SizedBox(
-            height: 200,
+            height: 240,
           ),
           Expanded(
               child: Padding(

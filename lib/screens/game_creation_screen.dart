@@ -41,9 +41,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                 createNumberPicker('Number of Players:', 2, 8, 'numberOfPlayers'),
                 createNumberPicker('Number of Rounds:', 3, 10, 'numberOfRounds'),
                 const SizedBox(height: 16.0),
-                Align(
-                    alignment: Alignment.centerLeft,
-                    child: Text('Selected packs: ', style: TextStyle(color: colorScheme.tertiary))),
+                Align(alignment: Alignment.centerLeft, child: Text('Selected packs: ', style: TextStyle(color: colorScheme.tertiary))),
                 createPackList(),
                 const SizedBox(height: 16.0),
                 createPackSelectionButton(),
@@ -55,9 +53,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       Navigator.of(context).push(
                         PageTransition(
                             type: PageTransitionType.rightToLeft,
-                            child: PlayerInputScreen(
-                                numberOfPlayers: variables['numberOfPlayers']!,
-                                numberOfRounds: variables['numberOfRounds']!)),
+                            child: PlayerInputScreen(numberOfPlayers: variables['numberOfPlayers']!, numberOfRounds: variables['numberOfRounds']!)),
                       );
                     }),
                 const SizedBox(height: 32)
@@ -110,22 +106,15 @@ class GameCreationScreenState extends State<GameCreationScreen> {
           .where((p) => p.isSelected)
           .map((p) => Padding(
               padding: const EdgeInsets.all(3.0),
-              child: Container(
-                  height: 22,
-                  width: 22,
-                  decoration: BoxDecoration(
-                      image: DecorationImage(image: Svg('assets/images/${p.img}.svg', color: colorScheme.tertiary))))))
+              child: Container(height: 22, width: 22, decoration: BoxDecoration(image: DecorationImage(image: Svg('assets/images/${p.img}', color: colorScheme.tertiary))))))
           .toList());
 
   Widget createPackSelectionButton() => Row(children: [
         GestureDetector(
             onTap: () {
               HapticFeedback.mediumImpact();
-              Navigator.of(context)
-                  .push(PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()))
-                  .then((_) => setState(() {}));
+              Navigator.of(context).push(PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen())).then((_) => setState(() {}));
             },
-            child: Text('Still want to change your packs?',
-                style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline)))
+            child: Text('Still want to change your packs?', style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline)))
       ]);
 }
