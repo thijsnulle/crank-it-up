@@ -43,8 +43,8 @@ class PackState extends State<PackCard> with AutomaticKeepAliveClientMixin<PackC
           padding: const EdgeInsets.all(30),
           child: Container(
               decoration: BoxDecoration(
-                  image: DecorationImage(
-                      image: Svg('assets/images/${widget.img}.svg', color: colorScheme.onPrimaryContainer)),
+                  image:
+                      DecorationImage(image: Svg('assets/images/${widget.img}', color: colorScheme.onPrimaryContainer)),
                   borderRadius: BorderRadius.circular(20))),
         ),
         Padding(
