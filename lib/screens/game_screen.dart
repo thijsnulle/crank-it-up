@@ -9,6 +9,7 @@ import 'package:crank_it_up/screens/tie_voting_screen.dart';
 import 'package:crank_it_up/screens/voting_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_svg_provider/flutter_svg_provider.dart';
 
 import 'package:page_flip_builder/page_flip_builder.dart';
 import 'package:page_transition/page_transition.dart';
@@ -72,7 +73,7 @@ class GameScreenState extends State<GameScreen> {
                               frontBuilder: (_) => StandardPackView(
                                   pageFlipKey: pageFlipKey,
                                   content: PackView(
-                                    text: game!.currentScenario,
+                                    scenario: game!.currentScenario,
                                   )),
                               backBuilder: (_) => StandardPackView(
                                 pageFlipKey: pageFlipKey,
@@ -122,26 +123,34 @@ class StandardPackView extends StatelessWidget {
                 color: colorScheme.onPrimary,
                 borderRadius: const BorderRadius.all(Radius.circular(20)),
                 boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
-            child: Padding(
-              key: const ValueKey<int>(0),
-              padding: const EdgeInsets.all(32.0),
-              child: content,
-            )));
+            child: Padding(key: const ValueKey<int>(0), padding: const EdgeInsets.all(32.0), child: content)));
   }
 }
 
 class PackView extends StatelessWidget {
-  const PackView({super.key, required this.text});
+  const PackView({super.key, required this.scenario});
 
-  final String text;
+  final Scenario scenario;
 
   @override
   Widget build(context) {
-    return AutoSizeText(text,
-        style: Theme.of(context)
-            .textTheme
-            .headline4
-            ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold));
+    return Column(
+      children: [
+        Align(
+            alignment: Alignment.topLeft,
+            child: Container(
+                height: 42,
+                width: 42,
+                decoration: BoxDecoration(
+                    image: DecorationImage(image: Svg('assets/images/${scenario.pack}.svg', color: Colors.black))))),
+        const SizedBox(height: 16.0),
+        AutoSizeText(scenario.content,
+            style: Theme.of(context)
+                .textTheme
+                .headline4
+                ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold)),
+      ],
+    );
   }
 }
 

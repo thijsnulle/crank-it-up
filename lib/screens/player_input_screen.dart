@@ -108,7 +108,13 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
 
     game = GameObject(
       players: List<Player>.from(playerNames.map((name) => Player(name: capitalise(name.trim())))),
-      scenarios: List<String>.from(packs.where((p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
+      // scenarios: List<String>.from(packs.where(p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
+
+      scenarios: packs
+          .where((p) => p.isSelected)
+          .map((p) => p.scenarios.map((c) => Scenario(pack: p.name, content: c)))
+          .expand((e) => e)
+          .toList(),
       totalRounds: widget.numberOfRounds,
     );
 
