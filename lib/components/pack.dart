@@ -40,7 +40,10 @@ class PackCardState extends State<PackCard> {
   Widget createImage(String img) {
     return Padding(
       padding: const EdgeInsets.all(40.0),
-      child: Container(decoration: BoxDecoration(image: DecorationImage(image: Svg('assets/images/${widget.img}', color: colorScheme.onPrimaryContainer)))),
+      child: Container(
+          decoration: BoxDecoration(
+              image:
+                  DecorationImage(image: Svg('assets/images/${widget.img}', color: colorScheme.onPrimaryContainer)))),
     );
   }
 

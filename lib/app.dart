@@ -23,10 +23,10 @@ List<Pack> packs = scenarios.entries
 class GameObject {
   final List<Player> players;
   final int totalRounds;
-  final List<String> scenarios;
+  final List<Scenario> scenarios;
 
   int currentRound = 1;
-  String currentScenario = "";
+  Scenario currentScenario = Scenario(pack: '', content: '');
 
   GameObject({required this.players, required this.totalRounds, required this.scenarios});
 }
@@ -44,7 +44,7 @@ class Player {
 class Pack {
   final String name;
   final String img;
-  final List scenarios;
+  final List<String> scenarios;
   bool isSelected;
 
   Pack({
@@ -53,6 +53,13 @@ class Pack {
     required this.scenarios,
     this.isSelected = true,
   });
+}
+
+class Scenario {
+  final String pack;
+  final String content;
+
+  Scenario({required this.pack, required this.content});
 }
 
 GameObject? game;

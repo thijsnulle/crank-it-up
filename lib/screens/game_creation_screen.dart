@@ -106,7 +106,11 @@ class GameCreationScreenState extends State<GameCreationScreen> {
           .where((p) => p.isSelected)
           .map((p) => Padding(
               padding: const EdgeInsets.all(3.0),
-              child: Container(height: 22, width: 22, decoration: BoxDecoration(image: DecorationImage(image: Svg('assets/images/${p.img}', color: colorScheme.tertiary))))))
+              child: Container(
+                  height: 22,
+                  width: 22,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: Svg('assets/images/${p.img}', color: colorScheme.tertiary))))))
           .toList());
 
   Widget createPackSelectionButton() => Row(children: [
