@@ -18,12 +18,12 @@ class RulesScreen extends StatelessWidget {
       builder: (context) => Scaffold(
         appBar:
             AppHeader.create('RULES', 'BOOK', null, Icons.west_rounded, CrossAxisAlignment.center, context, actions: [
-          IconButton(
-              icon: const Icon(Icons.rotate_left),
-              onPressed: () {
-                HapticFeedback.mediumImpact();
-                pageFlipKey.currentState?.flip();
-              }),
+          // IconButton(
+          //     icon: const Icon(Icons.rotate_left),
+          //     onPressed: () {
+          //       HapticFeedback.mediumImpact();
+          //       pageFlipKey.currentState?.flip();
+          //     }),
         ]),
         extendBodyBehindAppBar: true,
         body: GradientBackground(
@@ -32,20 +32,19 @@ class RulesScreen extends StatelessWidget {
             height: 200,
           ),
           Expanded(
-              child: Padding(
-            padding: const EdgeInsets.all(32.0),
-            child: PageFlipBuilder(
-              key: pageFlipKey,
-              frontBuilder: (_) => BasicRules(onFlip: () {
-                HapticFeedback.mediumImpact();
-                pageFlipKey.currentState?.flip();
-              }),
-              backBuilder: (_) => DrinkingRules(onFlip: () {
-                HapticFeedback.mediumImpact();
-                pageFlipKey.currentState?.flip();
-              }),
-            ),
-          ))
+              child: Padding(padding: const EdgeInsets.all(32.0), child: BasicRules(onFlip: () => {})
+                  // child: PageFlipBuilder(
+                  //   key: pageFlipKey,
+                  //   frontBuilder: (_) => BasicRules(onFlip: () {
+                  //     HapticFeedback.mediumImpact();
+                  //     pageFlipKey.currentState?.flip();
+                  //   }),
+                  //   backBuilder: (_) => DrinkingRules(onFlip: () {
+                  //     HapticFeedback.mediumImpact();
+                  //     pageFlipKey.currentState?.flip();
+                  //   }),
+                  // ),
+                  ))
         ])),
       ),
     );
@@ -71,7 +70,7 @@ class BasicRules extends StatelessWidget {
               padding: const EdgeInsets.all(16.0),
               child: Markdown(
                 data:
-                    '# BASIC RULES\nThe aim of the game is to find the perfect song to a given scenario, or at least better than your competitors!\n1. Select the themed packs you want to play in _Pack Selection_ on the home screen.\n2. Create a game from the home screen.\n3. Prepare your speaker and make sure everyone can player their songs, e.g. with Spotify Sessions.\n4. Play a round, read the card and think about what song fits with the scenario.\n5. If everyone has found a song, play them in order of the current score.\n6. Go to the voting screen and decide collectively on who you thought had the best songs.\n7. Play until the rounds are over and repeat!',
+                    '# BASIC RULES\nThe aim of the game is to find the perfect song to a given scenario, or at least better than your competitors!\n1. Select the themed packs you want to play in **Pack Selection** on the home screen.\n2. Create a game from the home screen.\n3. Prepare your speaker and make sure everyone can player their songs, e.g. with Spotify Sessions.\n4. Play a round, read the card and think about what song fits with the scenario.\n5. If everyone has found a song, play them in order of the current score.\n6. Go to the voting screen and decide collectively on who you thought had the best songs.\n7. Play until the rounds are over and repeat!',
                 styleSheet: MarkdownStyleSheet(
                   listBullet: const TextStyle(fontSize: 18.0),
                   p: const TextStyle(fontSize: 18.0),
