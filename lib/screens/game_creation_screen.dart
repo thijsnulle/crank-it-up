@@ -114,7 +114,7 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                   height: 22,
                   width: 22,
                   decoration: BoxDecoration(
-                      image: DecorationImage(image: Svg('assets/images/${p.img}.svg', color: colorScheme.tertiary))))))
+                      image: DecorationImage(image: Svg('assets/images/${p.img}', color: colorScheme.tertiary))))))
           .toList());
 
   Widget createPackSelectionButton() => Row(children: [

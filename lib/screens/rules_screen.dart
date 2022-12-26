@@ -1,7 +1,6 @@
 import 'package:crank_it_up/color_scheme.dart';
 import 'package:crank_it_up/components/app_header.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:page_flip_builder/page_flip_builder.dart';
 

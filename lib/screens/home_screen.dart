@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:crank_it_up/components/logo.dart';
 
 import 'package:crank_it_up/screens/pack_selection_screen.dart';
-import 'package:crank_it_up/screens/settings_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:page_transition/page_transition.dart';
 

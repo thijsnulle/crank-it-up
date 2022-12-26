@@ -54,7 +54,8 @@ class GameScreenState extends State<GameScreen> {
                 CrossAxisAlignment.center,
                 context,
                 actions: [
-                  IconButton(icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
+                  IconButton(
+                      icon: const Icon(Icons.leaderboard_outlined), onPressed: () => pageFlipKey.currentState?.flip()),
                 ]),
             extendBodyBehindAppBar: true,
             body: GradientBackground(
@@ -68,17 +69,14 @@ class GameScreenState extends State<GameScreen> {
                           Expanded(
                             child: PageFlipBuilder(
                               key: pageFlipKey,
-                              frontBuilder: (_) => PackView(
-                                  onFlip: () {
-                                    HapticFeedback.mediumImpact();
-                                    pageFlipKey.currentState?.flip();
-                                  },
-                                  text: game!.currentScenario),
-                              backBuilder: (_) => ScoreBoard(
-                                onFlip: () {
-                                  HapticFeedback.mediumImpact();
-                                  pageFlipKey.currentState?.flip();
-                                },
+                              frontBuilder: (_) => StandardPackView(
+                                  pageFlipKey: pageFlipKey,
+                                  content: PackView(
+                                    text: game!.currentScenario,
+                                  )),
+                              backBuilder: (_) => StandardPackView(
+                                pageFlipKey: pageFlipKey,
+                                content: const ScoreBoard(),
                               ),
                               flipAxis: Axis.horizontal,
                             ),
@@ -106,70 +104,89 @@ class GameScreenState extends State<GameScreen> {
   }
 }
 
-class PackView extends StatelessWidget {
-  const PackView({super.key, required this.onFlip, required this.text});
+class StandardPackView extends StatelessWidget {
+  const StandardPackView({super.key, required this.pageFlipKey, required this.content});
 
-  final Function() onFlip;
-  final String text;
+  final GlobalKey<PageFlipBuilderState> pageFlipKey;
+  final Widget content;
 
   @override
   Widget build(context) {
     return GestureDetector(
-        onTap: onFlip,
+        onTap: () {
+          HapticFeedback.mediumImpact();
+          pageFlipKey.currentState?.flip();
+        },
         child: Container(
             decoration: BoxDecoration(
-                color: colorScheme.onPrimary, borderRadius: const BorderRadius.all(Radius.circular(20)), boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
+                color: colorScheme.onPrimary,
+                borderRadius: const BorderRadius.all(Radius.circular(20)),
+                boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
             child: Padding(
               key: const ValueKey<int>(0),
               padding: const EdgeInsets.all(32.0),
-              child: AutoSizeText(
-                text,
-                style: Theme.of(context).textTheme.headline4?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold),
-              ),
+              child: content,
             )));
   }
 }
 
-class ScoreBoard extends StatelessWidget {
-  const ScoreBoard({super.key, required this.onFlip});
+class PackView extends StatelessWidget {
+  const PackView({super.key, required this.text});
 
-  final Function() onFlip;
+  final String text;
 
   @override
   Widget build(context) {
-    return GestureDetector(
-        onTap: onFlip,
-        child: Container(
-            decoration: BoxDecoration(
-                color: colorScheme.onPrimary, borderRadius: const BorderRadius.all(Radius.circular(20)), boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))]),
-            child: Padding(
-                key: const ValueKey<int>(0),
-                padding: const EdgeInsets.all(32.0),
-                child: Column(children: [
-                  Text(
-                    'Scoreboard',
-                    style: Theme.of(context).textTheme.headline3?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)),
-                  ),
-                  Align(
-                      alignment: Alignment.centerLeft,
-                      child: Padding(
-                          padding: const EdgeInsets.only(top: 16.0),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: List.generate(
-                              game!.players.length,
-                              (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                                Wrap(children: [
-                                  SizedBox(
-                                      width: 30,
-                                      child: Text('${index + 1}. ', style: Theme.of(context).textTheme.headline5?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
-                                  Text(game!.players[index].name, style: Theme.of(context).textTheme.headline6?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
-                                ]),
-                                Text('\t${game!.players[index].score}', style: Theme.of(context).textTheme.headline5?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
-                              ]),
-                            ),
-                          )))
-                ]))));
+    return AutoSizeText(text,
+        style: Theme.of(context)
+            .textTheme
+            .headline4
+            ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29), fontWeight: FontWeight.bold));
+  }
+}
+
+class ScoreBoard extends StatelessWidget {
+  const ScoreBoard({super.key});
+
+  @override
+  Widget build(context) {
+    return Column(children: [
+      Text(
+        'Scoreboard',
+        style: Theme.of(context).textTheme.headline3?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)),
+      ),
+      Align(
+          alignment: Alignment.centerLeft,
+          child: Padding(
+              padding: const EdgeInsets.only(top: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: List.generate(
+                  game!.players.length,
+                  (index) => Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+                    Wrap(children: [
+                      SizedBox(
+                          width: 30,
+                          child: Text('${index + 1}. ',
+                              style: Theme.of(context)
+                                  .textTheme
+                                  .headline5
+                                  ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29)))),
+                      Text(game!.players[index].name,
+                          style: Theme.of(context)
+                              .textTheme
+                              .headline6
+                              ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
+                    ]),
+                    Text('\t${game!.players[index].score}',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            ?.copyWith(color: const Color.fromARGB(255, 22, 22, 29))),
+                  ]),
+                ),
+              )))
+    ]);
   }
 }
 
