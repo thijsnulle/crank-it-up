@@ -42,8 +42,8 @@ class PackCardState extends State<PackCard> {
       padding: const EdgeInsets.all(40.0),
       child: Container(
           decoration: BoxDecoration(
-              image: DecorationImage(
-                  image: Svg('assets/images/${widget.img}.svg', color: colorScheme.onPrimaryContainer)))),
+              image:
+                  DecorationImage(image: Svg('assets/images/${widget.img}', color: colorScheme.onPrimaryContainer)))),
     );
   }
 
