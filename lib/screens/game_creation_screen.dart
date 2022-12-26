@@ -19,8 +19,10 @@ class GameCreationScreen extends StatefulWidget {
 }
 
 class GameCreationScreenState extends State<GameCreationScreen> {
-  int numberOfPlayers = 4;
-  int numberOfRounds = 5;
+  Map<String, int> variables = {
+    'numberOfPlayers': 4,
+    'numberOfRounds': 5,
+  };
 
   @override
   Widget build(BuildContext context) {
@@ -30,129 +32,21 @@ class GameCreationScreenState extends State<GameCreationScreen> {
         extendBodyBehindAppBar: true,
         body: GradientBackground(
             child: Column(children: [
-          const SizedBox(height: 200),
+          const SizedBox(height: 240),
           Expanded(
               child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 32.0),
             child: Column(
               children: [
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Text('Number of Players:', style: Theme.of(context).textTheme.button),
-                  Wrap(children: [
-                    Row(children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove),
-                        onPressed: () => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfPlayers = (numberOfPlayers - 1).clamp(2, 8);
-                        }),
-                        color: colorScheme.onBackground,
-                      ),
-                      NumberPicker(
-                        value: numberOfPlayers,
-                        minValue: 2,
-                        maxValue: 8,
-                        itemWidth: 30,
-                        itemHeight: 30,
-                        onChanged: (v) => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfPlayers = v;
-                        }),
-                        selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
-                        textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
-                        haptics: true,
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfPlayers = (numberOfPlayers + 1).clamp(2, 8);
-                        }),
-                        color: colorScheme.onBackground,
-                      )
-                    ])
-                  ]),
-                ]),
-                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-                  Text('Number of Rounds:', style: Theme.of(context).textTheme.button),
-                  Wrap(children: [
-                    Row(children: [
-                      IconButton(
-                        icon: const Icon(Icons.remove),
-                        onPressed: () => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfRounds = (numberOfRounds - 1).clamp(3, 10);
-                        }),
-                        color: colorScheme.onBackground,
-                      ),
-                      NumberPicker(
-                        value: numberOfRounds,
-                        minValue: 3,
-                        maxValue: 10,
-                        itemWidth: 30,
-                        itemHeight: 30,
-                        onChanged: (v) => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfRounds = v;
-                        }),
-                        selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
-                        textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
-                        haptics: true,
-                      ),
-                      IconButton(
-                        icon: const Icon(Icons.add),
-                        onPressed: () => setState(() {
-                          HapticFeedback.mediumImpact();
-                          numberOfRounds = (numberOfRounds + 1).clamp(3, 10);
-                        }),
-                        color: colorScheme.onBackground,
-                      )
-                    ])
-                  ]),
-                ]),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      'Selected packs: ',
-                      style: TextStyle(color: colorScheme.tertiary),
-                    )
-                  ],
-                ),
-                Row(
-                    children: List.generate(
-                        (packs.where((p) => p.isSelected)).length,
-                        (index) => Padding(
-                            padding: const EdgeInsets.all(3),
-                            child: Container(
-                                height: 22,
-                                width: 22,
-                                decoration: BoxDecoration(
-                                    image: DecorationImage(
-                                        image: Svg(
-                                            'assets/images/${(packs.where((p) => p.isSelected)).toList()[index].img}',
-                                            color: colorScheme.tertiary))))))),
-                const SizedBox(
-                  height: 20,
-                ),
-                Row(
-                  children: [
-                    GestureDetector(
-                        onTap: () {
-                          HapticFeedback.mediumImpact();
-                          Navigator.of(context)
-                              .push(PageTransition(
-                                  type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()))
-                              .then((_) => setState(() {}));
-                        },
-                        child: Text(
-                          'Still want to change your packs?',
-                          style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline),
-                        ))
-                  ],
-                ),
+                createNumberPicker('Number of Players:', 2, 8, 'numberOfPlayers'),
+                createNumberPicker('Number of Rounds:', 3, 10, 'numberOfRounds'),
+                const SizedBox(height: 16.0),
+                Align(
+                    alignment: Alignment.centerLeft,
+                    child: Text('Selected packs: ', style: TextStyle(color: colorScheme.tertiary))),
+                createPackList(),
+                const SizedBox(height: 16.0),
+                createPackSelectionButton(),
                 Expanded(child: Container()),
                 PrimaryButton(
                     text: 'LET\'S GO',
@@ -161,7 +55,9 @@ class GameCreationScreenState extends State<GameCreationScreen> {
                       Navigator.of(context).push(
                         PageTransition(
                             type: PageTransitionType.rightToLeft,
-                            child: PlayerInputScreen(numberOfPlayers: numberOfPlayers, numberOfRounds: numberOfRounds)),
+                            child: PlayerInputScreen(
+                                numberOfPlayers: variables['numberOfPlayers']!,
+                                numberOfRounds: variables['numberOfRounds']!)),
                       );
                     }),
                 const SizedBox(height: 32)
@@ -172,4 +68,64 @@ class GameCreationScreenState extends State<GameCreationScreen> {
       ),
     );
   }
+
+  Widget createNumberPicker(String description, final int minValue, final int maxValue, String key) {
+    void updateValue(String key, int minValue, int maxValue, int value) {
+      setState(() {
+        HapticFeedback.mediumImpact();
+        variables[key] = value.clamp(minValue, maxValue);
+      });
+    }
+
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(description, style: Theme.of(context).textTheme.button),
+      Row(children: [
+        IconButton(
+          icon: const Icon(Icons.remove),
+          onPressed: () => updateValue(key, minValue, maxValue, variables[key]! - 1),
+          color: colorScheme.onBackground,
+        ),
+        NumberPicker(
+          value: variables[key]!,
+          minValue: minValue,
+          maxValue: maxValue,
+          itemWidth: 30,
+          itemHeight: 30,
+          onChanged: (value) => updateValue(key, minValue, maxValue, value),
+          selectedTextStyle: TextStyle(color: colorScheme.onBackground, fontSize: 24),
+          textStyle: TextStyle(color: colorScheme.secondary, fontSize: 16),
+          haptics: true,
+        ),
+        IconButton(
+          icon: const Icon(Icons.add),
+          onPressed: () => updateValue(key, minValue, maxValue, variables[key]! + 1),
+          color: colorScheme.onBackground,
+        ),
+      ])
+    ]);
+  }
+
+  Widget createPackList() => Row(
+      children: packs
+          .where((p) => p.isSelected)
+          .map((p) => Padding(
+              padding: const EdgeInsets.all(3.0),
+              child: Container(
+                  height: 22,
+                  width: 22,
+                  decoration: BoxDecoration(
+                      image: DecorationImage(image: Svg('assets/images/${p.img}.svg', color: colorScheme.tertiary))))))
+          .toList());
+
+  Widget createPackSelectionButton() => Row(children: [
+        GestureDetector(
+            onTap: () {
+              HapticFeedback.mediumImpact();
+              Navigator.of(context)
+                  .push(PageTransition(type: PageTransitionType.bottomToTop, child: const PackSelectionScreen()))
+                  .then((_) => setState(() {}));
+            },
+            child: Text('Still want to change your packs?',
+                style: TextStyle(color: colorScheme.tertiary, decoration: TextDecoration.underline)))
+      ]);
 }
