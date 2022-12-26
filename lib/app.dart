@@ -42,14 +42,12 @@ class Player {
 }
 
 class Pack {
-  final int id;
   final String name;
   final String img;
   final List scenarios;
   bool isSelected;
 
   Pack({
-    required this.id,
     required this.name,
     required this.img,
     required this.scenarios,
