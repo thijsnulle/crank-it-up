@@ -33,95 +33,54 @@ class WinnerScreenState extends State<WinnerScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-        onWillPop: () => Future.value(false),
-        child: Builder(
-            builder: (context) => Scaffold(
-                appBar: AppHeader.create(game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2).name, 'WINS!!!', null, null, CrossAxisAlignment.center, context),
-                extendBodyBehindAppBar: true,
-                body: GradientBackground(
-                    child: Column(children: [
-                  const SizedBox(height: 200),
-                  Expanded(
-                      child: Stack(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(32.0),
-                        child: Column(children: [
-                          const Podium(),
-                          const ScoreBoard(),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Expanded(
-                            child: Container(),
-                          ),
-                          PrimaryButton(
-                              text: 'END GAME',
-                              function: () {
-                                game = null;
-                                HapticFeedback.mediumImpact();
-                                Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
-                              }),
-                        ]),
-                      ),
-                      Align(
-                          alignment: Alignment.topCenter,
-                          child: ConfettiWidget(
-                            confettiController: controller,
-                            maxBlastForce: 100,
-                            blastDirectionality: BlastDirectionality.explosive,
-                            colors: const [Colors.green, Colors.blue, Colors.pinkAccent, Colors.orange, Colors.purple],
-                            numberOfParticles: 25,
-                            shouldLoop: true,
-                          )),
-                    ],
-                  ))
-                ])))));
+    return WillPopScope(child: buildPage(context), onWillPop: () async => false);
   }
-}
 
-class Podium extends StatelessWidget {
-  const Podium({super.key});
+  Widget buildPage(BuildContext context) {
+    Player winner = game!.players.reduce((p1, p2) => p1.score >= p2.score ? p1 : p2);
 
-  @override
-  Widget build(BuildContext context) {
-    if (game!.players.length > 2) {
-      return Stack(
-        children: const [
-          Positioned(bottom: 0, left: 0, child: Pillar(height: 240, rank: 2)),
-          Positioned(bottom: 0, right: 0, child: Pillar(height: 165, rank: 3)),
-          Align(alignment: Alignment.bottomCenter, child: Pillar(height: 310, rank: 1)),
-        ],
-      );
-    } else {
-      return Align(
-          alignment: Alignment.centerLeft,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: List.generate(
-              game!.players.length,
-              (index) => Padding(
-                  padding: const EdgeInsets.only(bottom: 10),
-                  child: Row(children: [
-                    Text(
-                      '${index + 1}. ',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
-                    ),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground)),
-                    Expanded(
-                        child: Text(
-                      'Score: \t${game!.players[index].score}',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.onBackground),
-                      textAlign: TextAlign.right,
-                    )),
-                  ])),
-            ),
-          ));
-    }
+    return Builder(
+      builder: (context) => Scaffold(
+          appBar: AppHeader.create(winner.name, 'WINS!', null, null, CrossAxisAlignment.center, context),
+          extendBodyBehindAppBar: true,
+          body: GradientBackground(
+            child: Column(children: [
+              const SizedBox(height: 240),
+              Expanded(child: Stack(children: [createScoreboard(context), createConfetti()]))
+            ]),
+          )),
+    );
+  }
+
+  Widget createScoreboard(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.all(32.0),
+      child: Column(children: [
+        // const Podium(),
+        const ScoreBoard(),
+        Expanded(child: Container()),
+        PrimaryButton(
+            text: 'END GAME',
+            function: () {
+              game = null;
+              HapticFeedback.mediumImpact();
+              Navigator.pushNamedAndRemoveUntil(context, '/', (_) => false);
+            }),
+      ]),
+    );
+  }
+
+  Widget createConfetti() {
+    return Align(
+        alignment: Alignment.topCenter,
+        child: ConfettiWidget(
+          confettiController: controller,
+          maxBlastForce: 100,
+          blastDirectionality: BlastDirectionality.explosive,
+          colors: const [Colors.green, Colors.blue, Colors.pinkAccent, Colors.orange, Colors.purple],
+          numberOfParticles: 25,
+          shouldLoop: true,
+        ));
   }
 }
 
@@ -130,47 +89,54 @@ class ScoreBoard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return Column(children: [
+      createPodium(),
+      createScoreboard(),
+    ]);
+  }
+
+  Widget createPodium() {
+    return Stack(
+      children: [
+        const Positioned(bottom: 0, left: 0, child: Pillar(height: 240, rank: 2)),
+        (game!.players.length >= 3)
+            ? const Positioned(bottom: 0, right: 0, child: Pillar(height: 165, rank: 3))
+            : Container(),
+        const Align(alignment: Alignment.bottomCenter, child: Pillar(height: 310, rank: 1)),
+      ],
+    );
+  }
+
+  Widget createScoreboard() {
+    if (game!.players.length <= 3) {
+      return Container();
+    }
+
+    List<Player> remainingPlayers = game!.players.sublist(3);
     return Container(
       decoration: BoxDecoration(
         color: colorScheme.onBackground,
         borderRadius: const BorderRadius.only(bottomLeft: Radius.circular(10), bottomRight: Radius.circular(10)),
         boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))],
       ),
+      clipBehavior: Clip.hardEdge,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: List.generate(
-          game!.players.length,
-          (index) {
-            if (index > 2) {
-              return Padding(
-                  padding: const EdgeInsets.only(left: 20, top: 3, bottom: 3, right: 20),
-                  child: Row(children: [
-                    Wrap(children: [
-                      SizedBox(
-                        width: 30,
-                        child: Text(
-                          '${index + 1}. ',
-                          style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
-                        ),
-                      )
-                    ]),
-                    const SizedBox(
-                      width: 10,
-                    ),
-                    Text('\t${game!.players[index].name}', style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20)),
-                    Expanded(
-                        child: Text(
-                      'Score: \t${game!.players[index].score}',
-                      style: Theme.of(context).textTheme.headline6!.copyWith(color: colorScheme.surface, fontSize: 20),
-                      textAlign: TextAlign.right,
-                    )),
-                  ]));
-            }
-
-            return Container();
-          },
-        ),
+        children: remainingPlayers.map(createScoreboardElement).toList(),
       ),
+    );
+  }
+
+  Widget createScoreboardElement(Player player) {
+    return Container(
+      color: Colors.white,
+      child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 4.0),
+          child: Row(children: [
+            Text(player.name, style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+            Expanded(child: Container()),
+            Text('${player.score} pts', style: const TextStyle(color: Colors.black)),
+          ])),
     );
   }
 }
@@ -187,46 +153,23 @@ class Pillar extends StatelessWidget {
           color: colorScheme.surfaceVariant,
           boxShadow: const [BoxShadow(blurRadius: 32.0, color: Color(0x66000000))],
           borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10))),
-      width: 125,
+      width: (MediaQuery.of(context).size.width - 48.0) / 3.0,
       height: height,
-      child: Padding(
-          padding: const EdgeInsets.only(top: 10),
-          child: Align(
-              alignment: Alignment.topCenter,
-              child: Column(children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 20, bottom: 15),
-                    child: Stack(children: [
-                      Container(
-                        decoration: BoxDecoration(
-                          border: Border.all(color: colorScheme.onBackground),
-                          shape: BoxShape.circle,
-                        ),
-                        width: 50,
-                        height: 50,
-                      ),
-                      Positioned(
-                          left: 0,
-                          bottom: 0,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              border: Border.all(color: colorScheme.onBackground),
-                              shape: BoxShape.circle,
-                              color: rankColors[rank - 1],
-                            ),
-                            height: 18,
-                            width: 18,
-                            child: Center(
-                              child: Text(
-                                rank.toString(),
-                                style: Theme.of(context).textTheme.button,
-                              ),
-                            ),
-                          ))
-                    ])),
-                Text(game!.players[rank - 1].name),
-                Padding(padding: const EdgeInsets.only(top: 10), child: Text(game!.players[rank - 1].score.toString()))
-              ]))),
+      child: Column(children: [
+        const SizedBox(height: 16.0),
+        Container(
+          decoration: BoxDecoration(
+              border: Border.all(color: colorScheme.onBackground), shape: BoxShape.circle, color: rankColors[rank - 1]),
+          height: 48,
+          child: Center(
+              child: Text('$rank',
+                  style: Theme.of(context).textTheme.headline5!.copyWith(color: colorScheme.onBackground))),
+        ),
+        const SizedBox(height: 16.0),
+        Text(game!.players[rank - 1].name, style: const TextStyle(fontWeight: FontWeight.bold)),
+        const SizedBox(height: 8.0),
+        Text('${game!.players[rank - 1].score.toString()} pts'),
+      ]),
     );
   }
 }
