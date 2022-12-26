@@ -42,7 +42,7 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
         body: GradientBackground(
             child: Column(children: [
           const SizedBox(
-            height: 200,
+            height: 240,
           ),
           Expanded(
               child: Padding(
@@ -108,8 +108,6 @@ class PlayerInputScreenState extends State<PlayerInputScreen> {
 
     game = GameObject(
       players: List<Player>.from(playerNames.map((name) => Player(name: capitalise(name.trim())))),
-      // scenarios: List<String>.from(packs.where(p) => p.isSelected).map((p) => p.scenarios).expand((e) => e).toList()),
-
       scenarios: packs
           .where((p) => p.isSelected)
           .map((p) => p.scenarios.map((c) => Scenario(pack: p.name, content: c)))
