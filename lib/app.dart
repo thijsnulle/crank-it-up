@@ -8,8 +8,7 @@ List<bool> ranks = List<bool>.filled(maxRanks, false);
 List<Color> rankColors = [
   const Color.fromARGB(255, 255, 223, 0),
   const Color.fromARGB(255, 196, 202, 206),
-  const Color.fromARGB(255, 205, 127, 50)
-];
+  const Color.fromARGB(255, 205, 127, 50)];
 
 int id = 0;
 List<Pack> packs = scenarios.entries
@@ -43,14 +42,12 @@ class Player {
 }
 
 class Pack {
-  final int id;
   final String name;
   final String img;
   final List scenarios;
   bool isSelected;
 
   Pack({
-    required this.id,
     required this.name,
     required this.img,
     required this.scenarios,
